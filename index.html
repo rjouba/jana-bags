@@ -1,0 +1,3327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jana Bags — Women’s Bags</title>
+    <meta
+      name="description"
+      content="Jana Bags: women’s bags curated by brand — totes, crossbodies, shoulder bags, clutches, and backpacks."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="jj.png" type="image/png" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --panel: rgba(11, 15, 26, 0.03);
+        --panel-2: rgba(11, 15, 26, 0.06);
+        --text: #0b0f1a;
+        --muted: rgba(11, 15, 26, 0.68);
+        --subtle: rgba(11, 15, 26, 0.46);
+        --border: rgba(11, 15, 26, 0.14);
+        --accent: #06b6d4;
+        --accent-2: #8b5cf6;
+        --danger: #e11d48;
+        --ok: #059669;
+        --shadow: 0 24px 64px rgba(11, 15, 26, 0.14);
+        --radius: 16px;
+        --radius-sm: 12px;
+        --max: 1200px;
+        --focus: 0 0 0 3px rgba(6, 182, 212, 0.22);
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        color: var(--text);
+        background:
+          radial-gradient(1200px 700px at 12% 10%, rgba(6, 182, 212, 0.16), transparent 60%),
+          radial-gradient(1200px 760px at 88% 18%, rgba(139, 92, 246, 0.16), transparent 60%),
+          radial-gradient(900px 620px at 50% 115%, rgba(5, 150, 105, 0.12), transparent 60%),
+          linear-gradient(180deg, #ffffff, #f7f8ff 52%, #ffffff);
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(11, 15, 26, 0.02), rgba(11, 15, 26, 0.01)),
+          repeating-linear-gradient(90deg, rgba(11, 15, 26, 0.06) 0 1px, transparent 1px 48px),
+          repeating-linear-gradient(0deg, rgba(11, 15, 26, 0.05) 0 1px, transparent 1px 48px);
+        opacity: 0.08;
+        mix-blend-mode: multiply;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 18px 18px 44px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar .container {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        transition: padding 160ms ease;
+      }
+
+      .topbar.is-scrolled .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .announce {
+        border-bottom: 1px solid var(--border);
+        background:
+          linear-gradient(90deg, rgba(6, 182, 212, 0.18), rgba(139, 92, 246, 0.16), rgba(5, 150, 105, 0.14));
+        color: rgba(11, 15, 26, 0.9);
+        font-size: 12px;
+        letter-spacing: 0.25px;
+      }
+
+      .announce .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .header-left,
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 260px;
+      }
+
+      .header-left {
+        justify-content: flex-start;
+        position: relative;
+      }
+
+      .header-right {
+        justify-content: flex-end;
+      }
+
+      .brand {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        flex: 1;
+      }
+
+      .logo-img {
+        width: 256px;
+        height: 256px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        transition: width 180ms ease, height 180ms ease;
+      }
+
+      .topbar.is-scrolled .logo-img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .logo {
+        width: 0;
+        height: 0;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: 0.9px;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
+      .brand p {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      nav {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .navlink {
+        padding: 10px 10px;
+        border-radius: 999px;
+        color: var(--muted);
+        border: 1px solid transparent;
+        transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+      }
+
+      .navlink:hover {
+        color: var(--text);
+        border-color: var(--border);
+        background: rgba(11, 15, 26, 0.04);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(18, 18, 18, 0.03);
+        border: 1px solid var(--border);
+        min-width: min(420px, 40vw);
+      }
+
+      .search input {
+        background: transparent;
+        border: 0;
+        outline: none;
+        width: 100%;
+        color: var(--text);
+      }
+
+      .search input::placeholder {
+        color: rgba(18, 18, 18, 0.5);
+      }
+
+      .icon {
+        width: 18px;
+        height: 18px;
+        opacity: 0.85;
+        flex: 0 0 auto;
+      }
+
+      .btn {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        padding: 10px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+      }
+
+      .btn:hover {
+        background: var(--panel-2);
+        border-color: rgba(11, 15, 26, 0.22);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn:focus-visible,
+      .navlink:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: none;
+        box-shadow: var(--focus);
+      }
+
+      .btn-primary {
+        border-color: rgba(6, 182, 212, 0.35);
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(139, 92, 246, 0.16));
+        color: var(--text);
+        box-shadow: 0 18px 40px rgba(6, 182, 212, 0.12);
+      }
+
+      .admin-launch {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 50;
+        box-shadow: var(--shadow);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 6px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: rgba(11, 15, 26, 0.92);
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .collection-head {
+        padding-top: 26px;
+        padding-bottom: 18px;
+      }
+
+      .breadcrumb {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.25px;
+      }
+
+      .breadcrumb a {
+        color: inherit;
+      }
+
+      .collection-title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .collection-title h2 {
+        margin: 0;
+        font-size: clamp(22px, 2.4vw, 34px);
+        letter-spacing: 0.2px;
+        font-weight: 700;
+      }
+
+      .collection-title p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+        max-width: 70ch;
+      }
+
+      .subnav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding: 14px 0 6px;
+        scrollbar-width: thin;
+      }
+
+      .new-arrivals {
+        margin-top: 14px;
+      }
+
+      .new-arrivals-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 10px;
+      }
+
+      .new-arrivals-head h3 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.45px;
+        text-transform: uppercase;
+      }
+
+      .new-marquee {
+        overflow: hidden;
+        border-top: 1px solid rgba(11, 15, 26, 0.12);
+        border-bottom: 1px solid rgba(11, 15, 26, 0.12);
+        padding: 14px 0;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+
+      .new-marquee-track {
+        display: flex;
+        gap: 12px;
+        width: max-content;
+        will-change: transform;
+        animation: new-marquee 26s linear infinite;
+        transform: translateX(0);
+        --shift: 0px;
+      }
+
+      .new-marquee:hover .new-marquee-track,
+      .new-marquee:focus-within .new-marquee-track {
+        animation-play-state: paused;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .new-marquee-track {
+          animation: none;
+        }
+      }
+
+      @keyframes new-marquee {
+        from {
+          transform: translateX(calc(-1 * var(--shift)));
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .new-item {
+        width: 180px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        color: inherit;
+      }
+
+      .new-img {
+        border: 1px solid rgba(11, 15, 26, 0.12);
+        background: rgba(255, 255, 255, 0.78);
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        border-radius: var(--radius);
+        box-shadow: 0 16px 34px rgba(11, 15, 26, 0.14);
+      }
+
+      .new-img svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .new-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .new-label {
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .chip {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .chip[aria-pressed="true"] {
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(139, 92, 246, 0.16));
+        border-color: rgba(6, 182, 212, 0.35);
+        color: var(--text);
+      }
+
+      .layout {
+        display: block;
+        padding-top: 10px;
+      }
+
+      .filters {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius);
+        padding: 14px;
+        position: sticky;
+        top: 88px;
+      }
+
+      .filters h3 {
+        margin: 0 0 10px;
+        font-size: 13px;
+        letter-spacing: 0.35px;
+        text-transform: uppercase;
+      }
+
+      .filter-section {
+        padding: 12px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .filter-section:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .filter-section h4 {
+        margin: 0 0 10px;
+        font-size: 12px;
+        letter-spacing: 0.35px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .checklist {
+        display: grid;
+        gap: 8px;
+      }
+
+      .check {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .check input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--accent);
+      }
+
+      .products-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 0 6px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        position: relative;
+      }
+
+      .results {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .products-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .menu-btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+      }
+
+      .menu-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .filter-menu {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 10px);
+        width: min(360px, 92vw);
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(14px);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 12px;
+        z-index: 20;
+      }
+
+      .filter-menu[hidden] {
+        display: none;
+      }
+
+      .filter-menu-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(11, 15, 26, 0.12);
+      }
+
+      .filter-menu-head h3 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.45px;
+        text-transform: uppercase;
+      }
+
+      .admin-top {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .admin-tabs {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .admin-tab[aria-selected="true"] {
+        border-color: rgba(6, 182, 212, 0.35);
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.18), rgba(139, 92, 246, 0.12));
+      }
+
+      .admin-panel[hidden] {
+        display: none;
+      }
+
+      .admin-split {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 14px;
+      }
+
+      .admin-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(11, 15, 26, 0.12);
+      }
+
+      .admin-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .admin-item {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius);
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .admin-item strong {
+        display: block;
+        font-size: 13px;
+      }
+
+      .admin-item .small {
+        margin-top: 4px;
+      }
+
+      .admin-item-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex: 0 0 auto;
+      }
+
+      @media (max-width: 860px) {
+        .admin-split {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .select {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        padding: 10px 12px;
+        border-radius: 999px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px 14px;
+        margin-top: 16px;
+      }
+
+      .card {
+        border: 1px solid rgba(11, 15, 26, 0.12);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 18px 46px rgba(11, 15, 26, 0.14);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 100%;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(6, 182, 212, 0.32);
+        box-shadow: 0 26px 70px rgba(11, 15, 26, 0.18);
+      }
+
+      .img {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        border-bottom: 1px solid rgba(11, 15, 26, 0.12);
+        background: radial-gradient(520px 320px at 30% 25%, rgba(6, 182, 212, 0.18), transparent 62%),
+          radial-gradient(520px 320px at 70% 70%, rgba(139, 92, 246, 0.14), transparent 62%),
+          rgba(255, 255, 255, 0.6);
+        overflow: hidden;
+      }
+
+      .img svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(11, 15, 26, 0.14);
+        background: rgba(255, 255, 255, 0.74);
+        padding: 7px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        color: var(--text);
+      }
+
+      .tag strong {
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+
+      .quick {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 140ms ease, transform 140ms ease;
+      }
+
+      .img:hover .quick,
+      .img:focus-within .quick {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .quick .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .card-body {
+        padding: 12px 12px 14px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.45px;
+        text-transform: uppercase;
+      }
+
+      .subtitle {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .meta {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 2px;
+      }
+
+      .price {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--subtle);
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .linkbtn {
+        border: 1px solid var(--border);
+        background: var(--panel);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: 0.35px;
+        text-transform: uppercase;
+      }
+
+      .section-title span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .pill {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .drawer-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(11, 15, 26, 0.38);
+        backdrop-filter: blur(8px);
+        z-index: 60;
+        display: none;
+      }
+
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: min(420px, 92vw);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(14px);
+        border-left: 1px solid var(--border);
+        box-shadow: -10px 0 34px rgba(11, 15, 26, 0.18);
+        z-index: 70;
+        transform: translateX(102%);
+        transition: transform 160ms ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .drawer.open {
+        transform: translateX(0);
+      }
+
+      .drawer-backdrop.open {
+        display: block;
+      }
+
+      .drawer-header {
+        padding: 16px 16px 12px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .drawer-header h3 {
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+      }
+
+      .drawer-body {
+        padding: 14px 16px;
+        overflow: auto;
+        flex: 1;
+      }
+
+      .line {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 14px;
+        margin-bottom: 10px;
+      }
+
+      .line h4 {
+        margin: 0;
+        font-size: 13px;
+      }
+
+      .line .muted {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .qty {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .qty button {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+      }
+
+      .drawer-footer {
+        padding: 14px 16px 16px;
+        border-top: 1px solid var(--border);
+        display: grid;
+        gap: 10px;
+      }
+
+      .totals {
+        display: grid;
+        gap: 8px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 12px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .row strong {
+        color: var(--text);
+      }
+
+      dialog {
+        width: min(680px, 94vw);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--shadow);
+        padding: 0;
+      }
+
+      #adminDialog {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        border: 0;
+        padding: 0;
+      }
+
+      #adminDialog::backdrop {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+      }
+
+      #adminDialog .modal {
+        height: 100%;
+        grid-template-rows: auto 1fr;
+      }
+
+      #adminDialog .modal-body {
+        overflow: auto;
+        padding: 18px;
+      }
+
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(6px);
+      }
+
+      .modal {
+        display: grid;
+        gap: 0;
+      }
+
+      .modal-header {
+        padding: 16px 16px 12px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+      }
+
+      .modal-body {
+        padding: 16px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .product-detail {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .detail-img {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.78);
+        min-height: 220px;
+      }
+
+      .detail-img svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .detail-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .kv {
+        display: grid;
+        gap: 10px;
+      }
+
+      .kv h4 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .kv .desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .specs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .spec {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        padding: 8px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      input,
+      textarea {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.86);
+        border-radius: 14px;
+        padding: 10px 12px;
+        outline: none;
+      }
+
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .notice {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 12px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .footer {
+        margin-top: 34px;
+        padding-top: 22px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer a {
+        color: var(--text);
+        opacity: 0.85;
+      }
+
+      @media (max-width: 980px) {
+        nav {
+          display: none;
+        }
+
+        .search {
+          min-width: 0;
+          flex: 1;
+        }
+
+        .brand {
+          justify-content: center;
+        }
+
+        .header-left,
+        .header-right {
+          min-width: 0;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .filters {
+          position: static;
+        }
+
+        .logo-img {
+          width: 160px;
+          height: 160px;
+        }
+
+        .topbar.is-scrolled .logo-img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .product-detail {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .logo-img {
+          width: 128px;
+          height: 128px;
+        }
+
+        .topbar.is-scrolled .logo-img {
+          width: 56px;
+          height: 56px;
+        }
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="announce">
+      <div class="container" style="padding-left: 18px; padding-right: 18px">
+        Free shipping over $120 · Easy returns · Secure checkout
+      </div>
+    </div>
+    <header class="topbar">
+      <div class="container" style="padding-left: 18px; padding-right: 18px">
+        <div class="header-left">
+          <button
+            class="btn menu-btn"
+            id="filterBtn"
+            type="button"
+            aria-label="Filter"
+            aria-expanded="false"
+            aria-controls="filterMenu"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <nav aria-label="Primary">
+            <a class="navlink" href="#shop">All Bags</a>
+            <a class="navlink" href="#shop">Brands</a>
+            <a class="navlink" href="#about">About</a>
+          </nav>
+
+          <div class="filter-menu" id="filterMenu" role="dialog" aria-label="Filters" hidden>
+            <div class="filter-menu-head">
+              <h3>Filters</h3>
+              <button class="btn linkbtn" type="button" id="clearFilters">Clear</button>
+            </div>
+            <div class="filter-section">
+              <h4>Brand</h4>
+              <div class="checklist" id="brandFilters"></div>
+            </div>
+            <div class="filter-section">
+              <h4>Category</h4>
+              <div class="checklist" id="categoryFilters"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand" aria-label="Jana Bags">
+          <div>
+            <img class="logo-img" src="jj.png" alt="Jana Bags logo" />
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="btn btn-primary" id="openCart" type="button">
+            Cart <span class="badge" id="cartCount" aria-live="polite">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <button class="btn btn-primary admin-launch" id="adminLauncher" type="button" hidden>Admin</button>
+
+    <main class="container">
+      <section class="collection-head" aria-label="Collection header">
+        <div class="breadcrumb">
+          <a href="#shop">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>All Bags</span>
+        </div>
+        <div class="collection-title">
+          <div>
+            <h2>Explore Jana Bags Collection</h2>
+            <p>
+              Shop women’s bags by brand and style. Use the brand categories and filters to find the perfect tote, crossbody, shoulder
+              bag, clutch, or backpack.
+            </p>
+          </div>
+          <span class="pill" id="shippingNote">Free shipping over $120</span>
+        </div>
+        <div class="new-arrivals" id="newArrivals" aria-label="New arrivals">
+          <div class="new-arrivals-head">
+            <h3>New Arrivals</h3>
+            <span class="small">Latest drops</span>
+          </div>
+          <div class="new-marquee" id="newMarquee" tabindex="0">
+            <div class="new-marquee-track" id="newMarqueeTrack"></div>
+          </div>
+        </div>
+        <div class="subnav" id="brandChips" aria-label="Brand categories"></div>
+      </section>
+
+      <section id="shop" aria-label="Shop">
+        <div class="layout">
+          <div class="products-bar">
+            <div class="results" id="resultsMeta">Loading…</div>
+            <div class="products-actions">
+              <select class="select" id="sort" aria-label="Sort products">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+                <option value="name-asc">Name: A → Z</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid" id="grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="about" aria-label="About">
+        <div class="section-title">
+          <h2>About this site</h2>
+          <span>Ready to connect payments + real inventory</span>
+        </div>
+        <div class="notice" style="margin-top: 12px">
+          This is a demo storefront: product listing, product detail, cart, and a checkout form that simulates an order. To make it a
+          real shop, the next step is to connect a payment provider (Stripe/PayPal), add an admin dashboard, and store products in a
+          database.
+        </div>
+      </section>
+
+      <footer class="footer" aria-label="Footer">
+        <div>© <span id="year"></span> Jana Bags</div>
+        <div>
+          <a href="#shop">Shop</a> · <a href="#about">About</a> · <a href="#shop">Top</a>
+        </div>
+      </footer>
+    </main>
+
+    <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="drawer" id="drawer" aria-label="Shopping cart" aria-modal="true" role="dialog">
+      <div class="drawer-header">
+        <h3>Your cart</h3>
+        <button class="btn" type="button" id="closeCart">Close</button>
+      </div>
+      <div class="drawer-body" id="cartLines"></div>
+      <div class="drawer-footer">
+        <div class="totals">
+          <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+          <div class="row"><span>Shipping</span><strong id="shipping">$0.00</strong></div>
+          <div class="row"><span>Total</span><strong id="total">$0.00</strong></div>
+        </div>
+        <button class="btn btn-primary" type="button" id="checkoutBtn">Checkout (demo)</button>
+        <button class="btn" type="button" id="clearCart">Clear cart</button>
+        <div class="small">Demo only. No real payment is processed.</div>
+      </div>
+    </aside>
+
+    <dialog id="productDialog" aria-label="Product details">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="productTitle">Product</h3>
+          <button class="btn" id="closeProduct" type="button">Close</button>
+        </div>
+        <div class="modal-body" id="productBody"></div>
+      </div>
+    </dialog>
+
+    <dialog id="checkoutDialog" aria-label="Checkout">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Checkout (demo)</h3>
+          <button class="btn" id="closeCheckout" type="button">Close</button>
+        </div>
+        <div class="modal-body">
+          <div class="notice">
+            This checkout is a UI demo. To accept real payments, connect Stripe/PayPal and create an order on your server.
+          </div>
+          <form class="form" id="checkoutForm">
+            <div class="form-grid">
+              <label>
+                Full name
+                <input name="name" autocomplete="name" required />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+              <label>
+                Phone
+                <input name="phone" autocomplete="tel" required />
+              </label>
+              <label>
+                City
+                <input name="city" autocomplete="address-level2" required />
+              </label>
+              <label style="grid-column: 1 / -1">
+                Address
+                <input name="address" autocomplete="street-address" required />
+              </label>
+              <label style="grid-column: 1 / -1">
+                Notes (optional)
+                <textarea name="notes" placeholder="Delivery instructions, gift note, etc."></textarea>
+              </label>
+            </div>
+            <button class="btn btn-primary" type="submit" id="placeOrderBtn">Place order (demo)</button>
+            <div class="small" id="checkoutSummary"></div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="adminDialog" aria-label="Admin">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Admin</h3>
+          <button class="btn" id="closeAdmin" type="button">Close</button>
+        </div>
+        <div class="modal-body">
+          <div class="admin-login" id="adminLogin">
+            <div class="notice">
+              Admin panel works in this browser only (demo). For real security + multi-device access, we need a backend.
+            </div>
+            <form class="form" id="adminLoginForm" style="margin-top: 12px">
+              <div class="form-grid">
+                <label>
+                  Username
+                  <input name="username" autocomplete="username" required />
+                </label>
+                <label>
+                  Password
+                  <input name="password" type="password" autocomplete="current-password" required />
+                </label>
+              </div>
+              <button class="btn btn-primary" type="submit" id="adminLoginBtn">Sign in</button>
+              <div class="small" id="adminLoginMsg"></div>
+            </form>
+          </div>
+
+          <div class="admin-app" id="adminApp" hidden>
+            <div class="admin-top">
+              <div class="admin-tabs" role="tablist" aria-label="Admin sections">
+                <button class="btn admin-tab" type="button" role="tab" aria-selected="true" data-tab="products">Products</button>
+                <button class="btn admin-tab" type="button" role="tab" aria-selected="false" data-tab="orders">Orders</button>
+                <button class="btn admin-tab" type="button" role="tab" aria-selected="false" data-tab="categories">Categories</button>
+              </div>
+              <div class="admin-actions">
+                <button class="btn" type="button" id="adminLogout">Logout</button>
+              </div>
+            </div>
+
+            <div class="admin-panel" id="adminProducts" role="tabpanel" aria-label="Products">
+              <div class="admin-split">
+                <div>
+                  <div class="admin-head">
+                    <strong>Products</strong>
+                    <select class="select" id="adminNewProductCategory" aria-label="New product category"></select>
+                    <button class="btn btn-primary" type="button" id="adminNewProduct">Add product</button>
+                  </div>
+                  <div class="admin-list" id="adminProductList"></div>
+                </div>
+                <div>
+                  <div class="admin-head">
+                    <strong id="adminProductTitle">Edit product</strong>
+                    <button class="btn linkbtn" type="button" id="adminDeleteProduct">Delete</button>
+                  </div>
+                  <form class="form" id="adminProductForm">
+                    <div class="form-grid">
+                      <label>
+                        Brand
+                        <input name="brand" required />
+                      </label>
+                      <label>
+                        Name
+                        <input name="name" required />
+                      </label>
+                      <label>
+                        Category
+                        <input name="category" list="adminCategoryOptions" required />
+                      </label>
+                      <label>
+                        Price
+                        <input name="price" type="number" min="0" step="1" required />
+                      </label>
+                      <label>
+                        Color
+                        <input name="color" required />
+                      </label>
+                      <label>
+                        Material
+                        <input name="material" required />
+                      </label>
+                      <label>
+                        Size
+                        <input name="size" required />
+                      </label>
+                      <label>
+                        Variant count
+                        <input name="variantCount" type="number" min="0" step="1" />
+                      </label>
+                      <label>
+                        Featured rank
+                        <input name="featured" type="number" min="0" step="1" />
+                      </label>
+                      <label>
+                        New
+                        <select name="isNew">
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      </label>
+                      <label style="grid-column: 1 / -1">
+                        Description
+                        <textarea name="description"></textarea>
+                      </label>
+                      <label style="grid-column: 1 / -1">
+                        Photo (PNG/JPG)
+                        <input name="imageFile" type="file" accept="image/*" />
+                      </label>
+                      <label style="grid-column: 1 / -1">
+                        Or photo URL
+                        <input name="imageUrl" placeholder="https://..." />
+                      </label>
+                    </div>
+                    <datalist id="adminCategoryOptions"></datalist>
+                    <button class="btn btn-primary" type="submit" id="adminSaveProduct">Save</button>
+                    <div class="small" id="adminProductMsg"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-panel" id="adminOrders" role="tabpanel" aria-label="Orders" hidden>
+              <div class="admin-head">
+                <strong>Orders</strong>
+                <button class="btn linkbtn" type="button" id="adminClearOrders">Clear all</button>
+              </div>
+              <div class="admin-list" id="adminOrderList"></div>
+              <div class="notice" style="margin-top: 12px">
+                Orders are saved locally in this browser for the demo.
+              </div>
+            </div>
+
+            <div class="admin-panel" id="adminCategories" role="tabpanel" aria-label="Categories" hidden>
+              <div class="admin-split">
+                <div>
+                  <div class="admin-head">
+                    <strong>Categories</strong>
+                    <button class="btn btn-primary" type="button" id="adminRefreshCategories">Refresh</button>
+                  </div>
+                  <div class="admin-list" id="adminCategoryList"></div>
+                </div>
+                <div>
+                  <div class="admin-head">
+                    <strong>Rename category</strong>
+                    <span class="small">Updates all products</span>
+                  </div>
+                  <form class="form" id="adminCategoryForm">
+                    <div class="form-grid">
+                      <label>
+                        Current category
+                        <select name="from" id="adminCategoryFrom"></select>
+                      </label>
+                      <label>
+                        New category name
+                        <input name="to" id="adminCategoryTo" required />
+                      </label>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="adminApplyCategory">Apply rename</button>
+                    <div class="small" id="adminCategoryMsg"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script>
+      const SEED_PRODUCTS = [
+        {
+          id: "jana-everyday-tote-ivory",
+          brand: "Jana",
+          name: "Everyday Tote",
+          category: "Tote",
+          price: 118,
+          featured: 14,
+          color: "Ivory",
+          material: "Vegan leather",
+          size: "Fits 15” laptop",
+          variantCount: 8,
+          isNew: true,
+          description: "Structured tote with a clean silhouette, magnetic close, and interior sleeve for daily essentials.",
+        },
+        {
+          id: "jana-mini-crossbody-black",
+          brand: "Jana",
+          name: "Mini Crossbody",
+          category: "Crossbody",
+          price: 78,
+          featured: 13,
+          color: "Black",
+          material: "Pebbled leather",
+          size: "Phone + wallet",
+          variantCount: 10,
+          isNew: true,
+          description: "Compact crossbody with an adjustable strap and secure flap closure for effortless everyday wear.",
+        },
+        {
+          id: "jana-shoulder-curve-espresso",
+          brand: "Jana",
+          name: "Curve Shoulder",
+          category: "Shoulder",
+          price: 135,
+          featured: 12,
+          color: "Espresso",
+          material: "Genuine leather",
+          size: "Medium",
+          variantCount: 6,
+          isNew: false,
+          description: "Softly curved shoulder bag with smooth zip access and polished hardware for day-to-night styling.",
+        },
+        {
+          id: "jana-evening-clutch-champagne",
+          brand: "Jana",
+          name: "Evening Clutch",
+          category: "Clutch",
+          price: 62,
+          featured: 10,
+          color: "Champagne",
+          material: "Satin + metal frame",
+          size: "Slim",
+          variantCount: 4,
+          isNew: false,
+          description: "Minimal clutch with a subtle sheen and detachable chain strap for hands-free evenings.",
+        },
+        {
+          id: "lumi-city-backpack-olive",
+          brand: "Lumi",
+          name: "City Backpack",
+          category: "Backpack",
+          price: 124,
+          featured: 11,
+          color: "Olive",
+          material: "Water-resistant nylon",
+          size: "Fits 13” laptop",
+          variantCount: 5,
+          isNew: true,
+          description: "Refined backpack with smart compartments and comfortable straps for commutes and travel.",
+        },
+        {
+          id: "lumi-soft-tote-sand",
+          brand: "Lumi",
+          name: "Soft Tote",
+          category: "Tote",
+          price: 98,
+          featured: 9,
+          color: "Sand",
+          material: "Soft vegan leather",
+          size: "Oversized",
+          variantCount: 7,
+          isNew: false,
+          description: "Relaxed oversized tote with a drapey shape, roomy interior, and easy grab-and-go comfort.",
+        },
+        {
+          id: "orla-chain-crossbody-navy",
+          brand: "Orla",
+          name: "Chain Crossbody",
+          category: "Crossbody",
+          price: 92,
+          featured: 8,
+          color: "Navy",
+          material: "Quilted leather",
+          size: "Compact",
+          variantCount: 12,
+          isNew: false,
+          description: "Quilted crossbody with a statement chain strap and secure flap closure—dress up or down.",
+        },
+        {
+          id: "orla-hobo-shoulder-taupe",
+          brand: "Orla",
+          name: "Hobo Shoulder",
+          category: "Shoulder",
+          price: 112,
+          featured: 7,
+          color: "Taupe",
+          material: "Suede-like microfiber",
+          size: "Spacious",
+          variantCount: 6,
+          isNew: false,
+          description: "Soft hobo with a comfortable shoulder drop, hidden pockets, and space for daily essentials.",
+        },
+        {
+          id: "vela-satchel-stone",
+          brand: "Vela",
+          name: "Top Handle Satchel",
+          category: "Satchel",
+          price: 148,
+          featured: 10,
+          color: "Stone",
+          material: "Genuine leather",
+          size: "Medium",
+          variantCount: 5,
+          isNew: true,
+          description: "Structured satchel with a top handle, optional strap, and clean lines for a refined look.",
+        },
+        {
+          id: "vela-mini-tote-vanilla",
+          brand: "Vela",
+          name: "Mini Tote",
+          category: "Tote",
+          price: 104,
+          featured: 6,
+          color: "Vanilla",
+          material: "Genuine leather",
+          size: "Mini",
+          variantCount: 9,
+          isNew: false,
+          description: "A compact tote with a crisp silhouette, interior pocketing, and a versatile crossbody strap.",
+        },
+        {
+          id: "noor-fold-clutch-onyx",
+          brand: "Noor",
+          name: "Fold Clutch",
+          category: "Clutch",
+          price: 54,
+          featured: 5,
+          color: "Onyx",
+          material: "Vegan leather",
+          size: "Phone-friendly",
+          variantCount: 6,
+          isNew: true,
+          description: "Fold-over clutch with a modern edge—ideal for dinner, events, and special occasions.",
+        },
+        {
+          id: "noor-bucket-umber",
+          brand: "Noor",
+          name: "Bucket Bag",
+          category: "Shoulder",
+          price: 116,
+          featured: 4,
+          color: "Umber",
+          material: "Textured leather",
+          size: "Medium",
+          variantCount: 7,
+          isNew: false,
+          description: "Bucket bag with an adjustable strap, easy drawstring access, and a softly structured base.",
+        },
+      ];
+
+      const STORAGE_KEY = "jana_cart_v1";
+      const PRODUCTS_KEY = "jana_products_v1";
+      const ORDERS_KEY = "jana_orders_v1";
+      const ADMIN_CRED_KEY = "jana_admin_cred_v1";
+      const ADMIN_TOKEN_KEY = "jana_admin_token_v1";
+      const API_ENABLED = location.protocol === "http:" || location.protocol === "https:";
+      const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" });
+
+      const els = {
+        year: document.getElementById("year"),
+        q: null,
+        brandChips: document.getElementById("brandChips"),
+        brandFilters: document.getElementById("brandFilters"),
+        categoryFilters: document.getElementById("categoryFilters"),
+        filterBtn: document.getElementById("filterBtn"),
+        filterMenu: document.getElementById("filterMenu"),
+        sort: document.getElementById("sort"),
+        clearFilters: document.getElementById("clearFilters"),
+        grid: document.getElementById("grid"),
+        resultsMeta: document.getElementById("resultsMeta"),
+        openAdmin: document.getElementById("openAdmin"),
+        adminLauncher: document.getElementById("adminLauncher"),
+        adminDialog: document.getElementById("adminDialog"),
+        closeAdmin: document.getElementById("closeAdmin"),
+        adminLogin: document.getElementById("adminLogin"),
+        adminLoginForm: document.getElementById("adminLoginForm"),
+        adminLoginBtn: document.getElementById("adminLoginBtn"),
+        adminLoginMsg: document.getElementById("adminLoginMsg"),
+        adminApp: document.getElementById("adminApp"),
+        adminLogout: document.getElementById("adminLogout"),
+        adminTabs: document.querySelectorAll(".admin-tab"),
+        adminProducts: document.getElementById("adminProducts"),
+        adminOrders: document.getElementById("adminOrders"),
+        adminCategories: document.getElementById("adminCategories"),
+        adminNewProduct: document.getElementById("adminNewProduct"),
+        adminNewProductCategory: document.getElementById("adminNewProductCategory"),
+        adminProductList: document.getElementById("adminProductList"),
+        adminProductForm: document.getElementById("adminProductForm"),
+        adminProductTitle: document.getElementById("adminProductTitle"),
+        adminDeleteProduct: document.getElementById("adminDeleteProduct"),
+        adminProductMsg: document.getElementById("adminProductMsg"),
+        adminOrderList: document.getElementById("adminOrderList"),
+        adminClearOrders: document.getElementById("adminClearOrders"),
+        adminRefreshCategories: document.getElementById("adminRefreshCategories"),
+        adminCategoryList: document.getElementById("adminCategoryList"),
+        adminCategoryForm: document.getElementById("adminCategoryForm"),
+        adminCategoryFrom: document.getElementById("adminCategoryFrom"),
+        adminCategoryTo: document.getElementById("adminCategoryTo"),
+        adminApplyCategory: document.getElementById("adminApplyCategory"),
+        adminCategoryMsg: document.getElementById("adminCategoryMsg"),
+        adminCategoryOptions: document.getElementById("adminCategoryOptions"),
+        openCart: document.getElementById("openCart"),
+        closeCart: document.getElementById("closeCart"),
+        drawer: document.getElementById("drawer"),
+        drawerBackdrop: document.getElementById("drawerBackdrop"),
+        cartCount: document.getElementById("cartCount"),
+        cartLines: document.getElementById("cartLines"),
+        subtotal: document.getElementById("subtotal"),
+        shipping: document.getElementById("shipping"),
+        total: document.getElementById("total"),
+        clearCart: document.getElementById("clearCart"),
+        checkoutBtn: document.getElementById("checkoutBtn"),
+        productDialog: document.getElementById("productDialog"),
+        closeProduct: document.getElementById("closeProduct"),
+        productTitle: document.getElementById("productTitle"),
+        productBody: document.getElementById("productBody"),
+        checkoutDialog: document.getElementById("checkoutDialog"),
+        closeCheckout: document.getElementById("closeCheckout"),
+        checkoutForm: document.getElementById("checkoutForm"),
+        checkoutSummary: document.getElementById("checkoutSummary"),
+        placeOrderBtn: document.getElementById("placeOrderBtn"),
+      };
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function hashString(input) {
+        let h = 2166136261;
+        for (let i = 0; i < input.length; i++) {
+          h ^= input.charCodeAt(i);
+          h = Math.imul(h, 16777619);
+        }
+        return (h >>> 0).toString(16).padStart(8, "0");
+      }
+
+      function ensureAdminCred() {
+        const raw = localStorage.getItem(ADMIN_CRED_KEY);
+        if (raw) return;
+        const defaultUser = "admin";
+        const defaultPass = "jana2040";
+        const passHash = hashString(`${defaultUser}:${defaultPass}`);
+        localStorage.setItem(ADMIN_CRED_KEY, JSON.stringify({ user: defaultUser, passHash }));
+      }
+
+      function getAdminToken() {
+        try {
+          return String(sessionStorage.getItem(ADMIN_TOKEN_KEY) || "");
+        } catch {
+          return "";
+        }
+      }
+
+      function setAdminToken(token) {
+        try {
+          if (!token) sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+          else sessionStorage.setItem(ADMIN_TOKEN_KEY, token);
+        } catch {}
+      }
+
+      async function apiJson(pathname, options = {}) {
+        const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+        const token = getAdminToken();
+        if (options.auth && token) headers.Authorization = `Bearer ${token}`;
+
+        const res = await fetch(pathname, {
+          method: options.method || "GET",
+          headers,
+          body: options.body ? JSON.stringify(options.body) : undefined,
+        });
+
+        if (res.status === 204) return null;
+        const json = await res.json().catch(() => null);
+        if (!res.ok) {
+          const msg = (json && (json.error || json.message)) || `HTTP ${res.status}`;
+          throw new Error(String(msg));
+        }
+        return json;
+      }
+
+      async function apiLogin(username, password) {
+        const data = await apiJson("/api/admin/login", { method: "POST", body: { username, password } });
+        const token = String(data?.token || "");
+        if (!token) throw new Error("Login failed");
+        setAdminToken(token);
+        return token;
+      }
+
+      async function apiGetProducts() {
+        const data = await apiJson("/api/products");
+        return Array.isArray(data?.products) ? data.products : [];
+      }
+
+      async function apiCreateProduct(product) {
+        const data = await apiJson("/api/products", { method: "POST", body: product, auth: true });
+        return data?.product;
+      }
+
+      async function apiUpdateProduct(id, product) {
+        const data = await apiJson(`/api/products/${encodeURIComponent(id)}`, { method: "PUT", body: product, auth: true });
+        return data?.product;
+      }
+
+      async function apiDeleteProduct(id) {
+        await apiJson(`/api/products/${encodeURIComponent(id)}`, { method: "DELETE", auth: true });
+      }
+
+      async function apiCreateOrder(order) {
+        const data = await apiJson("/api/orders", { method: "POST", body: order });
+        return data?.order;
+      }
+
+      async function apiGetOrders() {
+        const data = await apiJson("/api/orders", { auth: true });
+        return Array.isArray(data?.orders) ? data.orders : [];
+      }
+
+      async function apiUpdateOrderStatus(id, status) {
+        const data = await apiJson(`/api/orders/${encodeURIComponent(id)}`, { method: "PATCH", body: { status }, auth: true });
+        return data?.order;
+      }
+
+      async function apiRenameCategory(from, to) {
+        const data = await apiJson("/api/categories/rename", { method: "POST", body: { from, to }, auth: true });
+        return Array.isArray(data?.products) ? data.products : null;
+      }
+
+      async function apiDeleteCategory(name) {
+        const data = await apiJson("/api/categories/delete", { method: "POST", body: { name }, auth: true });
+        return Array.isArray(data?.products) ? data.products : null;
+      }
+
+      function loadProducts() {
+        try {
+          const raw = localStorage.getItem(PRODUCTS_KEY);
+          if (!raw) return [...SEED_PRODUCTS];
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        } catch {
+          return [...SEED_PRODUCTS];
+        }
+        return [...SEED_PRODUCTS];
+      }
+
+      function saveProducts(products) {
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+      }
+
+      function loadOrders() {
+        try {
+          const raw = localStorage.getItem(ORDERS_KEY);
+          if (!raw) return [];
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        } catch {
+          return [];
+        }
+        return [];
+      }
+
+      function saveOrders(orders) {
+        localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+      }
+
+      function hashColor(seed) {
+        let h = 0;
+        for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+        const s = 18 + (h % 18);
+        const l = 62 + ((h >>> 8) % 14);
+        return `hsl(${(h % 360).toFixed(0)}deg ${s}% ${l}%)`;
+      }
+
+      function productSvg(product) {
+        const c1 = hashColor(product.id);
+        const c2 = hashColor(product.brand + product.name);
+        const label = escapeHtml(product.name);
+        const sub = escapeHtml(`${product.brand} · ${product.color}`);
+        return `
+          <svg viewBox="0 0 800 800" role="img" aria-label="${label}">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="${c1}" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="${c2}" stop-opacity="0.9"/>
+              </linearGradient>
+              <radialGradient id="s" cx="50%" cy="35%" r="70%">
+                <stop offset="0" stop-color="rgba(0,0,0,0.06)"/>
+                <stop offset="1" stop-color="rgba(0,0,0,0)"/>
+              </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="800" height="800" fill="#ffffff"/>
+            <rect x="0" y="0" width="800" height="800" fill="url(#g)" opacity="0.22"/>
+            <rect x="0" y="0" width="800" height="800" fill="url(#s)"/>
+            <g transform="translate(0, 16)">
+              <path
+                d="M250 292c0-54 44-98 98-98h104c54 0 98 44 98 98v32h-26v-32c0-40-32-72-72-72H348c-40 0-72 32-72 72v32h-26v-32Z"
+                fill="rgba(11,15,26,0.2)"
+              />
+              <path
+                d="M218 330h364c26 0 48 22 48 48v182c0 42-34 76-76 76H294c-42 0-76-34-76-76V378c0-26 22-48 48-48Z"
+                fill="rgba(11,15,26,0.16)"
+              />
+              <path
+                d="M244 346h312c20 0 36 16 36 36v166c0 34-28 62-62 62H270c-34 0-62-28-62-62V382c0-20 16-36 36-36Z"
+                fill="rgba(255,255,255,0.65)"
+              />
+              <path
+                d="M312 448h176"
+                stroke="rgba(11,15,26,0.16)"
+                stroke-width="14"
+                stroke-linecap="round"
+              />
+              <circle cx="400" cy="448" r="18" fill="rgba(11,15,26,0.12)"/>
+              <circle cx="400" cy="448" r="8" fill="rgba(11,15,26,0.2)"/>
+            </g>
+            <text x="44" y="708" fill="rgba(11,15,26,0.92)" font-size="22" font-weight="700" font-family="ui-sans-serif, system-ui">${label}</text>
+            <text x="44" y="742" fill="rgba(11,15,26,0.68)" font-size="16" font-weight="600" font-family="ui-sans-serif, system-ui">${sub}</text>
+          </svg>
+        `;
+      }
+
+      function loadCart() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") return parsed;
+        } catch {
+          return {};
+        }
+        return {};
+      }
+
+      function saveCart(cart) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      }
+
+      function cartCount(cart) {
+        return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+      }
+
+      function cartSubtotal(cart) {
+        let total = 0;
+        for (const [id, qty] of Object.entries(cart)) {
+          const p = getProductById(id);
+          if (!p) continue;
+          total += p.price * qty;
+        }
+        return total;
+      }
+
+      function calcShipping(subtotal) {
+        if (subtotal === 0) return 0;
+        if (subtotal >= 120) return 0;
+        return 9;
+      }
+
+      function setCartBadge(cart) {
+        els.cartCount.textContent = String(cartCount(cart));
+      }
+
+      function sortProducts(items, mode) {
+        const copy = [...items];
+        if (mode === "price-asc") copy.sort((a, b) => a.price - b.price);
+        else if (mode === "price-desc") copy.sort((a, b) => b.price - a.price);
+        else if (mode === "name-asc") copy.sort((a, b) => a.name.localeCompare(b.name));
+        else copy.sort((a, b) => (b.featured ?? 0) - (a.featured ?? 0));
+        return copy;
+      }
+
+      const state = {
+        products: loadProducts(),
+        orders: loadOrders(),
+        brands: new Set(),
+        categories: new Set(),
+        filtersBound: false,
+        admin: {
+          authed: false,
+          tab: "products",
+          selectedProductId: null,
+        },
+      };
+
+      function getProductById(id) {
+        return state.products.find((p) => p.id === id);
+      }
+
+      function productMedia(product) {
+        if (product.image) {
+          const src = escapeHtml(product.image);
+          const alt = escapeHtml(`${product.brand} ${product.name}`);
+          return `<img src="${src}" alt="${alt}" loading="lazy" />`;
+        }
+        return productSvg(product);
+      }
+
+      function uniqSorted(values) {
+        return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+      }
+
+      function buildFilters() {
+        const brands = uniqSorted(state.products.map((p) => p.brand));
+        const categories = uniqSorted(state.products.map((p) => p.category));
+
+        els.brandChips.innerHTML =
+          `<button class="chip" type="button" data-chip="all" aria-pressed="true">All Bags</button>` +
+          brands.map((b) => `<button class="chip" type="button" data-chip="${escapeHtml(b)}" aria-pressed="false">${escapeHtml(b)}</button>`).join("");
+
+        els.brandFilters.innerHTML = brands
+          .map(
+            (b) => `
+              <label class="check">
+                <input type="checkbox" value="${escapeHtml(b)}" />
+                <span>${escapeHtml(b)}</span>
+              </label>
+            `
+          )
+          .join("");
+
+        els.categoryFilters.innerHTML = categories
+          .map(
+            (c) => `
+              <label class="check">
+                <input type="checkbox" value="${escapeHtml(c)}" />
+                <span>${escapeHtml(c)}</span>
+              </label>
+            `
+          )
+          .join("");
+
+        if (!state.filtersBound) {
+          els.brandFilters.addEventListener("change", (e) => {
+            const input = e.target;
+            if (!(input instanceof HTMLInputElement)) return;
+            const value = input.value;
+            if (input.checked) state.brands.add(value);
+            else state.brands.delete(value);
+            syncChips();
+            renderGrid();
+          });
+
+          els.categoryFilters.addEventListener("change", (e) => {
+            const input = e.target;
+            if (!(input instanceof HTMLInputElement)) return;
+            const value = input.value;
+            if (input.checked) state.categories.add(value);
+            else state.categories.delete(value);
+            renderGrid();
+          });
+
+          els.brandChips.addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn) return;
+            const chip = btn.getAttribute("data-chip");
+            if (!chip) return;
+            if (chip === "all") {
+              state.brands.clear();
+            } else {
+              if (state.brands.has(chip)) state.brands.delete(chip);
+              else state.brands.add(chip);
+            }
+            syncBrandCheckboxes();
+            syncChips();
+            renderGrid();
+            document.getElementById("shop")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+
+          state.filtersBound = true;
+        }
+
+        syncChips();
+      }
+
+      function syncBrandCheckboxes() {
+        const inputs = els.brandFilters.querySelectorAll("input[type='checkbox']");
+        inputs.forEach((input) => {
+          input.checked = state.brands.has(input.value);
+        });
+      }
+
+      function syncCategoryCheckboxes() {
+        const inputs = els.categoryFilters.querySelectorAll("input[type='checkbox']");
+        inputs.forEach((input) => {
+          input.checked = state.categories.has(input.value);
+        });
+      }
+
+      function syncChips() {
+        const buttons = els.brandChips.querySelectorAll("button[data-chip]");
+        buttons.forEach((btn) => {
+          const chip = btn.getAttribute("data-chip");
+          if (!chip) return;
+          const pressed = chip === "all" ? state.brands.size === 0 : state.brands.has(chip);
+          btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+        });
+      }
+
+      function buildNewArrivals() {
+        const wrapper = document.getElementById("newArrivals");
+        const track = document.getElementById("newMarqueeTrack");
+        if (!wrapper || !track) return;
+
+        const items = state.products.filter((p) => p.isNew);
+        if (items.length === 0) {
+          wrapper.style.display = "none";
+          return;
+        }
+
+        track.innerHTML = items
+          .map(
+            (p) => `
+              <button class="new-item" type="button" data-id="${escapeHtml(p.id)}">
+                <div class="new-img">${productMedia(p)}</div>
+                <div class="new-label">${escapeHtml(p.brand)} ${escapeHtml(p.name)}</div>
+              </button>
+            `
+          )
+          .join("");
+
+        track.onclick = (e) => {
+          const btn = e.target.closest("button[data-id]");
+          if (!btn) return;
+          const id = btn.getAttribute("data-id");
+          if (!id) return;
+          openProduct(id);
+        };
+
+        setupNewMarquee();
+      }
+
+      function setupNewMarquee() {
+        const track = document.getElementById("newMarqueeTrack");
+        if (!track) return;
+        track.querySelectorAll("[data-dup='true']").forEach((n) => n.remove());
+
+        const firstWidth = track.scrollWidth;
+        const styles = getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+
+        const children = [...track.children];
+        children.forEach((node) => {
+          const clone = node.cloneNode(true);
+          clone.setAttribute("data-dup", "true");
+          track.appendChild(clone);
+        });
+
+        const shift = firstWidth + gap;
+        track.style.setProperty("--shift", `${shift}px`);
+      }
+
+      function filteredProducts() {
+        const q = "";
+        let items = state.products;
+        if (state.brands.size > 0) items = items.filter((p) => state.brands.has(p.brand));
+        if (state.categories.size > 0) items = items.filter((p) => state.categories.has(p.category));
+        if (q) {
+          items = items.filter((p) => {
+            const hay = `${p.brand} ${p.name} ${p.category} ${p.color} ${p.material} ${p.size} ${p.description}`.toLowerCase();
+            return hay.includes(q);
+          });
+        }
+        return sortProducts(items, els.sort.value);
+      }
+
+      function renderGrid() {
+        const items = filteredProducts();
+        els.resultsMeta.textContent = `${items.length} product${items.length === 1 ? "" : "s"}`;
+        els.grid.innerHTML = items
+          .map((p) => {
+            const safeName = escapeHtml(p.name);
+            const safeBrand = escapeHtml(p.brand);
+            const safeColor = escapeHtml(p.color);
+            return `
+              <article class="card" data-id="${escapeHtml(p.id)}">
+                <div class="img">
+                  ${productMedia(p)}
+                  <div class="tag">${p.isNew ? "<strong>New</strong>" : `<strong>${escapeHtml(p.category)}</strong>`}</div>
+                  <div class="quick">
+                    <button class="btn btn-primary" type="button" data-action="add">Add to cart</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div>
+                    <h3>${safeBrand} ${safeName}</h3>
+                    <p class="subtitle">${safeColor}${p.variantCount ? ` · +${p.variantCount}` : ""}</p>
+                    <div class="meta">
+                      <div class="price">${fmt.format(p.price)}</div>
+                      <div class="small">${escapeHtml(p.material)}</div>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="btn linkbtn" type="button" data-action="view">Details</button>
+                    <button class="btn" type="button" data-action="add">Add</button>
+                  </div>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function openDrawer() {
+        els.drawer.classList.add("open");
+        els.drawerBackdrop.classList.add("open");
+        els.drawerBackdrop.setAttribute("aria-hidden", "false");
+        els.closeCart.focus();
+      }
+
+      function closeDrawer() {
+        els.drawer.classList.remove("open");
+        els.drawerBackdrop.classList.remove("open");
+        els.drawerBackdrop.setAttribute("aria-hidden", "true");
+        els.openCart.focus();
+      }
+
+      function renderCart() {
+        const cart = loadCart();
+        setCartBadge(cart);
+        const lines = Object.entries(cart)
+          .map(([id, qty]) => {
+            const p = getProductById(id);
+            if (!p) return "";
+            const lineTotal = p.price * qty;
+            return `
+              <div class="line" data-id="${escapeHtml(p.id)}">
+                <div>
+                  <h4>${escapeHtml(p.name)}</h4>
+                  <div class="muted">${escapeHtml(p.category)} · ${escapeHtml(p.color)} · ${fmt.format(p.price)} each</div>
+                  <div class="muted">Line total: ${fmt.format(lineTotal)}</div>
+                </div>
+                <div class="qty" aria-label="Quantity controls">
+                  <button class="btn" type="button" data-action="dec" aria-label="Decrease quantity">−</button>
+                  <strong aria-label="Quantity">${qty}</strong>
+                  <button class="btn" type="button" data-action="inc" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+            `;
+          })
+          .filter(Boolean)
+          .join("");
+
+        els.cartLines.innerHTML =
+          lines ||
+          `<div class="notice">
+            Your cart is empty. Add a bag you love, then checkout.
+          </div>`;
+
+        const subtotal = cartSubtotal(cart);
+        const shipping = calcShipping(subtotal);
+        const total = subtotal + shipping;
+        els.subtotal.textContent = fmt.format(subtotal);
+        els.shipping.textContent = shipping === 0 ? "Free" : fmt.format(shipping);
+        els.total.textContent = fmt.format(total);
+
+        els.checkoutBtn.disabled = subtotal === 0;
+        els.clearCart.disabled = subtotal === 0;
+      }
+
+      function addToCart(productId) {
+        const cart = loadCart();
+        cart[productId] = (cart[productId] ?? 0) + 1;
+        saveCart(cart);
+        renderCart();
+      }
+
+      function changeQty(productId, delta) {
+        const cart = loadCart();
+        const next = (cart[productId] ?? 0) + delta;
+        if (next <= 0) delete cart[productId];
+        else cart[productId] = next;
+        saveCart(cart);
+        renderCart();
+      }
+
+      function clearCart() {
+        saveCart({});
+        renderCart();
+      }
+
+      function openProduct(productId) {
+        const p = getProductById(productId);
+        if (!p) return;
+        els.productTitle.textContent = `${p.brand} ${p.name}`;
+        els.productBody.innerHTML = `
+          <div class="product-detail">
+            <div class="detail-img">${productMedia(p)}</div>
+            <div class="kv">
+              <h4>${escapeHtml(p.brand)} ${escapeHtml(p.name)}</h4>
+              <p class="desc">${escapeHtml(p.description)}</p>
+              <div class="specs" aria-label="Specs">
+                <span class="spec">${escapeHtml(p.brand)}</span>
+                <span class="spec">${escapeHtml(p.category)}</span>
+                <span class="spec">${escapeHtml(p.color)}</span>
+                <span class="spec">${escapeHtml(p.material)}</span>
+                <span class="spec">${escapeHtml(p.size)}</span>
+                ${p.variantCount ? `<span class="spec">+${escapeHtml(p.variantCount)} colors</span>` : ""}
+              </div>
+              <div class="meta" style="margin-top: 10px">
+                <div class="price">${fmt.format(p.price)}</div>
+                <div class="small">In stock (demo)</div>
+              </div>
+              <div style="display:flex; gap: 10px; margin-top: 10px">
+                <button class="btn btn-primary" type="button" id="addFromModal">Add to cart</button>
+                <button class="btn" type="button" id="openCartFromModal">View cart</button>
+              </div>
+            </div>
+          </div>
+        `;
+        els.productDialog.showModal();
+
+        const addBtn = document.getElementById("addFromModal");
+        const cartBtn = document.getElementById("openCartFromModal");
+        addBtn.addEventListener("click", () => addToCart(p.id), { once: false });
+        cartBtn.addEventListener("click", () => {
+          els.productDialog.close();
+          openDrawer();
+        });
+      }
+
+      function openCheckout() {
+        const cart = loadCart();
+        const subtotal = cartSubtotal(cart);
+        const shipping = calcShipping(subtotal);
+        const total = subtotal + shipping;
+        els.checkoutSummary.textContent = `Total due (demo): ${fmt.format(total)} — ${cartCount(cart)} item${
+          cartCount(cart) === 1 ? "" : "s"
+        }`;
+        els.checkoutDialog.showModal();
+        els.checkoutForm.reset();
+        els.checkoutForm.querySelector('input[name="name"]').focus();
+      }
+
+      function handlePlaceOrder(e) {
+        e.preventDefault();
+        const cart = loadCart();
+        const subtotal = cartSubtotal(cart);
+        if (subtotal === 0) return;
+
+        els.placeOrderBtn.disabled = true;
+        els.placeOrderBtn.textContent = "Placing order…";
+
+        setTimeout(async () => {
+          const fd = new FormData(els.checkoutForm);
+          const shipping = calcShipping(subtotal);
+          const total = subtotal + shipping;
+          const itemsDetailed = Object.entries(cart)
+            .map(([id, qty]) => {
+              const p = getProductById(id);
+              if (!p) return null;
+              return {
+                productId: p.id,
+                brand: p.brand,
+                name: p.name,
+                qty,
+                unitPrice: p.price,
+              };
+            })
+            .filter(Boolean);
+
+          const customer = {
+            name: String(fd.get("name") ?? ""),
+            email: String(fd.get("email") ?? ""),
+            phone: String(fd.get("phone") ?? ""),
+            city: String(fd.get("city") ?? ""),
+            address: String(fd.get("address") ?? ""),
+            notes: String(fd.get("notes") ?? ""),
+          };
+
+          let order = null;
+          if (API_ENABLED) {
+            try {
+              const items = itemsDetailed.map((it) => ({ productId: it.productId, qty: it.qty }));
+              order = await apiCreateOrder({ customer, items });
+              if (order) {
+                state.orders = [order, ...state.orders];
+              }
+            } catch {
+              order = null;
+            }
+          }
+
+          if (!order) {
+            const orderId = `JB-${Math.random().toString(16).slice(2, 8).toUpperCase()}`;
+            order = {
+              id: orderId,
+              createdAt: new Date().toISOString(),
+              status: "new",
+              customer,
+              totals: { subtotal, shipping, total },
+              items: itemsDetailed,
+            };
+            state.orders = [order, ...state.orders];
+            saveOrders(state.orders);
+          }
+
+          els.placeOrderBtn.disabled = false;
+          els.placeOrderBtn.textContent = "Place order (demo)";
+          els.checkoutDialog.close();
+          clearCart();
+          closeDrawer();
+          if (state.admin.authed) renderAdminOrders();
+          alert(`Order placed (demo)! Your order id is ${order.id}.`);
+        }, 700);
+      }
+
+      function refreshStorefront() {
+        const allowedBrands = new Set(state.products.map((p) => p.brand));
+        const allowedCategories = new Set(state.products.map((p) => p.category));
+        [...state.brands].forEach((b) => {
+          if (!allowedBrands.has(b)) state.brands.delete(b);
+        });
+        [...state.categories].forEach((c) => {
+          if (!allowedCategories.has(c)) state.categories.delete(c);
+        });
+
+        buildFilters();
+        syncBrandCheckboxes();
+        syncCategoryCheckboxes();
+        syncChips();
+        buildNewArrivals();
+        renderGrid();
+        renderCart();
+        syncAdminCategoryControls();
+      }
+
+      async function syncProductsFromApi() {
+        if (!API_ENABLED) return false;
+        const products = await apiGetProducts();
+        if (!Array.isArray(products)) return false;
+        state.products = products;
+        refreshStorefront();
+        return true;
+      }
+
+      async function syncOrdersFromApi() {
+        if (!API_ENABLED) return false;
+        const orders = await apiGetOrders();
+        state.orders = orders;
+        return true;
+      }
+
+      function setAdminAuthed(authed) {
+        state.admin.authed = authed;
+        els.adminLogin.hidden = authed;
+        els.adminApp.hidden = !authed;
+        if (!authed) setAdminToken("");
+      }
+
+      function setAdminTab(tab) {
+        state.admin.tab = tab;
+        els.adminTabs.forEach((btn) => {
+          const selected = btn.dataset.tab === tab;
+          btn.setAttribute("aria-selected", selected ? "true" : "false");
+        });
+        els.adminProducts.hidden = tab !== "products";
+        els.adminOrders.hidden = tab !== "orders";
+        els.adminCategories.hidden = tab !== "categories";
+        if (tab === "products") {
+          if (API_ENABLED) {
+            syncProductsFromApi()
+              .catch(() => {})
+              .finally(() => renderAdminProducts());
+          } else {
+            renderAdminProducts();
+          }
+        }
+        if (tab === "orders") {
+          if (API_ENABLED) {
+            syncOrdersFromApi()
+              .then(() => renderAdminOrders())
+              .catch(() => renderAdminOrders());
+          } else {
+            renderAdminOrders();
+          }
+        }
+        if (tab === "categories") {
+          if (API_ENABLED) {
+            syncProductsFromApi()
+              .catch(() => {})
+              .finally(() => renderAdminCategories());
+          } else {
+            renderAdminCategories();
+          }
+        }
+      }
+
+      function selectAdminProduct(productId) {
+        state.admin.selectedProductId = productId;
+        const p = getProductById(productId);
+        if (!p) return;
+
+        els.adminProductTitle.textContent = `Edit: ${p.brand} ${p.name}`;
+        els.adminDeleteProduct.disabled = false;
+
+        const form = els.adminProductForm;
+        form.brand.value = p.brand ?? "";
+        form.name.value = p.name ?? "";
+        form.category.value = p.category ?? "";
+        form.price.value = String(p.price ?? 0);
+        form.color.value = p.color ?? "";
+        form.material.value = p.material ?? "";
+        form.size.value = p.size ?? "";
+        form.variantCount.value = p.variantCount == null ? "" : String(p.variantCount);
+        form.featured.value = p.featured == null ? "" : String(p.featured);
+        form.isNew.value = String(Boolean(p.isNew));
+        form.description.value = p.description ?? "";
+        form.imageUrl.value = p.image ?? "";
+        form.imageFile.value = "";
+        els.adminProductMsg.textContent = "";
+      }
+
+      function renderAdminProducts() {
+        const list = state.products
+          .slice()
+          .sort((a, b) => (b.featured ?? 0) - (a.featured ?? 0) || a.name.localeCompare(b.name))
+          .map((p) => {
+            const title = escapeHtml(`${p.brand} ${p.name}`);
+            const meta = escapeHtml(`${p.category} · ${fmt.format(p.price)}${p.isNew ? " · New" : ""}`);
+            return `
+              <div class="admin-item" data-id="${escapeHtml(p.id)}">
+                <div>
+                  <strong>${title}</strong>
+                  <div class="small">${meta}</div>
+                </div>
+                <div class="admin-item-actions">
+                  <button class="btn" type="button" data-action="edit">Edit</button>
+                  <button class="btn linkbtn" type="button" data-action="delete">Delete</button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+        els.adminProductList.innerHTML =
+          list ||
+          `<div class="notice">No products yet. Click “Add product”.</div>`;
+
+        syncAdminCategoryControls();
+
+        if (!state.admin.selectedProductId && state.products.length > 0) {
+          selectAdminProduct(state.products[0].id);
+        } else if (state.admin.selectedProductId && !getProductById(state.admin.selectedProductId)) {
+          state.admin.selectedProductId = null;
+          if (state.products.length > 0) selectAdminProduct(state.products[0].id);
+        }
+      }
+
+      function renderAdminOrders() {
+        const orders = state.orders;
+        if (orders.length === 0) {
+          els.adminOrderList.innerHTML = `<div class="notice">No orders yet.</div>`;
+          return;
+        }
+
+        els.adminOrderList.innerHTML = orders
+          .map((o) => {
+            const dt = new Date(o.createdAt);
+            const when = isNaN(dt.getTime()) ? escapeHtml(o.createdAt) : escapeHtml(dt.toLocaleString());
+            const customer = escapeHtml(o.customer?.name ?? "");
+            const total = fmt.format(o.totals?.total ?? 0);
+            const status = escapeHtml(o.status ?? "new");
+            const items = Array.isArray(o.items)
+              ? o.items
+                  .map((it) => `${escapeHtml(it.brand ?? "")} ${escapeHtml(it.name ?? "")} × ${escapeHtml(it.qty ?? 0)}`)
+                  .join("<br/>")
+              : "";
+
+            return `
+              <div class="admin-item" data-id="${escapeHtml(o.id)}">
+                <div>
+                  <strong>${escapeHtml(o.id)} · ${customer}</strong>
+                  <div class="small">${when} · ${total}</div>
+                  <div class="small" data-order-details hidden style="margin-top: 8px">
+                    <div><strong>Items</strong></div>
+                    <div class="small" style="margin-top: 6px">${items || "—"}</div>
+                    <div class="small" style="margin-top: 10px"><strong>Address</strong></div>
+                    <div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.city ?? "")} · ${escapeHtml(
+              o.customer?.address ?? ""
+            )}</div>
+                    ${o.customer?.notes ? `<div class="small" style="margin-top: 10px"><strong>Notes</strong></div><div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.notes ?? "")}</div>` : ""}
+                  </div>
+                </div>
+                <div class="admin-item-actions">
+                  <select class="select" data-action="status" aria-label="Order status">
+                    <option value="new" ${status === "new" ? "selected" : ""}>New</option>
+                    <option value="fulfilled" ${status === "fulfilled" ? "selected" : ""}>Fulfilled</option>
+                    <option value="cancelled" ${status === "cancelled" ? "selected" : ""}>Cancelled</option>
+                  </select>
+                  <button class="btn" type="button" data-action="toggle">View</button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderAdminCategories() {
+        const categories = getAllCategories();
+
+        const list =
+          categories
+            .map((c) => {
+              const count = state.products.filter((p) => p.category === c).length;
+              return `
+                <div class="admin-item" data-cat="${escapeHtml(c)}">
+                  <div>
+                    <strong>${escapeHtml(c)}</strong>
+                    <div class="small">${count} product${count === 1 ? "" : "s"}</div>
+                  </div>
+                  <div class="admin-item-actions">
+                    <button class="btn" type="button" data-action="rename">Rename</button>
+                    <button class="btn" type="button" data-action="addProduct">Add product</button>
+                    <button class="btn linkbtn" type="button" data-action="delete">Delete</button>
+                  </div>
+                </div>
+              `;
+            })
+            .join("") || `<div class="notice">No categories yet.</div>`;
+
+        els.adminCategoryList.innerHTML = list;
+        els.adminCategoryMsg.textContent = "";
+        syncAdminCategoryControls();
+      }
+
+      function getAllCategories() {
+        const raw = state.products
+          .map((p) => String(p.category ?? "").trim())
+          .filter(Boolean);
+        const categories = uniqSorted(raw);
+        if (!categories.includes("Uncategorized")) categories.unshift("Uncategorized");
+        return categories;
+      }
+
+      function syncAdminCategoryControls() {
+        if (!els.adminCategoryOptions && !els.adminNewProductCategory && !els.adminCategoryFrom) return;
+        const categories = getAllCategories();
+
+        if (els.adminCategoryOptions) {
+          els.adminCategoryOptions.innerHTML = categories
+            .map((c) => `<option value="${escapeHtml(c)}"></option>`)
+            .join("");
+        }
+
+        if (els.adminNewProductCategory) {
+          const current = String(els.adminNewProductCategory.value ?? "");
+          els.adminNewProductCategory.innerHTML = categories
+            .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`)
+            .join("");
+          els.adminNewProductCategory.value = categories.includes(current) ? current : categories[0];
+        }
+
+        if (els.adminCategoryFrom) {
+          const current = String(els.adminCategoryFrom.value ?? "");
+          els.adminCategoryFrom.innerHTML = categories
+            .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`)
+            .join("");
+          els.adminCategoryFrom.value = categories.includes(current) ? current : categories[0];
+        }
+      }
+
+      function openAdmin() {
+        if (!els.adminDialog) return;
+        try {
+          if (typeof els.adminDialog.showModal === "function") {
+            els.adminDialog.showModal();
+          } else {
+            els.adminDialog.setAttribute("open", "");
+          }
+        } catch (_) {
+          try {
+            els.adminDialog.setAttribute("open", "");
+          } catch (_) {}
+        }
+        const token = getAdminToken();
+        const canUseToken = API_ENABLED && token;
+        if (state.admin.authed || canUseToken) {
+          setAdminAuthed(true);
+          setAdminTab(state.admin.tab);
+          return;
+        }
+        setAdminAuthed(false);
+        els.adminLoginForm.querySelector('input[name="username"]').focus();
+      }
+
+      async function init() {
+        if (!API_ENABLED) ensureAdminCred();
+        els.year.textContent = String(new Date().getFullYear());
+        buildFilters();
+        buildNewArrivals();
+        renderGrid();
+        renderCart();
+
+        if (API_ENABLED) {
+          syncProductsFromApi().catch(() => {});
+        }
+
+        const topbar = document.querySelector(".topbar");
+        function syncTopbar() {
+          const scrolled = window.scrollY > 10;
+          topbar?.classList.toggle("is-scrolled", scrolled);
+        }
+
+        syncTopbar();
+        window.addEventListener("scroll", syncTopbar, { passive: true });
+
+        function setFilterMenu(open) {
+          if (!els.filterMenu || !els.filterBtn) return;
+          els.filterMenu.hidden = !open;
+          els.filterBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+
+        setFilterMenu(false);
+
+        els.filterBtn?.addEventListener("click", () => {
+          const isOpen = els.filterBtn.getAttribute("aria-expanded") === "true";
+          setFilterMenu(!isOpen);
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!els.filterMenu || !els.filterBtn) return;
+          const target = e.target;
+          if (!(target instanceof Node)) return;
+          const clickedInside = els.filterMenu.contains(target) || els.filterBtn.contains(target);
+          if (!clickedInside) setFilterMenu(false);
+        });
+
+        window.addEventListener("keydown", (e) => {
+          if (e.key !== "Escape") return;
+          setFilterMenu(false);
+        });
+
+        els.openAdmin?.addEventListener("click", openAdmin);
+        els.adminLauncher?.addEventListener("click", openAdmin);
+        els.closeAdmin.addEventListener("click", () => {
+          try {
+            els.adminDialog.close();
+          } catch (_) {
+            els.adminDialog.removeAttribute("open");
+          }
+        });
+
+        function syncAdminDeepLink() {
+          const active = location.hash === "#admin";
+          if (els.adminLauncher) els.adminLauncher.hidden = !active;
+          if (!active) return;
+          openAdmin();
+        }
+
+        syncAdminDeepLink();
+        window.addEventListener("hashchange", syncAdminDeepLink);
+
+        document.addEventListener("keydown", (e) => {
+          if (!(e.ctrlKey || e.metaKey) || !e.shiftKey) return;
+          if (String(e.key).toLowerCase() !== "a") return;
+          e.preventDefault();
+          openAdmin();
+        });
+
+        els.adminLoginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const fd = new FormData(els.adminLoginForm);
+          const user = String(fd.get("username") ?? "").trim();
+          const pass = String(fd.get("password") ?? "");
+
+          if (API_ENABLED) {
+            try {
+              await apiLogin(user, pass);
+              els.adminLoginMsg.textContent = "";
+              setAdminAuthed(true);
+              await syncProductsFromApi().catch(() => {});
+              await syncOrdersFromApi().catch(() => {});
+              setAdminTab("products");
+            } catch (err) {
+              els.adminLoginMsg.textContent = String(err?.message || "Login failed");
+            }
+            return;
+          }
+
+          const raw = localStorage.getItem(ADMIN_CRED_KEY);
+          const cred = raw ? JSON.parse(raw) : null;
+          const ok = cred && cred.user === user && cred.passHash === hashString(`${user}:${pass}`);
+          if (!ok) {
+            els.adminLoginMsg.textContent = "Invalid username or password.";
+            return;
+          }
+          els.adminLoginMsg.textContent = "";
+          setAdminAuthed(true);
+          setAdminTab("products");
+        });
+
+        els.adminLogout.addEventListener("click", () => {
+          setAdminAuthed(false);
+        });
+
+        els.adminTabs.forEach((btn) => {
+          btn.addEventListener("click", () => setAdminTab(btn.dataset.tab));
+        });
+
+        els.adminProductList.onclick = async (e) => {
+          const card = e.target.closest(".admin-item");
+          if (!card) return;
+          const actionBtn = e.target.closest("button[data-action]");
+          if (!actionBtn) return;
+          const action = actionBtn.getAttribute("data-action");
+          const id = card.getAttribute("data-id");
+          if (!id) return;
+          if (action === "edit") {
+            selectAdminProduct(id);
+          }
+          if (action === "delete") {
+            const p = getProductById(id);
+            if (!p) return;
+            const ok = confirm(`Delete product: ${p.brand} ${p.name}?`);
+            if (!ok) return;
+            if (API_ENABLED) {
+              try {
+                await apiDeleteProduct(id);
+                await syncProductsFromApi().catch(() => {});
+                if (state.admin.selectedProductId === id) state.admin.selectedProductId = null;
+                renderAdminProducts();
+              } catch (err) {
+                els.adminProductMsg.textContent = String(err?.message || "Delete failed");
+              }
+              return;
+            }
+
+            state.products = state.products.filter((x) => x.id !== id);
+            saveProducts(state.products);
+            if (state.admin.selectedProductId === id) state.admin.selectedProductId = null;
+            refreshStorefront();
+            renderAdminProducts();
+          }
+        };
+
+        els.adminNewProduct.addEventListener("click", async () => {
+          const id = `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+          const category = String(els.adminNewProductCategory?.value ?? "Uncategorized").trim() || "Uncategorized";
+          const product = {
+            id,
+            brand: "Jana",
+            name: "New Bag",
+            category,
+            price: 0,
+            featured: 0,
+            color: "Black",
+            material: "Leather",
+            size: "Medium",
+            variantCount: 0,
+            isNew: true,
+            description: "",
+            image: "",
+          };
+          if (API_ENABLED) {
+            try {
+              const created = await apiCreateProduct(product);
+              await syncProductsFromApi().catch(() => {});
+              renderAdminProducts();
+              selectAdminProduct(created?.id || id);
+            } catch (err) {
+              els.adminProductMsg.textContent = String(err?.message || "Add failed");
+            }
+            return;
+          }
+
+          state.products = [product, ...state.products];
+          saveProducts(state.products);
+          refreshStorefront();
+          renderAdminProducts();
+          selectAdminProduct(id);
+        });
+
+        function readFileAsDataUrl(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result ?? ""));
+            reader.onerror = () => reject(new Error("Failed to read file"));
+            reader.readAsDataURL(file);
+          });
+        }
+
+        els.adminProductForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const id = state.admin.selectedProductId;
+          if (!id) return;
+          const p = getProductById(id);
+          if (!p) return;
+
+          const form = els.adminProductForm;
+          const file = form.imageFile.files && form.imageFile.files[0] ? form.imageFile.files[0] : null;
+          const url = String(form.imageUrl.value ?? "").trim();
+          let image = p.image ?? "";
+          if (url) image = url;
+          else if (file) image = await readFileAsDataUrl(file);
+
+          const updated = {
+            ...p,
+            brand: String(form.brand.value ?? "").trim(),
+            name: String(form.name.value ?? "").trim(),
+            category: String(form.category.value ?? "").trim() || "Uncategorized",
+            price: Number(form.price.value ?? 0),
+            color: String(form.color.value ?? "").trim(),
+            material: String(form.material.value ?? "").trim(),
+            size: String(form.size.value ?? "").trim(),
+            variantCount: form.variantCount.value === "" ? 0 : Number(form.variantCount.value ?? 0),
+            featured: form.featured.value === "" ? 0 : Number(form.featured.value ?? 0),
+            isNew: String(form.isNew.value) === "true",
+            description: String(form.description.value ?? "").trim(),
+            image,
+          };
+
+          if (API_ENABLED) {
+            try {
+              const saved = await apiUpdateProduct(id, updated);
+              await syncProductsFromApi().catch(() => {});
+              renderAdminProducts();
+              selectAdminProduct(saved?.id || id);
+              els.adminProductMsg.textContent = "Saved.";
+            } catch (err) {
+              els.adminProductMsg.textContent = String(err?.message || "Save failed");
+            }
+            return;
+          }
+
+          state.products = state.products.map((x) => (x.id === id ? updated : x));
+          saveProducts(state.products);
+          refreshStorefront();
+          renderAdminProducts();
+          selectAdminProduct(id);
+          els.adminProductMsg.textContent = "Saved.";
+        });
+
+        els.adminDeleteProduct.addEventListener("click", async () => {
+          const id = state.admin.selectedProductId;
+          if (!id) return;
+          const p = getProductById(id);
+          if (p) {
+            const ok = confirm(`Delete product: ${p.brand} ${p.name}?`);
+            if (!ok) return;
+          }
+
+          if (API_ENABLED) {
+            try {
+              await apiDeleteProduct(id);
+              await syncProductsFromApi().catch(() => {});
+              state.admin.selectedProductId = null;
+              renderAdminProducts();
+              els.adminProductMsg.textContent = "";
+            } catch (err) {
+              els.adminProductMsg.textContent = String(err?.message || "Delete failed");
+            }
+            return;
+          }
+
+          state.products = state.products.filter((p) => p.id !== id);
+          saveProducts(state.products);
+          state.admin.selectedProductId = null;
+          refreshStorefront();
+          renderAdminProducts();
+          els.adminProductMsg.textContent = "";
+        });
+
+        els.adminClearOrders.addEventListener("click", async () => {
+          if (API_ENABLED) {
+            try {
+              await apiJson("/api/orders", { method: "DELETE", auth: true });
+              await syncOrdersFromApi().catch(() => {});
+              renderAdminOrders();
+            } catch (err) {
+              els.adminCategoryMsg.textContent = String(err?.message || "Clear failed");
+            }
+            return;
+          }
+
+          state.orders = [];
+          saveOrders(state.orders);
+          renderAdminOrders();
+        });
+
+        els.adminRefreshCategories.addEventListener("click", async () => {
+          if (API_ENABLED) await syncProductsFromApi().catch(() => {});
+          renderAdminCategories();
+        });
+
+        els.adminCategoryList.onclick = async (e) => {
+          const row = e.target.closest(".admin-item");
+          if (!row) return;
+          const btn = e.target.closest("button[data-action]");
+          if (!btn) return;
+          const cat = row.getAttribute("data-cat");
+          if (!cat) return;
+          const action = btn.getAttribute("data-action");
+          if (action === "rename") {
+            els.adminCategoryFrom.value = cat;
+            els.adminCategoryTo.value = cat;
+            els.adminCategoryTo.focus();
+            return;
+          }
+          if (action === "addProduct") {
+            const id = `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+            const category = String(cat).trim() || "Uncategorized";
+            const product = {
+              id,
+              brand: "Jana",
+              name: "New Bag",
+              category,
+              price: 0,
+              featured: 0,
+              color: "Black",
+              material: "Leather",
+              size: "Medium",
+              variantCount: 0,
+              isNew: true,
+              description: "",
+              image: "",
+            };
+            if (API_ENABLED) {
+              try {
+                const created = await apiCreateProduct(product);
+                await syncProductsFromApi().catch(() => {});
+                renderAdminProducts();
+                selectAdminProduct(created?.id || id);
+                setAdminTab("products");
+              } catch (err) {
+                els.adminCategoryMsg.textContent = String(err?.message || "Add failed");
+              }
+              return;
+            }
+
+            state.products = [product, ...state.products];
+            saveProducts(state.products);
+            refreshStorefront();
+            renderAdminProducts();
+            selectAdminProduct(id);
+            setAdminTab("products");
+            return;
+          }
+          if (action === "delete") {
+            if (cat === "Uncategorized") {
+              els.adminCategoryMsg.textContent = "Cannot delete Uncategorized.";
+              return;
+            }
+            const count = state.products.filter((p) => p.category === cat).length;
+            const ok = confirm(`Delete category “${cat}”? ${count} product(s) will move to Uncategorized.`);
+            if (!ok) return;
+            if (API_ENABLED) {
+              try {
+                const products = await apiDeleteCategory(cat);
+                if (Array.isArray(products)) state.products = products;
+                refreshStorefront();
+                renderAdminProducts();
+                renderAdminCategories();
+                els.adminCategoryMsg.textContent = `Deleted “${cat}”. Moved products to Uncategorized.`;
+              } catch (err) {
+                els.adminCategoryMsg.textContent = String(err?.message || "Delete failed");
+              }
+              return;
+            }
+
+            state.products = state.products.map((p) => (p.category === cat ? { ...p, category: "Uncategorized" } : p));
+            saveProducts(state.products);
+            refreshStorefront();
+            renderAdminProducts();
+            renderAdminCategories();
+            els.adminCategoryMsg.textContent = `Deleted “${cat}”. Moved products to Uncategorized.`;
+          }
+        };
+
+        els.adminCategoryForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const from = String(els.adminCategoryFrom.value ?? "").trim();
+          const to = String(els.adminCategoryTo.value ?? "").trim();
+          if (!from || !to) return;
+          if (from === to) {
+            els.adminCategoryMsg.textContent = "No changes.";
+            return;
+          }
+
+          if (API_ENABLED) {
+            try {
+              const products = await apiRenameCategory(from, to);
+              if (Array.isArray(products)) state.products = products;
+              refreshStorefront();
+              renderAdminProducts();
+              renderAdminCategories();
+              els.adminCategoryMsg.textContent = `Renamed “${from}” → “${to}”.`;
+            } catch (err) {
+              els.adminCategoryMsg.textContent = String(err?.message || "Rename failed");
+            }
+            return;
+          }
+
+          state.products = state.products.map((p) => (p.category === from ? { ...p, category: to } : p));
+          saveProducts(state.products);
+          refreshStorefront();
+          renderAdminProducts();
+          renderAdminCategories();
+          els.adminCategoryMsg.textContent = `Renamed “${from}” → “${to}”.`;
+        });
+
+        els.adminOrderList.onclick = (e) => {
+          const row = e.target.closest(".admin-item");
+          if (!row) return;
+          const actionBtn = e.target.closest("button[data-action]");
+          if (!actionBtn) return;
+          if (actionBtn.getAttribute("data-action") !== "toggle") return;
+          const details = row.querySelector("[data-order-details]");
+          if (!details) return;
+          details.hidden = !details.hidden;
+        };
+
+        els.adminOrderList.onchange = async (e) => {
+          const select = e.target;
+          if (!(select instanceof HTMLSelectElement)) return;
+          const row = select.closest(".admin-item");
+          if (!row) return;
+          const id = row.getAttribute("data-id");
+          if (!id) return;
+          const value = select.value;
+          if (API_ENABLED) {
+            try {
+              await apiUpdateOrderStatus(id, value);
+              await syncOrdersFromApi().catch(() => {});
+              renderAdminOrders();
+            } catch {}
+            return;
+          }
+
+          state.orders = state.orders.map((o) => (o.id === id ? { ...o, status: value } : o));
+          saveOrders(state.orders);
+        };
+
+        els.sort.addEventListener("change", renderGrid);
+        els.clearFilters.addEventListener("click", () => {
+          state.brands.clear();
+          state.categories.clear();
+          els.sort.value = "featured";
+          syncBrandCheckboxes();
+          syncCategoryCheckboxes();
+          syncChips();
+          renderGrid();
+          setFilterMenu(false);
+        });
+
+        els.grid.addEventListener("click", (e) => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          const card = e.target.closest("[data-id]");
+          if (!card) return;
+          const id = card.getAttribute("data-id");
+          if (!id) return;
+          if (btn.dataset.action === "add") addToCart(id);
+          if (btn.dataset.action === "view") openProduct(id);
+        });
+
+        els.openCart.addEventListener("click", () => {
+          renderCart();
+          openDrawer();
+        });
+        els.closeCart.addEventListener("click", closeDrawer);
+        els.drawerBackdrop.addEventListener("click", closeDrawer);
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && els.drawer.classList.contains("open")) closeDrawer();
+        });
+
+        els.cartLines.addEventListener("click", (e) => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          const line = e.target.closest("[data-id]");
+          if (!line) return;
+          const id = line.getAttribute("data-id");
+          if (!id) return;
+          const action = btn.dataset.action;
+          if (action === "inc") changeQty(id, +1);
+          if (action === "dec") changeQty(id, -1);
+        });
+
+        els.clearCart.addEventListener("click", clearCart);
+        els.checkoutBtn.addEventListener("click", openCheckout);
+
+        els.closeProduct.addEventListener("click", () => els.productDialog.close());
+        els.productDialog.addEventListener("click", (e) => {
+          const box = els.productDialog.getBoundingClientRect();
+          const clickedOutside =
+            e.clientX < box.left || e.clientX > box.right || e.clientY < box.top || e.clientY > box.bottom;
+          if (clickedOutside) els.productDialog.close();
+        });
+
+        els.closeCheckout.addEventListener("click", () => els.checkoutDialog.close());
+        els.checkoutForm.addEventListener("submit", handlePlaceOrder);
+      }
+
+      init();
+    </script>
+  </body>
+  </html>
