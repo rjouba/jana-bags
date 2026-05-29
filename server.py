@@ -71,6 +71,7 @@ def seed_products() -> list[dict]:
             "category": "Tote",
             "price": 118,
             "featured": 14,
+            "stock": 10,
             "color": "Ivory",
             "material": "Vegan leather",
             "size": "Fits 15” laptop",
@@ -86,6 +87,7 @@ def seed_products() -> list[dict]:
             "category": "Crossbody",
             "price": 92,
             "featured": 11,
+            "stock": 10,
             "color": "Black",
             "material": "Vegan leather",
             "size": "Compact",
@@ -101,6 +103,7 @@ def seed_products() -> list[dict]:
             "category": "Shoulder",
             "price": 136,
             "featured": 9,
+            "stock": 10,
             "color": "Sand",
             "material": "Vegan leather",
             "size": "Medium",
@@ -125,6 +128,15 @@ def load_data() -> dict:
             data["products"] = []
         if not isinstance(data.get("orders"), list):
             data["orders"] = []
+        changed = False
+        for p in data.get("products", []):
+            if not isinstance(p, dict):
+                continue
+            if "stock" not in p:
+                p["stock"] = 999
+                changed = True
+        if changed:
+            save_data(data)
         return data
     except Exception:
         data = {"products": seed_products(), "orders": []}
@@ -167,6 +179,7 @@ def normalize_product(obj: dict) -> dict:
         "category": s("category", "Uncategorized") or "Uncategorized",
         "price": n("price", 0),
         "featured": n("featured", 0),
+        "stock": n("stock", 0),
         "color": s("color", "Black") or "Black",
         "material": s("material", "Leather") or "Leather",
         "size": s("size", "Medium") or "Medium",
@@ -178,7 +191,16 @@ def normalize_product(obj: dict) -> dict:
     return out
 
 
-def compute_order_totals(products_by_id: dict[str, dict], items: list[dict]) -> tuple[list[dict], dict]:
+def _delivery_fee(subtotal: int, city_code: str) -> int:
+    if subtotal <= 0:
+        return 0
+    code = str(city_code or "").strip().lower()
+    if code in ("amman", "عمّان", "عمان"):
+        return 2
+    return 3
+
+
+def compute_order_totals(products_by_id: dict[str, dict], items: list[dict], city_code: str = "") -> tuple[list[dict], dict]:
     subtotal = 0
     normalized: list[dict] = []
     for it in items:
@@ -200,13 +222,12 @@ def compute_order_totals(products_by_id: dict[str, dict], items: list[dict]) -> 
                 "productId": p.get("id", pid),
                 "brand": p.get("brand", ""),
                 "name": p.get("name", ""),
+                "image": p.get("image", ""),
                 "qty": qty,
                 "unitPrice": price,
             }
         )
-    shipping = 0
-    if subtotal > 0:
-        shipping = 0 if subtotal >= 200 else 12
+    shipping = _delivery_fee(subtotal, city_code)
     return normalized, {"subtotal": subtotal, "shipping": shipping, "total": subtotal + shipping}
 
 
@@ -338,10 +359,42 @@ class Handler(BaseHTTPRequestHandler):
                 customer = {}
             if not isinstance(items, list):
                 items = []
+            city_code = str(customer.get("cityCode") or customer.get("city") or "").strip()
             products_by_id = {p.get("id"): p for p in data["products"] if isinstance(p, dict)}
-            normalized_items, totals = compute_order_totals(products_by_id, items)
+            requested: list[tuple[str, int]] = []
+            for it in items:
+                if not isinstance(it, dict):
+                    continue
+                pid = str(it.get("productId", "")).strip()
+                try:
+                    qty = int(float(it.get("qty", 0)))
+                except Exception:
+                    qty = 0
+                qty = min(99, max(1, qty))
+                if pid:
+                    requested.append((pid, qty))
+            for pid, qty in requested:
+                p = products_by_id.get(pid)
+                if not p:
+                    continue
+                try:
+                    stock = int(p.get("stock", 0) or 0)
+                except Exception:
+                    stock = 0
+                if stock < qty:
+                    return self._send_json(HTTPStatus.CONFLICT, {"error": "out_of_stock", "productId": pid, "stock": stock})
+            normalized_items, totals = compute_order_totals(products_by_id, items, city_code=city_code)
             if totals["subtotal"] <= 0 or not normalized_items:
                 return self._send_json(HTTPStatus.BAD_REQUEST, {"error": "empty_order"})
+            for pid, qty in requested:
+                p = products_by_id.get(pid)
+                if not p:
+                    continue
+                try:
+                    stock = int(p.get("stock", 0) or 0)
+                except Exception:
+                    stock = 0
+                p["stock"] = max(0, stock - qty)
             order_id = f"JB-{secrets.token_hex(4).upper()}"
             order = {
                 "id": order_id,
@@ -352,6 +405,7 @@ class Handler(BaseHTTPRequestHandler):
                     "email": str(customer.get("email", "")).strip(),
                     "phone": str(customer.get("phone", "")).strip(),
                     "city": str(customer.get("city", "")).strip(),
+                    "cityCode": str(customer.get("cityCode", "")).strip(),
                     "address": str(customer.get("address", "")).strip(),
                     "notes": str(customer.get("notes", "")).strip(),
                 },

@@ -1231,12 +1231,24 @@
         white-space: nowrap;
         border: 0;
       }
+
+      html[dir="rtl"] body {
+        direction: rtl;
+      }
+
+      html[dir="rtl"] .topbar .container {
+        flex-direction: row-reverse;
+      }
+
+      html[dir="rtl"] .breadcrumb {
+        flex-direction: row-reverse;
+      }
     </style>
   </head>
   <body>
     <div class="announce">
       <div class="container" style="padding-left: 18px; padding-right: 18px">
-        Free shipping over $120 · Easy returns · Secure checkout
+        <span id="announceText">Free shipping over $120 · Easy returns · Secure checkout</span>
       </div>
     </div>
     <header class="topbar">
@@ -1261,22 +1273,22 @@
             </svg>
           </button>
           <nav aria-label="Primary">
-            <a class="navlink" href="#shop">All Bags</a>
-            <a class="navlink" href="#shop">Brands</a>
-            <a class="navlink" href="#about">About</a>
+            <a class="navlink" href="#shop" id="navAll">All Bags</a>
+            <a class="navlink" href="#shop" id="navBrands">Brands</a>
+            <a class="navlink" href="#about" id="navAbout">About</a>
           </nav>
 
           <div class="filter-menu" id="filterMenu" role="dialog" aria-label="Filters" hidden>
             <div class="filter-menu-head">
-              <h3>Filters</h3>
+              <h3 id="filtersTitle">Filters</h3>
               <button class="btn linkbtn" type="button" id="clearFilters">Clear</button>
             </div>
             <div class="filter-section">
-              <h4>Brand</h4>
+              <h4 id="filterBrandTitle">Brand</h4>
               <div class="checklist" id="brandFilters"></div>
             </div>
             <div class="filter-section">
-              <h4>Category</h4>
+              <h4 id="filterCategoryTitle">Category</h4>
               <div class="checklist" id="categoryFilters"></div>
             </div>
           </div>
@@ -1289,8 +1301,9 @@
         </div>
 
         <div class="header-right">
+          <button class="btn" id="langToggle" type="button" aria-label="Language">AR</button>
           <button class="btn btn-primary" id="openCart" type="button">
-            Cart <span class="badge" id="cartCount" aria-live="polite">0</span>
+            <span id="cartLabel">Cart</span> <span class="badge" id="cartCount" aria-live="polite">0</span>
           </button>
         </div>
       </div>
@@ -1301,14 +1314,14 @@
     <main class="container">
       <section class="collection-head" aria-label="Collection header">
         <div class="breadcrumb">
-          <a href="#shop">Home</a>
+          <a href="#shop" id="crumbHome">Home</a>
           <span aria-hidden="true">/</span>
-          <span>All Bags</span>
+          <span id="crumbAll">All Bags</span>
         </div>
         <div class="collection-title">
           <div>
-            <h2>Explore Jana Bags Collection</h2>
-            <p>
+            <h2 id="collectionTitle">Explore Jana Bags Collection</h2>
+            <p id="collectionDesc">
               Shop women’s bags by brand and style. Use the brand categories and filters to find the perfect tote, crossbody, shoulder
               bag, clutch, or backpack.
             </p>
@@ -1317,8 +1330,8 @@
         </div>
         <div class="new-arrivals" id="newArrivals" aria-label="New arrivals">
           <div class="new-arrivals-head">
-            <h3>New Arrivals</h3>
-            <span class="small">Latest drops</span>
+            <h3 id="newArrivalsTitle">New Arrivals</h3>
+            <span class="small" id="newArrivalsSubtitle">Latest drops</span>
           </div>
           <div class="new-marquee" id="newMarquee" tabindex="0">
             <div class="new-marquee-track" id="newMarqueeTrack"></div>
@@ -1367,19 +1380,19 @@
     <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
     <aside class="drawer" id="drawer" aria-label="Shopping cart" aria-modal="true" role="dialog">
       <div class="drawer-header">
-        <h3>Your cart</h3>
+        <h3 id="drawerTitle">Your cart</h3>
         <button class="btn" type="button" id="closeCart">Close</button>
       </div>
       <div class="drawer-body" id="cartLines"></div>
       <div class="drawer-footer">
         <div class="totals">
-          <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
-          <div class="row"><span>Shipping</span><strong id="shipping">$0.00</strong></div>
-          <div class="row"><span>Total</span><strong id="total">$0.00</strong></div>
+          <div class="row"><span id="subtotalLabel">Subtotal</span><strong id="subtotal">$0.00</strong></div>
+          <div class="row"><span id="shippingLabel">Shipping</span><strong id="shipping">$0.00</strong></div>
+          <div class="row"><span id="totalLabel">Total</span><strong id="total">$0.00</strong></div>
         </div>
         <button class="btn btn-primary" type="button" id="checkoutBtn">Checkout (demo)</button>
         <button class="btn" type="button" id="clearCart">Clear cart</button>
-        <div class="small">Demo only. No real payment is processed.</div>
+        <div class="small" id="demoOnlyNote">Demo only. No real payment is processed.</div>
       </div>
     </aside>
 
@@ -1396,38 +1409,38 @@
     <dialog id="checkoutDialog" aria-label="Checkout">
       <div class="modal">
         <div class="modal-header">
-          <h3>Checkout (demo)</h3>
+          <h3 id="checkoutTitle">Checkout (demo)</h3>
           <button class="btn" id="closeCheckout" type="button">Close</button>
         </div>
         <div class="modal-body">
-          <div class="notice">
+          <div class="notice" id="checkoutNotice">
             This checkout is a UI demo. To accept real payments, connect Stripe/PayPal and create an order on your server.
           </div>
           <form class="form" id="checkoutForm">
             <div class="form-grid">
               <label>
-                Full name
+                <span id="checkoutNameLabel">Full name</span>
                 <input name="name" autocomplete="name" required />
               </label>
               <label>
-                Email
+                <span id="checkoutEmailLabel">Email</span>
                 <input name="email" type="email" autocomplete="email" required />
               </label>
               <label>
-                Phone
+                <span id="checkoutPhoneLabel">Phone</span>
                 <input name="phone" autocomplete="tel" required />
               </label>
               <label>
-                City
-                <input name="city" autocomplete="address-level2" required />
+                <span id="checkoutCityLabel">City</span>
+                <select name="city" id="checkoutCity" autocomplete="address-level2" required></select>
               </label>
               <label style="grid-column: 1 / -1">
-                Address
+                <span id="checkoutAddressLabel">Address</span>
                 <input name="address" autocomplete="street-address" required />
               </label>
               <label style="grid-column: 1 / -1">
-                Notes (optional)
-                <textarea name="notes" placeholder="Delivery instructions, gift note, etc."></textarea>
+                <span id="checkoutNotesLabel">Notes (optional)</span>
+                <textarea name="notes" id="checkoutNotes" placeholder="Delivery instructions, gift note, etc."></textarea>
               </label>
             </div>
             <button class="btn btn-primary" type="submit" id="placeOrderBtn">Place order (demo)</button>
@@ -1528,6 +1541,10 @@
                       <label>
                         Featured rank
                         <input name="featured" type="number" min="0" step="1" />
+                      </label>
+                      <label>
+                        Stock
+                        <input name="stock" type="number" min="0" step="1" />
                       </label>
                       <label>
                         New
@@ -1781,12 +1798,144 @@
       const ORDERS_KEY = "jana_orders_v1";
       const ADMIN_CRED_KEY = "jana_admin_cred_v1";
       const ADMIN_TOKEN_KEY = "jana_admin_token_v1";
+      const LANG_KEY = "jana_lang_v1";
       const API_ENABLED = location.protocol === "http:" || location.protocol === "https:";
-      const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" });
+
+      function loadLang() {
+        try {
+          const raw = String(localStorage.getItem(LANG_KEY) || "").toLowerCase();
+          if (raw === "ar" || raw === "en") return raw;
+        } catch {}
+        return "en";
+      }
+
+      let currentLang = loadLang();
+      try {
+        document.documentElement.lang = currentLang === "ar" ? "ar" : "en";
+        document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+      } catch {}
+
+      const formatters = {
+        en: new Intl.NumberFormat("en-JO", { style: "currency", currency: "JOD", minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        ar: new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD", minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      };
+
+      function money(value) {
+        const n = Number(value) || 0;
+        return (formatters[currentLang] || formatters.en).format(n);
+      }
+
+      const GOVERNORATES = [
+        { code: "amman", en: "Amman", ar: "عمّان" },
+        { code: "zarqa", en: "Zarqa", ar: "الزرقاء" },
+        { code: "irbid", en: "Irbid", ar: "إربد" },
+        { code: "aqaba", en: "Aqaba", ar: "العقبة" },
+        { code: "balqa", en: "Balqa", ar: "البلقاء" },
+        { code: "madaba", en: "Madaba", ar: "مادبا" },
+        { code: "karak", en: "Karak", ar: "الكرك" },
+        { code: "tafilah", en: "Tafilah", ar: "الطفيلة" },
+        { code: "maan", en: "Ma'an", ar: "معان" },
+        { code: "jerash", en: "Jerash", ar: "جرش" },
+        { code: "ajloun", en: "Ajloun", ar: "عجلون" },
+        { code: "mafraq", en: "Mafraq", ar: "المفرق" },
+      ];
+
+      const I18N = {
+        en: {
+          cart: "Cart",
+          admin: "Admin",
+          all_bags: "All Bags",
+          details: "Details",
+          add: "Add",
+          your_cart: "Your cart",
+          close: "Close",
+          subtotal: "Subtotal",
+          shipping: "Delivery",
+          total: "Total",
+          checkout_demo: "Checkout (demo)",
+          clear_cart: "Clear cart",
+          demo_only: "Demo only. No real payment is processed.",
+          shipping_at_checkout: "Calculated at checkout",
+          total_at_checkout: "—",
+          total_due_demo: "Total due (demo): {total} — {count} item{plural}",
+          placing_order: "Placing order…",
+          place_order_demo: "Place order (demo)",
+          order_placed: "Order placed (demo)! Your order id is {id}.",
+          empty_cart: "Your cart is empty. Add a bag you love, then checkout.",
+          each: "each",
+          line_total: "Line total: {total}",
+          delivery_fees: "Delivery fees: Amman 2 JOD · Other governorates 3 JOD",
+          full_name: "Full name",
+          email: "Email",
+          phone: "Phone",
+          city: "Governorate",
+          address: "Address",
+          notes: "Notes (optional)",
+          notes_placeholder: "Delivery instructions, gift note, etc.",
+          checkout_notice: "This checkout is a UI demo. To accept real payments, connect Stripe/PayPal and create an order on your server.",
+          invoice: "Invoice",
+          print: "Print",
+          customer_name: "Name",
+          customer_phone: "Mobile",
+          governorate_address: "Governorate & address",
+          order_value: "Order value",
+          items: "Items",
+        },
+        ar: {
+          cart: "السلة",
+          admin: "الإدارة",
+          all_bags: "كل الشنط",
+          details: "التفاصيل",
+          add: "إضافة",
+          your_cart: "سلتك",
+          close: "إغلاق",
+          subtotal: "المجموع",
+          shipping: "التوصيل",
+          total: "الإجمالي",
+          checkout_demo: "الدفع (تجريبي)",
+          clear_cart: "تفريغ السلة",
+          demo_only: "تجريبي فقط. لا يتم تنفيذ أي دفع فعلي.",
+          shipping_at_checkout: "يُحسب عند اختيار المحافظة",
+          total_at_checkout: "—",
+          total_due_demo: "الإجمالي المستحق (تجريبي): {total} — {count} قطعة{plural}",
+          placing_order: "جارٍ إرسال الطلب…",
+          place_order_demo: "إرسال الطلب (تجريبي)",
+          order_placed: "تم إرسال الطلب (تجريبي)! رقم الطلب: {id}.",
+          empty_cart: "سلتك فارغة. أضيفي شنطة ثم اكملي الطلب.",
+          each: "للواحدة",
+          line_total: "مجموع السطر: {total}",
+          delivery_fees: "رسوم التوصيل: عمّان ٢ د.أ · باقي المحافظات ٣ د.أ",
+          full_name: "الاسم الكامل",
+          email: "البريد الإلكتروني",
+          phone: "رقم الهاتف",
+          city: "المحافظة",
+          address: "العنوان",
+          notes: "ملاحظات (اختياري)",
+          notes_placeholder: "تعليمات التوصيل، ملاحظة هدية، إلخ.",
+          checkout_notice: "صفحة الدفع تجريبية. لتفعيل الدفع الحقيقي اربط Stripe/PayPal وأنشئ الطلب على السيرفر.",
+          invoice: "فاتورة",
+          print: "طباعة",
+          customer_name: "الاسم",
+          customer_phone: "رقم الموبايل",
+          governorate_address: "المحافظة والعنوان",
+          order_value: "قيمة الطلب",
+          items: "المنتجات",
+        },
+      };
+
+      function t(key, vars) {
+        const dict = I18N[currentLang] || I18N.en;
+        let out = String(dict[key] ?? I18N.en[key] ?? key);
+        if (vars && typeof vars === "object") {
+          for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, String(v));
+        }
+        return out;
+      }
 
       const els = {
         year: document.getElementById("year"),
         q: null,
+        langToggle: document.getElementById("langToggle"),
         brandChips: document.getElementById("brandChips"),
         brandFilters: document.getElementById("brandFilters"),
         categoryFilters: document.getElementById("categoryFilters"),
@@ -1845,6 +1994,7 @@
         checkoutDialog: document.getElementById("checkoutDialog"),
         closeCheckout: document.getElementById("closeCheckout"),
         checkoutForm: document.getElementById("checkoutForm"),
+        checkoutCity: document.getElementById("checkoutCity"),
         checkoutSummary: document.getElementById("checkoutSummary"),
         placeOrderBtn: document.getElementById("placeOrderBtn"),
       };
@@ -1968,11 +2118,17 @@
           const raw = localStorage.getItem(PRODUCTS_KEY);
           if (!raw) return [...SEED_PRODUCTS];
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
+          if (Array.isArray(parsed)) {
+            return parsed.map((p) => {
+              if (!p || typeof p !== "object") return p;
+              if ("stock" in p) return p;
+              return { ...p, stock: 999 };
+            });
+          }
         } catch {
           return [...SEED_PRODUCTS];
         }
-        return [...SEED_PRODUCTS];
+        return [...SEED_PRODUCTS].map((p) => ({ ...p, stock: "stock" in p ? p.stock : 999 }));
       }
 
       function saveProducts(products) {
@@ -2081,10 +2237,116 @@
         return total;
       }
 
-      function calcShipping(subtotal) {
+      function calcDelivery(subtotal, cityCode) {
         if (subtotal === 0) return 0;
-        if (subtotal >= 120) return 0;
-        return 9;
+        const code = String(cityCode || "").toLowerCase();
+        return code === "amman" ? 2 : 3;
+      }
+
+      function cityLabel(cityCode) {
+        const code = String(cityCode || "").toLowerCase();
+        const g = GOVERNORATES.find((x) => x.code === code);
+        if (!g) return String(cityCode || "");
+        return currentLang === "ar" ? g.ar : g.en;
+      }
+
+      function renderCheckoutCities() {
+        if (!els.checkoutCity) return;
+        const current = String(els.checkoutCity.value || "").toLowerCase();
+        els.checkoutCity.innerHTML = GOVERNORATES.map((g) => {
+          const label = currentLang === "ar" ? g.ar : g.en;
+          return `<option value="${escapeHtml(g.code)}">${escapeHtml(label)}</option>`;
+        }).join("");
+        els.checkoutCity.value = GOVERNORATES.some((g) => g.code === current) ? current : "amman";
+      }
+
+      function applyStaticTranslations() {
+        const langBtn = els.langToggle;
+        if (langBtn) langBtn.textContent = currentLang === "ar" ? "EN" : "AR";
+
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = String(value);
+        };
+
+        setText("announceText", t("delivery_fees"));
+        setText("navAll", t("all_bags"));
+        setText("navBrands", currentLang === "ar" ? "البراندات" : "Brands");
+        setText("navAbout", currentLang === "ar" ? "عن الموقع" : "About");
+
+        setText("filtersTitle", currentLang === "ar" ? "الفلاتر" : "Filters");
+        setText("clearFilters", currentLang === "ar" ? "مسح" : "Clear");
+        setText("filterBrandTitle", currentLang === "ar" ? "البراند" : "Brand");
+        setText("filterCategoryTitle", currentLang === "ar" ? "التصنيف" : "Category");
+
+        setText("cartLabel", t("cart"));
+        setText("drawerTitle", t("your_cart"));
+        setText("closeCart", t("close"));
+        setText("subtotalLabel", t("subtotal"));
+        setText("shippingLabel", t("shipping"));
+        setText("totalLabel", t("total"));
+        setText("checkoutBtn", t("checkout_demo"));
+        setText("clearCart", t("clear_cart"));
+        setText("demoOnlyNote", t("demo_only"));
+
+        setText("checkoutTitle", t("checkout_demo"));
+        setText("closeCheckout", t("close"));
+        setText("checkoutNotice", t("checkout_notice"));
+        setText("checkoutNameLabel", t("full_name"));
+        setText("checkoutEmailLabel", t("email"));
+        setText("checkoutPhoneLabel", t("phone"));
+        setText("checkoutCityLabel", t("city"));
+        setText("checkoutAddressLabel", t("address"));
+        setText("checkoutNotesLabel", t("notes"));
+
+        const notes = document.getElementById("checkoutNotes");
+        if (notes instanceof HTMLTextAreaElement) notes.placeholder = t("notes_placeholder");
+
+        setText("placeOrderBtn", t("place_order_demo"));
+        setText("shippingNote", t("delivery_fees"));
+        setText("adminLauncher", t("admin"));
+        setText("crumbHome", currentLang === "ar" ? "الرئيسية" : "Home");
+        setText("crumbAll", t("all_bags"));
+        setText("collectionTitle", currentLang === "ar" ? "اكتشفي مجموعة Jana Bags" : "Explore Jana Bags Collection");
+        setText(
+          "collectionDesc",
+          currentLang === "ar"
+            ? "تسوقي شنط نسائية حسب البراند والتصنيف. استخدمي الفلاتر لتجدي التوت، كروس بودي، شولدر، كلاتش أو باك باك."
+            : "Shop women’s bags by brand and style. Use the brand categories and filters to find the perfect tote, crossbody, shoulder bag, clutch, or backpack."
+        );
+        setText("newArrivalsTitle", currentLang === "ar" ? "وصل حديثًا" : "New Arrivals");
+        setText("newArrivalsSubtitle", currentLang === "ar" ? "أحدث الإضافات" : "Latest drops");
+      }
+
+      function setLang(lang) {
+        const next = String(lang || "").toLowerCase() === "ar" ? "ar" : "en";
+        currentLang = next;
+        state.lang = next;
+        try {
+          localStorage.setItem(LANG_KEY, next);
+        } catch {}
+        try {
+          document.documentElement.lang = next === "ar" ? "ar" : "en";
+          document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+        } catch {}
+
+        applyStaticTranslations();
+        renderCheckoutCities();
+        buildFilters();
+        buildNewArrivals();
+        renderGrid();
+        renderCart();
+      }
+
+      function updateCheckoutSummary() {
+        const cart = loadCart();
+        const subtotal = cartSubtotal(cart);
+        const cityCode = String(els.checkoutCity?.value || "").toLowerCase() || "amman";
+        const shipping = calcDelivery(subtotal, cityCode);
+        const total = subtotal + shipping;
+        const count = cartCount(cart);
+        const plural = currentLang === "en" && count !== 1 ? "s" : "";
+        els.checkoutSummary.textContent = t("total_due_demo", { total: money(total), count, plural });
       }
 
       function setCartBadge(cart) {
@@ -2103,6 +2365,7 @@
       const state = {
         products: loadProducts(),
         orders: loadOrders(),
+        lang: currentLang,
         brands: new Set(),
         categories: new Set(),
         filtersBound: false,
@@ -2131,11 +2394,12 @@
       }
 
       function buildFilters() {
-        const brands = uniqSorted(state.products.map((p) => p.brand));
-        const categories = uniqSorted(state.products.map((p) => p.category));
+        const available = state.products.filter((p) => Number(p.stock ?? 999) > 0);
+        const brands = uniqSorted(available.map((p) => p.brand));
+        const categories = uniqSorted(available.map((p) => p.category));
 
         els.brandChips.innerHTML =
-          `<button class="chip" type="button" data-chip="all" aria-pressed="true">All Bags</button>` +
+          `<button class="chip" type="button" data-chip="all" aria-pressed="true">${escapeHtml(t("all_bags"))}</button>` +
           brands.map((b) => `<button class="chip" type="button" data-chip="${escapeHtml(b)}" aria-pressed="false">${escapeHtml(b)}</button>`).join("");
 
         els.brandFilters.innerHTML = brands
@@ -2232,7 +2496,7 @@
         const track = document.getElementById("newMarqueeTrack");
         if (!wrapper || !track) return;
 
-        const items = state.products.filter((p) => p.isNew);
+        const items = state.products.filter((p) => p.isNew && (Number(p.stock ?? 999) > 0));
         if (items.length === 0) {
           wrapper.style.display = "none";
           return;
@@ -2282,7 +2546,7 @@
 
       function filteredProducts() {
         const q = "";
-        let items = state.products;
+        let items = state.products.filter((p) => Number(p.stock ?? 999) > 0);
         if (state.brands.size > 0) items = items.filter((p) => state.brands.has(p.brand));
         if (state.categories.size > 0) items = items.filter((p) => state.categories.has(p.category));
         if (q) {
@@ -2296,19 +2560,24 @@
 
       function renderGrid() {
         const items = filteredProducts();
-        els.resultsMeta.textContent = `${items.length} product${items.length === 1 ? "" : "s"}`;
+        els.resultsMeta.textContent =
+          currentLang === "ar"
+            ? `${items.length} منتج`
+            : `${items.length} product${items.length === 1 ? "" : "s"}`;
         els.grid.innerHTML = items
           .map((p) => {
             const safeName = escapeHtml(p.name);
             const safeBrand = escapeHtml(p.brand);
             const safeColor = escapeHtml(p.color);
+            const newLabel = currentLang === "ar" ? "جديد" : "New";
+            const addToCartLabel = currentLang === "ar" ? "إضافة للسلة" : "Add to cart";
             return `
               <article class="card" data-id="${escapeHtml(p.id)}">
                 <div class="img">
                   ${productMedia(p)}
-                  <div class="tag">${p.isNew ? "<strong>New</strong>" : `<strong>${escapeHtml(p.category)}</strong>`}</div>
+                  <div class="tag">${p.isNew ? `<strong>${escapeHtml(newLabel)}</strong>` : `<strong>${escapeHtml(p.category)}</strong>`}</div>
                   <div class="quick">
-                    <button class="btn btn-primary" type="button" data-action="add">Add to cart</button>
+                    <button class="btn btn-primary" type="button" data-action="add">${escapeHtml(addToCartLabel)}</button>
                   </div>
                 </div>
                 <div class="card-body">
@@ -2316,13 +2585,13 @@
                     <h3>${safeBrand} ${safeName}</h3>
                     <p class="subtitle">${safeColor}${p.variantCount ? ` · +${p.variantCount}` : ""}</p>
                     <div class="meta">
-                      <div class="price">${fmt.format(p.price)}</div>
+                      <div class="price">${money(p.price)}</div>
                       <div class="small">${escapeHtml(p.material)}</div>
                     </div>
                   </div>
                   <div class="card-actions">
-                    <button class="btn linkbtn" type="button" data-action="view">Details</button>
-                    <button class="btn" type="button" data-action="add">Add</button>
+                    <button class="btn linkbtn" type="button" data-action="view">${escapeHtml(t("details"))}</button>
+                    <button class="btn" type="button" data-action="add">${escapeHtml(t("add"))}</button>
                   </div>
                 </div>
               </article>
@@ -2357,8 +2626,8 @@
               <div class="line" data-id="${escapeHtml(p.id)}">
                 <div>
                   <h4>${escapeHtml(p.name)}</h4>
-                  <div class="muted">${escapeHtml(p.category)} · ${escapeHtml(p.color)} · ${fmt.format(p.price)} each</div>
-                  <div class="muted">Line total: ${fmt.format(lineTotal)}</div>
+                  <div class="muted">${escapeHtml(p.category)} · ${escapeHtml(p.color)} · ${money(p.price)} ${escapeHtml(t("each"))}</div>
+                  <div class="muted">${escapeHtml(t("line_total", { total: money(lineTotal) }))}</div>
                 </div>
                 <div class="qty" aria-label="Quantity controls">
                   <button class="btn" type="button" data-action="dec" aria-label="Decrease quantity">−</button>
@@ -2373,16 +2642,17 @@
 
         els.cartLines.innerHTML =
           lines ||
-          `<div class="notice">
-            Your cart is empty. Add a bag you love, then checkout.
-          </div>`;
+          `<div class="notice">${escapeHtml(t("empty_cart"))}</div>`;
 
         const subtotal = cartSubtotal(cart);
-        const shipping = calcShipping(subtotal);
-        const total = subtotal + shipping;
-        els.subtotal.textContent = fmt.format(subtotal);
-        els.shipping.textContent = shipping === 0 ? "Free" : fmt.format(shipping);
-        els.total.textContent = fmt.format(total);
+        els.subtotal.textContent = money(subtotal);
+        if (subtotal === 0) {
+          els.shipping.textContent = money(0);
+          els.total.textContent = money(0);
+        } else {
+          els.shipping.textContent = t("shipping_at_checkout");
+          els.total.textContent = t("total_at_checkout");
+        }
 
         els.checkoutBtn.disabled = subtotal === 0;
         els.clearCart.disabled = subtotal === 0;
@@ -2390,14 +2660,28 @@
 
       function addToCart(productId) {
         const cart = loadCart();
-        cart[productId] = (cart[productId] ?? 0) + 1;
+        const p = getProductById(productId);
+        const stock = Number(p?.stock ?? 999);
+        if (p && stock <= 0) {
+          alert(currentLang === "ar" ? "نفذت الكمية." : "Out of stock.");
+          return;
+        }
+        const current = Number(cart[productId] ?? 0);
+        if (p && Number.isFinite(stock) && current + 1 > stock) {
+          alert(currentLang === "ar" ? "لا يمكن إضافة كمية أكبر من المخزون." : "Cannot add more than available stock.");
+          return;
+        }
+        cart[productId] = current + 1;
         saveCart(cart);
         renderCart();
       }
 
       function changeQty(productId, delta) {
         const cart = loadCart();
-        const next = (cart[productId] ?? 0) + delta;
+        const p = getProductById(productId);
+        const stock = Number(p?.stock ?? 999);
+        const nextRaw = (cart[productId] ?? 0) + delta;
+        const next = p && Number.isFinite(stock) ? Math.min(nextRaw, stock) : nextRaw;
         if (next <= 0) delete cart[productId];
         else cart[productId] = next;
         saveCart(cart);
@@ -2413,6 +2697,10 @@
         const p = getProductById(productId);
         if (!p) return;
         els.productTitle.textContent = `${p.brand} ${p.name}`;
+        const colorsLabel = currentLang === "ar" ? "ألوان" : "colors";
+        const inStockLabel = currentLang === "ar" ? "متوفر (تجريبي)" : "In stock (demo)";
+        const addToCartLabel = currentLang === "ar" ? "إضافة للسلة" : "Add to cart";
+        const viewCartLabel = currentLang === "ar" ? "عرض السلة" : "View cart";
         els.productBody.innerHTML = `
           <div class="product-detail">
             <div class="detail-img">${productMedia(p)}</div>
@@ -2425,15 +2713,15 @@
                 <span class="spec">${escapeHtml(p.color)}</span>
                 <span class="spec">${escapeHtml(p.material)}</span>
                 <span class="spec">${escapeHtml(p.size)}</span>
-                ${p.variantCount ? `<span class="spec">+${escapeHtml(p.variantCount)} colors</span>` : ""}
+                ${p.variantCount ? `<span class="spec">+${escapeHtml(p.variantCount)} ${escapeHtml(colorsLabel)}</span>` : ""}
               </div>
               <div class="meta" style="margin-top: 10px">
-                <div class="price">${fmt.format(p.price)}</div>
-                <div class="small">In stock (demo)</div>
+                <div class="price">${money(p.price)}</div>
+                <div class="small">${escapeHtml(inStockLabel)}</div>
               </div>
               <div style="display:flex; gap: 10px; margin-top: 10px">
-                <button class="btn btn-primary" type="button" id="addFromModal">Add to cart</button>
-                <button class="btn" type="button" id="openCartFromModal">View cart</button>
+                <button class="btn btn-primary" type="button" id="addFromModal">${escapeHtml(addToCartLabel)}</button>
+                <button class="btn" type="button" id="openCartFromModal">${escapeHtml(viewCartLabel)}</button>
               </div>
             </div>
           </div>
@@ -2450,15 +2738,11 @@
       }
 
       function openCheckout() {
-        const cart = loadCart();
-        const subtotal = cartSubtotal(cart);
-        const shipping = calcShipping(subtotal);
-        const total = subtotal + shipping;
-        els.checkoutSummary.textContent = `Total due (demo): ${fmt.format(total)} — ${cartCount(cart)} item${
-          cartCount(cart) === 1 ? "" : "s"
-        }`;
+        renderCheckoutCities();
         els.checkoutDialog.showModal();
         els.checkoutForm.reset();
+        if (els.checkoutCity) els.checkoutCity.value = "amman";
+        updateCheckoutSummary();
         els.checkoutForm.querySelector('input[name="name"]').focus();
       }
 
@@ -2469,31 +2753,50 @@
         if (subtotal === 0) return;
 
         els.placeOrderBtn.disabled = true;
-        els.placeOrderBtn.textContent = "Placing order…";
+        els.placeOrderBtn.textContent = t("placing_order");
 
         setTimeout(async () => {
           const fd = new FormData(els.checkoutForm);
-          const shipping = calcShipping(subtotal);
+          const cityCode = String(fd.get("city") ?? "").toLowerCase() || "amman";
+          const shipping = calcDelivery(subtotal, cityCode);
           const total = subtotal + shipping;
           const itemsDetailed = Object.entries(cart)
             .map(([id, qty]) => {
               const p = getProductById(id);
               if (!p) return null;
+              const stock = Number(p.stock ?? 999);
+              if (Number.isFinite(stock) && stock < Number(qty)) {
+                return { productId: p.id, name: p.name, insufficient: true, stock };
+              }
               return {
                 productId: p.id,
                 brand: p.brand,
                 name: p.name,
                 qty,
                 unitPrice: p.price,
+                image: p.image ?? "",
               };
             })
             .filter(Boolean);
+
+          const insufficient = itemsDetailed.find((x) => x && x.insufficient);
+          if (insufficient) {
+            els.placeOrderBtn.disabled = false;
+            els.placeOrderBtn.textContent = t("place_order_demo");
+            alert(
+              currentLang === "ar"
+                ? `الكمية غير متوفرة للمنتج: ${insufficient.name} (المتوفر: ${insufficient.stock})`
+                : `Not enough stock for: ${insufficient.name} (available: ${insufficient.stock})`
+            );
+            return;
+          }
 
           const customer = {
             name: String(fd.get("name") ?? ""),
             email: String(fd.get("email") ?? ""),
             phone: String(fd.get("phone") ?? ""),
-            city: String(fd.get("city") ?? ""),
+            city: cityLabel(cityCode),
+            cityCode,
             address: String(fd.get("address") ?? ""),
             notes: String(fd.get("notes") ?? ""),
           };
@@ -2505,6 +2808,7 @@
               order = await apiCreateOrder({ customer, items });
               if (order) {
                 state.orders = [order, ...state.orders];
+                await syncProductsFromApi().catch(() => {});
               }
             } catch {
               order = null;
@@ -2513,6 +2817,14 @@
 
           if (!order) {
             const orderId = `JB-${Math.random().toString(16).slice(2, 8).toUpperCase()}`;
+            state.products = state.products.map((p) => {
+              const qty = Number(cart[p.id] ?? 0);
+              if (!qty) return p;
+              const stock = Number(p.stock ?? 999);
+              if (!Number.isFinite(stock)) return p;
+              return { ...p, stock: Math.max(0, stock - qty) };
+            });
+            saveProducts(state.products);
             order = {
               id: orderId,
               createdAt: new Date().toISOString(),
@@ -2523,15 +2835,16 @@
             };
             state.orders = [order, ...state.orders];
             saveOrders(state.orders);
+            refreshStorefront();
           }
 
           els.placeOrderBtn.disabled = false;
-          els.placeOrderBtn.textContent = "Place order (demo)";
+          els.placeOrderBtn.textContent = t("place_order_demo");
           els.checkoutDialog.close();
           clearCart();
           closeDrawer();
           if (state.admin.authed) renderAdminOrders();
-          alert(`Order placed (demo)! Your order id is ${order.id}.`);
+          alert(t("order_placed", { id: order.id }));
         }, 700);
       }
 
@@ -2634,6 +2947,7 @@
         form.size.value = p.size ?? "";
         form.variantCount.value = p.variantCount == null ? "" : String(p.variantCount);
         form.featured.value = p.featured == null ? "" : String(p.featured);
+        form.stock.value = p.stock == null ? "" : String(p.stock);
         form.isNew.value = String(Boolean(p.isNew));
         form.description.value = p.description ?? "";
         form.imageUrl.value = p.image ?? "";
@@ -2647,7 +2961,12 @@
           .sort((a, b) => (b.featured ?? 0) - (a.featured ?? 0) || a.name.localeCompare(b.name))
           .map((p) => {
             const title = escapeHtml(`${p.brand} ${p.name}`);
-            const meta = escapeHtml(`${p.category} · ${fmt.format(p.price)}${p.isNew ? " · New" : ""}`);
+            const stock = Number.isFinite(Number(p.stock)) ? Number(p.stock) : 999;
+            const stockNote =
+              stock <= 0 ? (currentLang === "ar" ? " · نفذت الكمية" : " · Out of stock") : ` · Stock: ${stock}`;
+            const meta = escapeHtml(
+              `${p.category} · ${money(p.price)}${p.isNew ? (currentLang === "ar" ? " · جديد" : " · New") : ""}${stockNote}`
+            );
             return `
               <div class="admin-item" data-id="${escapeHtml(p.id)}">
                 <div>
@@ -2689,7 +3008,7 @@
             const dt = new Date(o.createdAt);
             const when = isNaN(dt.getTime()) ? escapeHtml(o.createdAt) : escapeHtml(dt.toLocaleString());
             const customer = escapeHtml(o.customer?.name ?? "");
-            const total = fmt.format(o.totals?.total ?? 0);
+            const total = money(o.totals?.total ?? 0);
             const status = escapeHtml(o.status ?? "new");
             const items = Array.isArray(o.items)
               ? o.items
@@ -2718,12 +3037,104 @@
                     <option value="fulfilled" ${status === "fulfilled" ? "selected" : ""}>Fulfilled</option>
                     <option value="cancelled" ${status === "cancelled" ? "selected" : ""}>Cancelled</option>
                   </select>
+                  <button class="btn" type="button" data-action="invoice">${escapeHtml(t("invoice"))}</button>
                   <button class="btn" type="button" data-action="toggle">View</button>
                 </div>
               </div>
             `;
           })
           .join("");
+      }
+
+      function openInvoice(order) {
+        if (!order) return;
+        const dir = currentLang === "ar" ? "rtl" : "ltr";
+        const name = String(order.customer?.name ?? "");
+        const phone = String(order.customer?.phone ?? "");
+        const city = String(order.customer?.city ?? "");
+        const address = String(order.customer?.address ?? "");
+        const total = money(order.totals?.total ?? 0);
+
+        const items = Array.isArray(order.items) ? order.items : [];
+        const rows = items
+          .map((it) => {
+            const title = `${String(it.brand ?? "").trim()} ${String(it.name ?? "").trim()}`.trim();
+            const qty = Number(it.qty ?? 0) || 0;
+            const src = String(it.image ?? "");
+            const img = src ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" />` : "";
+            return `
+              <tr>
+                <td style="width:92px">${img}</td>
+                <td>${escapeHtml(title)}</td>
+                <td style="width:70px; text-align:center">${escapeHtml(qty)}</td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        const html = `<!doctype html>
+<html lang="${currentLang}" dir="${dir}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${escapeHtml(t("invoice"))} ${escapeHtml(order.id)}</title>
+    <style>
+      body { margin: 24px; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #0b0f1a; }
+      h1 { margin: 0 0 8px; font-size: 18px; }
+      .muted { color: rgba(11, 15, 26, 0.68); font-size: 12px; }
+      .row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+      .card { border: 1px solid rgba(11, 15, 26, 0.14); border-radius: 14px; padding: 12px; min-width: 260px; flex: 1; }
+      .kv { display: grid; gap: 6px; font-size: 13px; }
+      .kv strong { font-size: 12px; color: rgba(11, 15, 26, 0.68); font-weight: 600; }
+      table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+      th, td { border-bottom: 1px solid rgba(11, 15, 26, 0.14); padding: 10px 8px; vertical-align: middle; }
+      th { text-align: start; font-size: 12px; color: rgba(11, 15, 26, 0.68); }
+      img { width: 78px; height: 78px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(11, 15, 26, 0.14); background: #fff; }
+      .actions { margin-top: 18px; display: flex; gap: 10px; }
+      button { border: 1px solid rgba(11, 15, 26, 0.14); background: rgba(11, 15, 26, 0.03); padding: 10px 12px; border-radius: 999px; cursor: pointer; }
+      @media print { .actions { display: none; } body { margin: 0; } }
+    </style>
+  </head>
+  <body>
+    <h1>${escapeHtml(t("invoice"))} · ${escapeHtml(order.id)}</h1>
+    <div class="muted">${escapeHtml(new Date(order.createdAt).toLocaleString())}</div>
+
+    <div class="row">
+      <div class="card">
+        <div class="kv"><strong>${escapeHtml(t("customer_name"))}</strong><div>${escapeHtml(name)}</div></div>
+        <div class="kv" style="margin-top:10px"><strong>${escapeHtml(t("customer_phone"))}</strong><div>${escapeHtml(phone)}</div></div>
+      </div>
+      <div class="card">
+        <div class="kv"><strong>${escapeHtml(t("governorate_address"))}</strong><div>${escapeHtml(city)} · ${escapeHtml(address)}</div></div>
+        <div class="kv" style="margin-top:10px"><strong>${escapeHtml(t("order_value"))}</strong><div>${escapeHtml(total)}</div></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:92px"></th>
+          <th>${escapeHtml(t("items"))}</th>
+          <th style="width:70px; text-align:center">Qty</th>
+        </tr>
+      </thead>
+      <tbody>${rows || ""}</tbody>
+    </table>
+
+    <div class="actions">
+      <button onclick="window.print()">${escapeHtml(t("print"))}</button>
+    </div>
+  </body>
+</html>`;
+
+        const w = window.open("", "_blank", "noopener,noreferrer,width=900,height=700");
+        if (!w) {
+          alert(currentLang === "ar" ? "المتصفح منع فتح نافذة الفاتورة." : "Your browser blocked the invoice popup.");
+          return;
+        }
+        w.document.open();
+        w.document.write(html);
+        w.document.close();
       }
 
       function renderAdminCategories() {
@@ -2817,10 +3228,9 @@
       async function init() {
         if (!API_ENABLED) ensureAdminCred();
         els.year.textContent = String(new Date().getFullYear());
-        buildFilters();
-        buildNewArrivals();
-        renderGrid();
-        renderCart();
+        setLang(currentLang);
+        els.langToggle?.addEventListener("click", () => setLang(currentLang === "ar" ? "en" : "ar"));
+        els.checkoutCity?.addEventListener("change", updateCheckoutSummary);
 
         if (API_ENABLED) {
           syncProductsFromApi().catch(() => {});
@@ -2974,6 +3384,7 @@
             category,
             price: 0,
             featured: 0,
+            stock: 1,
             color: "Black",
             material: "Leather",
             size: "Medium",
@@ -3035,6 +3446,7 @@
             size: String(form.size.value ?? "").trim(),
             variantCount: form.variantCount.value === "" ? 0 : Number(form.variantCount.value ?? 0),
             featured: form.featured.value === "" ? 0 : Number(form.featured.value ?? 0),
+            stock: form.stock.value === "" ? 0 : Number(form.stock.value ?? 0),
             isNew: String(form.isNew.value) === "true",
             description: String(form.description.value ?? "").trim(),
             image,
@@ -3137,6 +3549,7 @@
               category,
               price: 0,
               featured: 0,
+              stock: 1,
               color: "Black",
               material: "Leather",
               size: "Medium",
@@ -3234,10 +3647,19 @@
           if (!row) return;
           const actionBtn = e.target.closest("button[data-action]");
           if (!actionBtn) return;
-          if (actionBtn.getAttribute("data-action") !== "toggle") return;
-          const details = row.querySelector("[data-order-details]");
-          if (!details) return;
-          details.hidden = !details.hidden;
+          const action = actionBtn.getAttribute("data-action");
+          if (action === "toggle") {
+            const details = row.querySelector("[data-order-details]");
+            if (!details) return;
+            details.hidden = !details.hidden;
+            return;
+          }
+          if (action === "invoice") {
+            const id = row.getAttribute("data-id");
+            if (!id) return;
+            const order = state.orders.find((o) => o.id === id);
+            openInvoice(order);
+          }
         };
 
         els.adminOrderList.onchange = async (e) => {
