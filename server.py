@@ -135,6 +135,21 @@ def load_data() -> dict:
             if "stock" not in p:
                 p["stock"] = 999
                 changed = True
+            img = str(p.get("image", "") or "").strip()
+            raw_images = p.get("images")
+            if not isinstance(raw_images, list):
+                p["images"] = [img] if img else []
+                changed = True
+            else:
+                cleaned = [str(x).strip() for x in raw_images if str(x).strip()]
+                if img and (not cleaned or cleaned[0] != img):
+                    cleaned = [img] + [x for x in cleaned if x != img]
+                if cleaned != raw_images:
+                    p["images"] = cleaned
+                    changed = True
+                if not img and cleaned:
+                    p["image"] = cleaned[0]
+                    changed = True
         if changed:
             save_data(data)
         return data
@@ -172,6 +187,16 @@ def normalize_product(obj: dict) -> dict:
             v = default
         return max(0, v)
 
+    raw_images = obj.get("images")
+    images: list[str] = []
+    if isinstance(raw_images, list):
+        images = [str(x).strip() for x in raw_images if str(x).strip()]
+    img = s("image", "")
+    if img and (not images or images[0] != img):
+        images = [img] + [x for x in images if x != img]
+    if not img and images:
+        img = images[0]
+
     out = {
         "id": s("id"),
         "brand": s("brand", "Jana") or "Jana",
@@ -186,7 +211,8 @@ def normalize_product(obj: dict) -> dict:
         "variantCount": n("variantCount", 0),
         "isNew": bool(obj.get("isNew", False)),
         "description": s("description", ""),
-        "image": s("image", ""),
+        "image": img,
+        "images": images,
     }
     return out
 

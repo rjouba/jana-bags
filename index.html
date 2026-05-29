@@ -1001,6 +1001,39 @@
         padding: 18px;
       }
 
+      #invoiceDialog {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        border: 0;
+        padding: 0;
+      }
+
+      #invoiceDialog::backdrop {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+      }
+
+      #invoiceDialog .modal {
+        height: 100%;
+        grid-template-rows: auto 1fr;
+      }
+
+      #invoiceDialog .modal-body {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .invoice-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        background: #ffffff;
+      }
+
       dialog::backdrop {
         background: rgba(0, 0, 0, 0.55);
         backdrop-filter: blur(6px);
@@ -1053,6 +1086,31 @@
       }
 
       .detail-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .thumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .thumb {
+        width: 64px;
+        height: 64px;
+        padding: 0;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.86);
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .thumb img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -1558,13 +1616,17 @@
                         <textarea name="description"></textarea>
                       </label>
                       <label style="grid-column: 1 / -1">
-                        Photo (PNG/JPG)
-                        <input name="imageFile" type="file" accept="image/*" />
+                        Photos (PNG/JPG)
+                        <input name="imageFiles" type="file" accept="image/*" multiple />
                       </label>
                       <label style="grid-column: 1 / -1">
-                        Or photo URL
-                        <input name="imageUrl" placeholder="https://..." />
+                        Or photo URLs (one per line)
+                        <textarea name="imageUrls" placeholder="https://...&#10;https://..."></textarea>
                       </label>
+                      <div style="grid-column: 1 / -1">
+                        <div class="small" style="margin-bottom: 8px">Current photos</div>
+                        <div class="admin-list" id="adminImagesList"></div>
+                      </div>
                     </div>
                     <datalist id="adminCategoryOptions"></datalist>
                     <button class="btn btn-primary" type="submit" id="adminSaveProduct">Save</button>
@@ -1617,6 +1679,21 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="invoiceDialog" aria-label="Invoice">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="invoiceDialogTitle">Invoice</h3>
+          <div style="display:flex; gap: 10px; align-items: center">
+            <button class="btn btn-primary" id="printInvoice" type="button">Print</button>
+            <button class="btn" id="closeInvoice" type="button">Close</button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <iframe class="invoice-frame" id="invoiceFrame" title="Invoice"></iframe>
         </div>
       </div>
     </dialog>
@@ -1963,6 +2040,7 @@
         adminNewProductCategory: document.getElementById("adminNewProductCategory"),
         adminProductList: document.getElementById("adminProductList"),
         adminProductForm: document.getElementById("adminProductForm"),
+        adminImagesList: document.getElementById("adminImagesList"),
         adminProductTitle: document.getElementById("adminProductTitle"),
         adminDeleteProduct: document.getElementById("adminDeleteProduct"),
         adminProductMsg: document.getElementById("adminProductMsg"),
@@ -1997,6 +2075,11 @@
         checkoutCity: document.getElementById("checkoutCity"),
         checkoutSummary: document.getElementById("checkoutSummary"),
         placeOrderBtn: document.getElementById("placeOrderBtn"),
+        invoiceDialog: document.getElementById("invoiceDialog"),
+        invoiceDialogTitle: document.getElementById("invoiceDialogTitle"),
+        invoiceFrame: document.getElementById("invoiceFrame"),
+        closeInvoice: document.getElementById("closeInvoice"),
+        printInvoice: document.getElementById("printInvoice"),
       };
 
       function escapeHtml(value) {
@@ -2129,6 +2212,20 @@
           return [...SEED_PRODUCTS];
         }
         return [...SEED_PRODUCTS].map((p) => ({ ...p, stock: "stock" in p ? p.stock : 999 }));
+      }
+
+      function normalizeProductRecord(p) {
+        if (!p || typeof p !== "object") return p;
+        const stock = "stock" in p ? Number(p.stock ?? 0) : 999;
+        const images = Array.isArray(p.images) ? p.images.map((x) => String(x)).filter(Boolean) : [];
+        const img = String(p.image ?? "").trim();
+        const merged = images.length > 0 ? images : img ? [img] : [];
+        const image = img || merged[0] || "";
+        return { ...p, stock: Number.isFinite(stock) ? Math.max(0, stock) : 999, image, images: merged };
+      }
+
+      function normalizeProducts(list) {
+        return Array.isArray(list) ? list.map(normalizeProductRecord) : [];
       }
 
       function saveProducts(products) {
@@ -2316,6 +2413,8 @@
         );
         setText("newArrivalsTitle", currentLang === "ar" ? "وصل حديثًا" : "New Arrivals");
         setText("newArrivalsSubtitle", currentLang === "ar" ? "أحدث الإضافات" : "Latest drops");
+        setText("printInvoice", t("print"));
+        setText("closeInvoice", t("close"));
       }
 
       function setLang(lang) {
@@ -2363,7 +2462,7 @@
       }
 
       const state = {
-        products: loadProducts(),
+        products: normalizeProducts(loadProducts()),
         orders: loadOrders(),
         lang: currentLang,
         brands: new Set(),
@@ -2373,6 +2472,7 @@
           authed: false,
           tab: "products",
           selectedProductId: null,
+          imagesDraft: [],
         },
       };
 
@@ -2381,8 +2481,10 @@
       }
 
       function productMedia(product) {
-        if (product.image) {
-          const src = escapeHtml(product.image);
+        const list = Array.isArray(product.images) ? product.images.map((x) => String(x)).filter(Boolean) : [];
+        const first = list[0] || String(product.image ?? "").trim();
+        if (first) {
+          const src = escapeHtml(first);
           const alt = escapeHtml(`${product.brand} ${product.name}`);
           return `<img src="${src}" alt="${alt}" loading="lazy" />`;
         }
@@ -2697,13 +2799,31 @@
         const p = getProductById(productId);
         if (!p) return;
         els.productTitle.textContent = `${p.brand} ${p.name}`;
+        const images = Array.isArray(p.images) ? p.images.map((x) => String(x)).filter(Boolean) : [];
+        const mainSrc = images[0] || "";
+        const media = mainSrc
+          ? `<div>
+              <div class="detail-img"><img id="detailMainImg" src="${escapeHtml(mainSrc)}" alt="${escapeHtml(`${p.brand} ${p.name}`)}" /></div>
+              ${images.length > 1 ? `<div class="thumbs" id="detailThumbs">${images
+                  .map(
+                    (src, idx) => `
+                      <button class="thumb" type="button" data-src="${escapeHtml(src)}" aria-label="${escapeHtml(
+                      `${idx + 1}`
+                    )}">
+                        <img src="${escapeHtml(src)}" alt="" />
+                      </button>
+                    `
+                  )
+                  .join("")}</div>` : ""}
+            </div>`
+          : `<div class="detail-img">${productMedia(p)}</div>`;
         const colorsLabel = currentLang === "ar" ? "ألوان" : "colors";
         const inStockLabel = currentLang === "ar" ? "متوفر (تجريبي)" : "In stock (demo)";
         const addToCartLabel = currentLang === "ar" ? "إضافة للسلة" : "Add to cart";
         const viewCartLabel = currentLang === "ar" ? "عرض السلة" : "View cart";
         els.productBody.innerHTML = `
           <div class="product-detail">
-            <div class="detail-img">${productMedia(p)}</div>
+            ${media}
             <div class="kv">
               <h4>${escapeHtml(p.brand)} ${escapeHtml(p.name)}</h4>
               <p class="desc">${escapeHtml(p.description)}</p>
@@ -2730,6 +2850,17 @@
 
         const addBtn = document.getElementById("addFromModal");
         const cartBtn = document.getElementById("openCartFromModal");
+        const thumbs = document.getElementById("detailThumbs");
+        const mainImg = document.getElementById("detailMainImg");
+        if (thumbs && mainImg instanceof HTMLImageElement) {
+          thumbs.addEventListener("click", (e) => {
+            const btn = e.target.closest("button[data-src]");
+            if (!btn) return;
+            const src = btn.getAttribute("data-src");
+            if (!src) return;
+            mainImg.src = src;
+          });
+        }
         addBtn.addEventListener("click", () => addToCart(p.id), { once: false });
         cartBtn.addEventListener("click", () => {
           els.productDialog.close();
@@ -2872,7 +3003,7 @@
         if (!API_ENABLED) return false;
         const products = await apiGetProducts();
         if (!Array.isArray(products)) return false;
-        state.products = products;
+        state.products = normalizeProducts(products);
         refreshStorefront();
         return true;
       }
@@ -2937,6 +3068,9 @@
         els.adminProductTitle.textContent = `Edit: ${p.brand} ${p.name}`;
         els.adminDeleteProduct.disabled = false;
 
+        const baseImages = Array.isArray(p.images) ? p.images.filter(Boolean).map((x) => String(x)) : [];
+        state.admin.imagesDraft = baseImages.length > 0 ? baseImages : p.image ? [String(p.image)] : [];
+
         const form = els.adminProductForm;
         form.brand.value = p.brand ?? "";
         form.name.value = p.name ?? "";
@@ -2950,9 +3084,37 @@
         form.stock.value = p.stock == null ? "" : String(p.stock);
         form.isNew.value = String(Boolean(p.isNew));
         form.description.value = p.description ?? "";
-        form.imageUrl.value = p.image ?? "";
-        form.imageFile.value = "";
+        form.imageUrls.value = "";
+        form.imageFiles.value = "";
         els.adminProductMsg.textContent = "";
+        renderAdminImagesDraft();
+      }
+
+      function renderAdminImagesDraft() {
+        if (!els.adminImagesList) return;
+        const images = Array.isArray(state.admin.imagesDraft) ? state.admin.imagesDraft : [];
+        if (images.length === 0) {
+          els.adminImagesList.innerHTML = `<div class="notice">${currentLang === "ar" ? "لا يوجد صور." : "No photos."}</div>`;
+          return;
+        }
+        els.adminImagesList.innerHTML = images
+          .map((src, idx) => {
+            const label = currentLang === "ar" ? `صورة ${idx + 1}` : `Photo ${idx + 1}`;
+            return `
+              <div class="admin-item" data-idx="${idx}">
+                <div style="display:flex; gap: 10px; align-items:center">
+                  <div style="width:56px; height:56px; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff">
+                    <img src="${escapeHtml(src)}" alt="${escapeHtml(label)}" style="width:100%; height:100%; object-fit:cover; display:block" />
+                  </div>
+                  <div class="small">${escapeHtml(label)}</div>
+                </div>
+                <div class="admin-item-actions">
+                  <button class="btn linkbtn" type="button" data-action="removeImage">${currentLang === "ar" ? "حذف" : "Remove"}</button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
       }
 
       function renderAdminProducts() {
@@ -3024,6 +3186,8 @@
                   <div class="small" data-order-details hidden style="margin-top: 8px">
                     <div><strong>Items</strong></div>
                     <div class="small" style="margin-top: 6px">${items || "—"}</div>
+                    <div class="small" style="margin-top: 10px"><strong>Phone</strong></div>
+                    <div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.phone ?? "") || "—"}</div>
                     <div class="small" style="margin-top: 10px"><strong>Address</strong></div>
                     <div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.city ?? "")} · ${escapeHtml(
               o.customer?.address ?? ""
@@ -3126,15 +3290,17 @@
     </div>
   </body>
 </html>`;
-
-        const w = window.open("", "_blank", "noopener,noreferrer,width=900,height=700");
-        if (!w) {
-          alert(currentLang === "ar" ? "المتصفح منع فتح نافذة الفاتورة." : "Your browser blocked the invoice popup.");
-          return;
+        if (els.invoiceDialogTitle) els.invoiceDialogTitle.textContent = `${t("invoice")} · ${order.id}`;
+        if (els.invoiceFrame) els.invoiceFrame.srcdoc = html;
+        if (!els.invoiceDialog) return;
+        try {
+          if (typeof els.invoiceDialog.showModal === "function") els.invoiceDialog.showModal();
+          else els.invoiceDialog.setAttribute("open", "");
+        } catch (_) {
+          try {
+            els.invoiceDialog.setAttribute("open", "");
+          } catch (_) {}
         }
-        w.document.open();
-        w.document.write(html);
-        w.document.close();
       }
 
       function renderAdminCategories() {
@@ -3374,6 +3540,21 @@
           }
         };
 
+        els.adminImagesList.onclick = (e) => {
+          const row = e.target.closest(".admin-item");
+          if (!row) return;
+          const btn = e.target.closest("button[data-action]");
+          if (!btn) return;
+          if (btn.getAttribute("data-action") !== "removeImage") return;
+          const idx = Number(row.getAttribute("data-idx"));
+          if (!Number.isFinite(idx)) return;
+          const draft = Array.isArray(state.admin.imagesDraft) ? [...state.admin.imagesDraft] : [];
+          if (idx < 0 || idx >= draft.length) return;
+          draft.splice(idx, 1);
+          state.admin.imagesDraft = draft;
+          renderAdminImagesDraft();
+        };
+
         els.adminNewProduct.addEventListener("click", async () => {
           const id = `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
           const category = String(els.adminNewProductCategory?.value ?? "Uncategorized").trim() || "Uncategorized";
@@ -3392,6 +3573,7 @@
             isNew: true,
             description: "",
             image: "",
+            images: [],
           };
           if (API_ENABLED) {
             try {
@@ -3429,11 +3611,20 @@
           if (!p) return;
 
           const form = els.adminProductForm;
-          const file = form.imageFile.files && form.imageFile.files[0] ? form.imageFile.files[0] : null;
-          const url = String(form.imageUrl.value ?? "").trim();
-          let image = p.image ?? "";
-          if (url) image = url;
-          else if (file) image = await readFileAsDataUrl(file);
+          const files = form.imageFiles?.files ? [...form.imageFiles.files] : [];
+          const urls = String(form.imageUrls?.value ?? "")
+            .split(/\r?\n/g)
+            .map((s) => s.trim())
+            .filter(Boolean);
+          let images = Array.isArray(state.admin.imagesDraft) ? [...state.admin.imagesDraft] : [];
+          if (urls.length > 0) images.push(...urls);
+          for (const f of files) {
+            const dataUrl = await readFileAsDataUrl(f);
+            if (dataUrl) images.push(String(dataUrl));
+          }
+          images = images.map((s) => String(s).trim()).filter(Boolean);
+          images = [...new Set(images)];
+          const image = images[0] || "";
 
           const updated = {
             ...p,
@@ -3450,6 +3641,7 @@
             isNew: String(form.isNew.value) === "true",
             description: String(form.description.value ?? "").trim(),
             image,
+            images,
           };
 
           if (API_ENABLED) {
@@ -3557,6 +3749,7 @@
               isNew: true,
               description: "",
               image: "",
+              images: [],
             };
             if (API_ENABLED) {
               try {
@@ -3590,7 +3783,7 @@
             if (API_ENABLED) {
               try {
                 const products = await apiDeleteCategory(cat);
-                if (Array.isArray(products)) state.products = products;
+                if (Array.isArray(products)) state.products = normalizeProducts(products);
                 refreshStorefront();
                 renderAdminProducts();
                 renderAdminCategories();
@@ -3623,7 +3816,7 @@
           if (API_ENABLED) {
             try {
               const products = await apiRenameCategory(from, to);
-              if (Array.isArray(products)) state.products = products;
+              if (Array.isArray(products)) state.products = normalizeProducts(products);
               refreshStorefront();
               renderAdminProducts();
               renderAdminCategories();
@@ -3741,6 +3934,26 @@
 
         els.closeCheckout.addEventListener("click", () => els.checkoutDialog.close());
         els.checkoutForm.addEventListener("submit", handlePlaceOrder);
+
+        els.closeInvoice?.addEventListener("click", () => {
+          if (!els.invoiceDialog) return;
+          try {
+            els.invoiceDialog.close();
+          } catch (_) {
+            els.invoiceDialog.removeAttribute("open");
+          }
+        });
+
+        els.printInvoice?.addEventListener("click", () => {
+          const w = els.invoiceFrame?.contentWindow;
+          if (!w) return;
+          try {
+            w.focus();
+          } catch (_) {}
+          try {
+            w.print();
+          } catch (_) {}
+        });
       }
 
       init();
