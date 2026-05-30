@@ -12,22 +12,22 @@
     <link rel="icon" href="jj.png" type="image/png" />
     <style>
       :root {
-        --bg: #ffffff;
-        --panel: rgba(11, 15, 26, 0.03);
+        --bg: #f6f3ec;
+        --panel: rgba(11, 15, 26, 0.035);
         --panel-2: rgba(11, 15, 26, 0.06);
-        --text: #0b0f1a;
-        --muted: rgba(11, 15, 26, 0.68);
-        --subtle: rgba(11, 15, 26, 0.46);
-        --border: rgba(11, 15, 26, 0.14);
-        --accent: #06b6d4;
-        --accent-2: #8b5cf6;
+        --text: #111111;
+        --muted: rgba(17, 17, 17, 0.68);
+        --subtle: rgba(17, 17, 17, 0.5);
+        --border: rgba(17, 17, 17, 0.14);
+        --accent: #111111;
+        --accent-2: #111111;
         --danger: #e11d48;
         --ok: #059669;
-        --shadow: 0 24px 64px rgba(11, 15, 26, 0.14);
-        --radius: 16px;
-        --radius-sm: 12px;
-        --max: 1200px;
-        --focus: 0 0 0 3px rgba(6, 182, 212, 0.22);
+        --shadow: 0 18px 44px rgba(17, 17, 17, 0.14);
+        --radius: 20px;
+        --radius-sm: 14px;
+        --max: 1280px;
+        --focus: 0 0 0 3px rgba(17, 17, 17, 0.14);
         color-scheme: light;
       }
 
@@ -44,11 +44,7 @@
         margin: 0;
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
         color: var(--text);
-        background:
-          radial-gradient(1200px 700px at 12% 10%, rgba(6, 182, 212, 0.16), transparent 60%),
-          radial-gradient(1200px 760px at 88% 18%, rgba(139, 92, 246, 0.16), transparent 60%),
-          radial-gradient(900px 620px at 50% 115%, rgba(5, 150, 105, 0.12), transparent 60%),
-          linear-gradient(180deg, #ffffff, #f7f8ff 52%, #ffffff);
+        background: var(--bg);
         position: relative;
         overflow-x: hidden;
       }
@@ -58,10 +54,7 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        background:
-          linear-gradient(rgba(11, 15, 26, 0.02), rgba(11, 15, 26, 0.01)),
-          repeating-linear-gradient(90deg, rgba(11, 15, 26, 0.06) 0 1px, transparent 1px 48px),
-          repeating-linear-gradient(0deg, rgba(11, 15, 26, 0.05) 0 1px, transparent 1px 48px);
+        background: linear-gradient(rgba(17, 17, 17, 0.02), rgba(17, 17, 17, 0.01));
         opacity: 0.08;
         mix-blend-mode: multiply;
       }
@@ -85,11 +78,303 @@
         padding: 18px 18px 44px;
       }
 
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: calc(var(--radius) + 6px);
+        background: rgba(255, 255, 255, 0.74);
+        border: 1px solid rgba(17, 17, 17, 0.1);
+        overflow: hidden;
+        box-shadow: 0 16px 46px rgba(17, 17, 17, 0.1);
+        min-height: 560px;
+        margin-top: 18px;
+        position: relative;
+      }
+
+      .hero-left {
+        position: absolute;
+        left: 28px;
+        bottom: 28px;
+        z-index: 2;
+        display: grid;
+        gap: 12px;
+        max-width: min(520px, calc(100% - 56px));
+        padding: 0;
+        color: rgba(17, 17, 17, 0.96);
+      }
+
+      .hero-kicker {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.78);
+      }
+
+      .hero-title {
+        margin: 0;
+        font-family: ui-serif, Georgia, "Times New Roman", serif;
+        font-size: clamp(36px, 4.8vw, 66px);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        text-shadow: 0 10px 26px rgba(255, 255, 255, 0.7);
+      }
+
+      .hero-title em {
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero-sub {
+        margin: 0;
+        color: rgba(17, 17, 17, 0.72);
+        max-width: 52ch;
+        line-height: 1.6;
+        font-size: 14px;
+        text-shadow: 0 10px 26px rgba(255, 255, 255, 0.8);
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 12px 16px;
+      }
+
+      .hero-media {
+        position: relative;
+        background: rgba(0, 0, 0, 0.03);
+        min-height: 520px;
+        overflow: hidden;
+      }
+
+      .hero-media::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(900px 520px at 22% 78%, rgba(255, 255, 255, 0.85), transparent 62%);
+        z-index: 1;
+      }
+
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 72%;
+        display: block;
+        transform: scale(1.06);
+      }
+
+      .hero-card {
+        position: absolute;
+        right: 22px;
+        bottom: 22px;
+        width: min(240px, 78%);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(17, 17, 17, 0.12);
+        border-radius: 18px;
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        box-shadow: 0 18px 50px rgba(17, 17, 17, 0.16);
+      }
+
+      .hero-card-media {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(17, 17, 17, 0.12);
+        background: rgba(255, 255, 255, 0.9);
+        aspect-ratio: 1.6 / 1;
+      }
+
+      .hero-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .hero-card-kicker {
+        font-size: 9px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.62);
+      }
+
+      .hero-card-title {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .hero-card-link {
+        font-size: 11px;
+        color: rgba(17, 17, 17, 0.8);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .benefits {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+        padding: 14px 0;
+        border-top: 1px solid rgba(17, 17, 17, 0.12);
+        border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+      }
+
+      .benefit {
+        display: grid;
+        gap: 4px;
+        justify-items: center;
+        text-align: center;
+        color: rgba(17, 17, 17, 0.72);
+        font-size: 12px;
+      }
+
+      .benefit strong {
+        color: rgba(17, 17, 17, 0.92);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .collections {
+        margin-top: 20px;
+      }
+
+      .collections-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .collections-head h2 {
+        margin: 0;
+        font-family: ui-serif, Georgia, "Times New Roman", serif;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+      }
+
+      .collections-head a {
+        font-size: 12px;
+        color: rgba(17, 17, 17, 0.7);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .collections-row {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+
+      .collection-tile {
+        border: 1px solid rgba(17, 17, 17, 0.12);
+        background: rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: grid;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+
+      .collection-tile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 60px rgba(17, 17, 17, 0.14);
+        border-color: rgba(17, 17, 17, 0.22);
+      }
+
+      .collection-tile-media {
+        aspect-ratio: 4 / 3;
+        background: radial-gradient(520px 340px at 30% 25%, rgba(17, 17, 17, 0.08), transparent 62%),
+          rgba(255, 255, 255, 0.78);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .collection-tile-media svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.9;
+      }
+
+      .collection-tile-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .collection-tile-body {
+        padding: 10px 12px 12px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .collection-tile-body strong {
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .collection-tile-body span {
+        font-size: 12px;
+        color: rgba(17, 17, 17, 0.6);
+      }
+
+      .brands {
+        margin-top: 18px;
+      }
+
+      .browse-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 18px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+      }
+
+      .browse-head h2 {
+        margin: 0;
+        font-family: ui-serif, Georgia, "Times New Roman", serif;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+      }
+
+      .browse-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      body.route-browse .hero,
+      body.route-browse .benefits,
+      body.route-browse .collection-head,
+      body.route-browse #collections,
+      body.route-browse #brands,
+      body.route-browse #about,
+      body.route-browse .footer {
+        display: none;
+      }
+
       .topbar {
         position: sticky;
         top: 0;
         z-index: 30;
-        background: rgba(255, 255, 255, 0.82);
+        background: rgba(246, 243, 236, 0.82);
         backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--border);
       }
@@ -128,7 +413,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        min-width: 260px;
+        min-width: 0;
       }
 
       .header-left {
@@ -148,8 +433,8 @@
       }
 
       .logo-img {
-        width: 256px;
-        height: 256px;
+        width: 76px;
+        height: 76px;
         object-fit: contain;
         display: block;
         margin: 0 auto;
@@ -157,8 +442,8 @@
       }
 
       .topbar.is-scrolled .logo-img {
-        width: 80px;
-        height: 80px;
+        width: 64px;
+        height: 64px;
       }
 
       .logo {
@@ -267,9 +552,9 @@
 
       .btn-primary {
         border-color: rgba(6, 182, 212, 0.35);
-        background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(139, 92, 246, 0.16));
-        color: var(--text);
-        box-shadow: 0 18px 40px rgba(6, 182, 212, 0.12);
+        background: rgba(17, 17, 17, 0.92);
+        color: #ffffff;
+        box-shadow: 0 18px 40px rgba(17, 17, 17, 0.12);
       }
 
       .admin-launch {
@@ -306,6 +591,10 @@
         color: var(--muted);
         font-size: 12px;
         letter-spacing: 0.25px;
+      }
+
+      .collection-head .breadcrumb {
+        display: none;
       }
 
       .breadcrumb a {
@@ -1246,6 +1535,28 @@
           width: 64px;
           height: 64px;
         }
+
+        .hero {
+          min-height: 0;
+        }
+
+        .hero-media {
+          min-height: 380px;
+        }
+
+        .hero-left {
+          left: 16px;
+          bottom: 16px;
+          max-width: calc(100% - 32px);
+        }
+
+        .benefits {
+          grid-template-columns: 1fr;
+        }
+
+        .collections-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       @media (max-width: 860px) {
@@ -1275,6 +1586,12 @@
         .topbar.is-scrolled .logo-img {
           width: 56px;
           height: 56px;
+        }
+
+        .hero-card {
+          right: 12px;
+          bottom: 12px;
+          width: min(210px, 78%);
         }
       }
 
@@ -1306,7 +1623,7 @@
   <body>
     <div class="announce">
       <div class="container" style="padding-left: 18px; padding-right: 18px">
-        <span id="announceText">Free shipping over $120 · Easy returns · Secure checkout</span>
+        <span id="announceText">Free shipping on orders over 70 JOD</span>
       </div>
     </div>
     <header class="topbar">
@@ -1370,6 +1687,137 @@
     <button class="btn btn-primary admin-launch" id="adminLauncher" type="button" hidden>Admin</button>
 
     <main class="container">
+      <section class="hero" aria-label="New collection">
+        <div class="hero-left">
+          <div class="hero-kicker" data-i18n="hero_kicker">New collection</div>
+          <h1 class="hero-title">
+            <span data-i18n="hero_title_a">Timeless.</span><br />
+            <em data-i18n="hero_title_b">Redefined.</em>
+          </h1>
+          <p class="hero-sub" data-i18n="hero_sub">Thoughtfully designed bags for the modern woman.</p>
+          <a class="btn btn-primary hero-cta" href="#shop" data-i18n="hero_shop_now">Shop now</a>
+        </div>
+        <div class="hero-media">
+          <img class="hero-img" src="1.png" alt="Jana Bags new collection" />
+          <div class="hero-card" aria-label="Featured product">
+            <div class="hero-card-media">
+              <img src="2.png" alt="Featured bag" />
+            </div>
+            <div>
+              <div class="hero-card-kicker" data-i18n="hero_new_in">New in</div>
+              <div class="hero-card-title" data-i18n="hero_feature_title">The Elle Shoulder Bag</div>
+              <a class="hero-card-link" href="#shop" data-i18n="hero_discover">Discover →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits" aria-label="Benefits">
+        <div class="benefit">
+          <strong data-i18n="benefit_free_shipping_title">Free shipping</strong>
+          <div data-i18n="benefit_free_shipping_desc">On all orders over 70 JOD</div>
+        </div>
+        <div class="benefit">
+          <strong data-i18n="benefit_made_with_care_title">Made with care</strong>
+          <div data-i18n="benefit_made_with_care_desc">Premium materials only</div>
+        </div>
+      </section>
+
+      <section class="collections" id="collections" aria-label="Explore collections">
+        <div class="collections-head">
+          <h2 data-i18n="collections_heading">Find your perfect match.</h2>
+          <a href="#shop" data-i18n="collections_view_all">View all collections →</a>
+        </div>
+        <div class="collections-row" id="collectionsRow">
+          <button class="collection-tile" type="button" data-category="Shoulder">
+            <div class="collection-tile-media" data-media="Shoulder"></div>
+            <div class="collection-tile-body">
+              <strong data-i18n="collection_shoulder">Shoulder bags</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-category="Tote">
+            <div class="collection-tile-media" data-media="Tote"></div>
+            <div class="collection-tile-body">
+              <strong data-i18n="collection_tote">Tote bags</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-category="Crossbody">
+            <div class="collection-tile-media" data-media="Crossbody"></div>
+            <div class="collection-tile-body">
+              <strong data-i18n="collection_crossbody">Crossbody bags</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-category="Satchel">
+            <div class="collection-tile-media" data-media="Satchel"></div>
+            <div class="collection-tile-body">
+              <strong data-i18n="collection_top_handle">Top handle</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-category="Backpack">
+            <div class="collection-tile-media" data-media="Backpack"></div>
+            <div class="collection-tile-body">
+              <strong data-i18n="collection_backpacks">Backpacks</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section class="brands" id="brands" aria-label="Find by brands">
+        <div class="collections-head">
+          <h2 data-i18n="brands_heading">Find by brands.</h2>
+          <a href="#shop" data-i18n="brands_view_all">View all brands →</a>
+        </div>
+        <div class="collections-row" id="brandsRow">
+          <button class="collection-tile" type="button" data-brand="coach">
+            <div class="collection-tile-media" data-brand-media="coach"></div>
+            <div class="collection-tile-body">
+              <strong>Coach</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-brand="chanel">
+            <div class="collection-tile-media" data-brand-media="chanel"></div>
+            <div class="collection-tile-body">
+              <strong>Chanel</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-brand="yvessaintlaurent">
+            <div class="collection-tile-media" data-brand-media="yvessaintlaurent"></div>
+            <div class="collection-tile-body">
+              <strong>Yves Saint Laurent</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-brand="lv">
+            <div class="collection-tile-media" data-brand-media="lv"></div>
+            <div class="collection-tile-body">
+              <strong>LV</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-brand="guess">
+            <div class="collection-tile-media" data-brand-media="guess"></div>
+            <div class="collection-tile-body">
+              <strong>Guess</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+          <button class="collection-tile" type="button" data-brand="jacquemus">
+            <div class="collection-tile-media" data-brand-media="jacquemus"></div>
+            <div class="collection-tile-body">
+              <strong>Jacquemus</strong>
+              <span data-i18n="explore">Explore</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
       <section class="collection-head" aria-label="Collection header">
         <div class="breadcrumb">
           <a href="#shop" id="crumbHome">Home</a>
@@ -1384,7 +1832,7 @@
               bag, clutch, or backpack.
             </p>
           </div>
-          <span class="pill" id="shippingNote">Free shipping over $120</span>
+          <span class="pill" id="shippingNote">Free shipping on orders over 70 JOD</span>
         </div>
         <div class="new-arrivals" id="newArrivals" aria-label="New arrivals">
           <div class="new-arrivals-head">
@@ -1398,16 +1846,24 @@
         <div class="subnav" id="brandChips" aria-label="Brand categories"></div>
       </section>
 
+      <section class="browse-head" id="browseHead" aria-label="Browse" hidden>
+        <h2 id="browseTitle">Browse</h2>
+        <div class="browse-actions">
+          <button class="btn" type="button" id="browseBack" data-i18n="browse_back">Back</button>
+          <button class="btn linkbtn" type="button" id="browseClear" data-i18n="browse_clear">Clear</button>
+        </div>
+      </section>
+
       <section id="shop" aria-label="Shop">
         <div class="layout">
           <div class="products-bar">
             <div class="results" id="resultsMeta">Loading…</div>
             <div class="products-actions">
               <select class="select" id="sort" aria-label="Sort products">
-                <option value="featured">Featured</option>
-                <option value="price-asc">Price: Low → High</option>
-                <option value="price-desc">Price: High → Low</option>
-                <option value="name-asc">Name: A → Z</option>
+                <option value="featured" data-i18n="sort_featured">Featured</option>
+                <option value="price-asc" data-i18n="sort_price_asc">Price: Low → High</option>
+                <option value="price-desc" data-i18n="sort_price_desc">Price: High → Low</option>
+                <option value="name-asc" data-i18n="sort_name_asc">Name: A → Z</option>
               </select>
             </div>
           </div>
@@ -1417,20 +1873,23 @@
 
       <section id="about" aria-label="About">
         <div class="section-title">
-          <h2>About this site</h2>
-          <span>Ready to connect payments + real inventory</span>
+          <h2 data-i18n="about_title">About this site</h2>
+          <span data-i18n="about_subtitle">Ready to connect payments + real inventory</span>
         </div>
         <div class="notice" style="margin-top: 12px">
-          This is a demo storefront: product listing, product detail, cart, and a checkout form that simulates an order. To make it a
-          real shop, the next step is to connect a payment provider (Stripe/PayPal), add an admin dashboard, and store products in a
-          database.
+          <span data-i18n="about_notice">
+            This is a demo storefront: product listing, product detail, cart, and a checkout form that simulates an order. To make it a
+            real shop, the next step is to connect a payment provider (Stripe/PayPal), add an admin dashboard, and store products in a
+            database.
+          </span>
         </div>
       </section>
 
       <footer class="footer" aria-label="Footer">
         <div>© <span id="year"></span> Jana Bags</div>
         <div>
-          <a href="#shop">Shop</a> · <a href="#about">About</a> · <a href="#shop">Top</a>
+          <a href="#shop" data-i18n="footer_shop">Shop</a> · <a href="#about" data-i18n="footer_about">About</a> ·
+          <a href="#shop" data-i18n="footer_top">Top</a>
         </div>
       </footer>
     </main>
@@ -1522,15 +1981,15 @@
             <form class="form" id="adminLoginForm" style="margin-top: 12px">
               <div class="form-grid">
                 <label>
-                  Username
+                  <span data-i18n="admin_username">Username</span>
                   <input name="username" autocomplete="username" required />
                 </label>
                 <label>
-                  Password
+                  <span data-i18n="admin_password">Password</span>
                   <input name="password" type="password" autocomplete="current-password" required />
                 </label>
               </div>
-              <button class="btn btn-primary" type="submit" id="adminLoginBtn">Sign in</button>
+              <button class="btn btn-primary" type="submit" id="adminLoginBtn" data-i18n="admin_sign_in">Sign in</button>
               <div class="small" id="adminLoginMsg"></div>
             </form>
           </div>
@@ -1541,6 +2000,7 @@
                 <button class="btn admin-tab" type="button" role="tab" aria-selected="true" data-tab="products">Products</button>
                 <button class="btn admin-tab" type="button" role="tab" aria-selected="false" data-tab="orders">Orders</button>
                 <button class="btn admin-tab" type="button" role="tab" aria-selected="false" data-tab="categories">Categories</button>
+                  <button class="btn admin-tab" type="button" role="tab" aria-selected="false" data-tab="covers">Covers</button>
               </div>
               <div class="admin-actions">
                 <button class="btn" type="button" id="adminLogout">Logout</button>
@@ -1551,85 +2011,85 @@
               <div class="admin-split">
                 <div>
                   <div class="admin-head">
-                    <strong>Products</strong>
+                    <strong data-i18n="admin_tab_products">Products</strong>
                     <select class="select" id="adminNewProductCategory" aria-label="New product category"></select>
-                    <button class="btn btn-primary" type="button" id="adminNewProduct">Add product</button>
+                    <button class="btn btn-primary" type="button" id="adminNewProduct" data-i18n="admin_add_product">Add product</button>
                   </div>
                   <div class="admin-list" id="adminProductList"></div>
                 </div>
                 <div>
                   <div class="admin-head">
-                    <strong id="adminProductTitle">Edit product</strong>
-                    <button class="btn linkbtn" type="button" id="adminDeleteProduct">Delete</button>
+                    <strong id="adminProductTitle" data-i18n="admin_edit_product">Edit product</strong>
+                    <button class="btn linkbtn" type="button" id="adminDeleteProduct" data-i18n="admin_delete">Delete</button>
                   </div>
                   <form class="form" id="adminProductForm">
                     <div class="form-grid">
                       <label>
-                        Brand
+                        <span data-i18n="admin_brand">Brand</span>
                         <input name="brand" required />
                       </label>
                       <label>
-                        Name
+                        <span data-i18n="admin_name">Name</span>
                         <input name="name" required />
                       </label>
                       <label>
-                        Category
+                        <span data-i18n="admin_category">Category</span>
                         <input name="category" list="adminCategoryOptions" required />
                       </label>
                       <label>
-                        Price
+                        <span data-i18n="admin_price">Price</span>
                         <input name="price" type="number" min="0" step="1" required />
                       </label>
                       <label>
-                        Color
+                        <span data-i18n="admin_color">Color</span>
                         <input name="color" required />
                       </label>
                       <label>
-                        Material
+                        <span data-i18n="admin_material">Material</span>
                         <input name="material" required />
                       </label>
                       <label>
-                        Size
+                        <span data-i18n="admin_size">Size</span>
                         <input name="size" required />
                       </label>
                       <label>
-                        Variant count
+                        <span data-i18n="admin_variant_count">Variant count</span>
                         <input name="variantCount" type="number" min="0" step="1" />
                       </label>
                       <label>
-                        Featured rank
+                        <span data-i18n="admin_featured_rank">Featured rank</span>
                         <input name="featured" type="number" min="0" step="1" />
                       </label>
                       <label>
-                        Stock
+                        <span data-i18n="admin_stock">Stock</span>
                         <input name="stock" type="number" min="0" step="1" />
                       </label>
                       <label>
-                        New
+                        <span data-i18n="admin_new">New</span>
                         <select name="isNew">
-                          <option value="true">Yes</option>
-                          <option value="false">No</option>
+                          <option value="true" data-i18n="yes">Yes</option>
+                          <option value="false" data-i18n="no">No</option>
                         </select>
                       </label>
                       <label style="grid-column: 1 / -1">
-                        Description
+                        <span data-i18n="admin_description">Description</span>
                         <textarea name="description"></textarea>
                       </label>
                       <label style="grid-column: 1 / -1">
-                        Photos (PNG/JPG)
+                        <span data-i18n="admin_photos">Photos (PNG/JPG)</span>
                         <input name="imageFiles" type="file" accept="image/*" multiple />
                       </label>
                       <label style="grid-column: 1 / -1">
-                        Or photo URLs (one per line)
-                        <textarea name="imageUrls" placeholder="https://...&#10;https://..."></textarea>
+                        <span data-i18n="admin_or_photo_urls">Or photo URLs (one per line)</span>
+                        <textarea name="imageUrls" data-i18n-placeholder="admin_image_urls_placeholder" placeholder="https://...&#10;https://..."></textarea>
                       </label>
                       <div style="grid-column: 1 / -1">
-                        <div class="small" style="margin-bottom: 8px">Current photos</div>
+                        <div class="small" style="margin-bottom: 8px" data-i18n="admin_current_photos">Current photos</div>
                         <div class="admin-list" id="adminImagesList"></div>
                       </div>
                     </div>
                     <datalist id="adminCategoryOptions"></datalist>
-                    <button class="btn btn-primary" type="submit" id="adminSaveProduct">Save</button>
+                    <button class="btn btn-primary" type="submit" id="adminSaveProduct" data-i18n="admin_save">Save</button>
                     <div class="small" id="adminProductMsg"></div>
                   </form>
                 </div>
@@ -1638,12 +2098,12 @@
 
             <div class="admin-panel" id="adminOrders" role="tabpanel" aria-label="Orders" hidden>
               <div class="admin-head">
-                <strong>Orders</strong>
-                <button class="btn linkbtn" type="button" id="adminClearOrders">Clear all</button>
+                <strong data-i18n="admin_tab_orders">Orders</strong>
+                <button class="btn linkbtn" type="button" id="adminClearOrders" data-i18n="admin_clear_all">Clear all</button>
               </div>
               <div class="admin-list" id="adminOrderList"></div>
               <div class="notice" style="margin-top: 12px">
-                Orders are saved locally in this browser for the demo.
+                <span data-i18n="admin_orders_saved_notice">Orders are saved locally in this browser for the demo.</span>
               </div>
             </div>
 
@@ -1651,32 +2111,55 @@
               <div class="admin-split">
                 <div>
                   <div class="admin-head">
-                    <strong>Categories</strong>
-                    <button class="btn btn-primary" type="button" id="adminRefreshCategories">Refresh</button>
+                    <strong data-i18n="admin_tab_categories">Categories</strong>
+                    <button class="btn btn-primary" type="button" id="adminRefreshCategories" data-i18n="admin_refresh">Refresh</button>
                   </div>
                   <div class="admin-list" id="adminCategoryList"></div>
                 </div>
                 <div>
                   <div class="admin-head">
-                    <strong>Rename category</strong>
-                    <span class="small">Updates all products</span>
+                    <strong data-i18n="admin_rename_category">Rename category</strong>
+                    <span class="small" data-i18n="admin_updates_all_products">Updates all products</span>
                   </div>
                   <form class="form" id="adminCategoryForm">
                     <div class="form-grid">
                       <label>
-                        Current category
+                        <span data-i18n="admin_current_category">Current category</span>
                         <select name="from" id="adminCategoryFrom"></select>
                       </label>
                       <label>
-                        New category name
+                        <span data-i18n="admin_new_category_name">New category name</span>
                         <input name="to" id="adminCategoryTo" required />
                       </label>
                     </div>
-                    <button class="btn btn-primary" type="submit" id="adminApplyCategory">Apply rename</button>
+                    <button class="btn btn-primary" type="submit" id="adminApplyCategory" data-i18n="admin_apply_rename">Apply rename</button>
                     <div class="small" id="adminCategoryMsg"></div>
                   </form>
                 </div>
               </div>
+            </div>
+
+            <div class="admin-panel" id="adminCovers" role="tabpanel" aria-label="Covers" hidden>
+              <div class="notice" data-i18n="admin_covers_note">
+                Set cover images for category tiles and brand tiles. You can paste an image URL or upload a photo.
+              </div>
+              <div class="admin-split" style="margin-top: 12px">
+                <div>
+                  <div class="admin-head">
+                    <strong data-i18n="admin_category_covers">Category covers</strong>
+                    <button class="btn" type="button" id="adminCoversResetCategories" data-i18n="admin_reset">Reset</button>
+                  </div>
+                  <div class="admin-list" id="adminCoverCategoryList"></div>
+                </div>
+                <div>
+                  <div class="admin-head">
+                    <strong data-i18n="admin_brand_covers">Brand covers</strong>
+                    <button class="btn" type="button" id="adminCoversResetBrands" data-i18n="admin_reset">Reset</button>
+                  </div>
+                  <div class="admin-list" id="adminCoverBrandList"></div>
+                </div>
+              </div>
+              <div class="small" id="adminCoversMsg" style="margin-top: 10px"></div>
             </div>
           </div>
         </div>
@@ -1876,7 +2359,17 @@
       const ADMIN_CRED_KEY = "jana_admin_cred_v1";
       const ADMIN_TOKEN_KEY = "jana_admin_token_v1";
       const LANG_KEY = "jana_lang_v1";
+      const COVERS_KEY = "jana_covers_v1";
       const API_ENABLED = location.protocol === "http:" || location.protocol === "https:";
+
+      const BRAND_PRESETS = [
+        { id: "coach", label: "Coach" },
+        { id: "chanel", label: "Chanel" },
+        { id: "yvessaintlaurent", label: "Yves Saint Laurent" },
+        { id: "lv", label: "LV" },
+        { id: "guess", label: "Guess" },
+        { id: "jacquemus", label: "Jacquemus" },
+      ];
 
       function loadLang() {
         try {
@@ -1919,6 +2412,7 @@
 
       const I18N = {
         en: {
+          announce: "Free shipping on orders over 70 JOD",
           cart: "Cart",
           admin: "Admin",
           all_bags: "All Bags",
@@ -1942,6 +2436,38 @@
           each: "each",
           line_total: "Line total: {total}",
           delivery_fees: "Delivery fees: Amman 2 JOD · Other governorates 3 JOD",
+          hero_kicker: "New collection",
+          hero_title_a: "Timeless.",
+          hero_title_b: "Redefined.",
+          hero_sub: "Thoughtfully designed bags for the modern woman.",
+          hero_shop_now: "Shop now",
+          hero_new_in: "New in",
+          hero_feature_title: "The Elle Shoulder Bag",
+          hero_discover: "Discover →",
+          benefit_free_shipping_title: "Free shipping",
+          benefit_free_shipping_desc: "On all orders over 70 JOD",
+          benefit_made_with_care_title: "Made with care",
+          benefit_made_with_care_desc: "Premium materials only",
+          collections_heading: "Find your perfect match.",
+          collections_view_all: "View all collections →",
+          brands_heading: "Find by brands.",
+          brands_view_all: "View all brands →",
+          browse_title: "Browse",
+          browse_back: "Back",
+          browse_clear: "Clear",
+          explore: "Explore",
+          collection_shoulder: "Shoulder bags",
+          collection_tote: "Tote bags",
+          collection_crossbody: "Crossbody bags",
+          collection_top_handle: "Top handle",
+          collection_backpacks: "Backpacks",
+          footer_shop: "Shop",
+          footer_about: "About",
+          footer_top: "Top",
+          sort_featured: "Featured",
+          sort_price_asc: "Price: Low → High",
+          sort_price_desc: "Price: High → Low",
+          sort_name_asc: "Name: A → Z",
           full_name: "Full name",
           email: "Email",
           phone: "Phone",
@@ -1957,8 +2483,84 @@
           governorate_address: "Governorate & address",
           order_value: "Order value",
           items: "Items",
+          qty_short: "Qty",
+          qty_increase: "Increase quantity",
+          qty_decrease: "Decrease quantity",
+          admin_username: "Username",
+          admin_password: "Password",
+          admin_sign_in: "Sign in",
+          admin_tab_products: "Products",
+          admin_tab_orders: "Orders",
+          admin_tab_categories: "Categories",
+          admin_tab_covers: "Covers",
+          admin_logout: "Logout",
+          admin_add_product: "Add product",
+          admin_clear_all: "Clear all",
+          admin_refresh: "Refresh",
+          admin_rename_category: "Rename category",
+          admin_edit_product: "Edit product",
+          admin_brand: "Brand",
+          admin_name: "Name",
+          admin_category: "Category",
+          admin_price: "Price",
+          admin_color: "Color",
+          admin_material: "Material",
+          admin_size: "Size",
+          admin_variant_count: "Variant count",
+          admin_featured_rank: "Featured rank",
+          admin_stock: "Stock",
+          admin_new: "New",
+          yes: "Yes",
+          no: "No",
+          admin_description: "Description",
+          admin_photos: "Photos (PNG/JPG)",
+          admin_or_photo_urls: "Or photo URLs (one per line)",
+          admin_image_urls_placeholder: "https://... (one per line)",
+          admin_current_photos: "Current photos",
+          admin_save: "Save",
+          admin_updates_all_products: "Updates all products",
+          admin_current_category: "Current category",
+          admin_new_category_name: "New category name",
+          admin_apply_rename: "Apply rename",
+          admin_covers_note: "Set cover images for category tiles and brand tiles. You can paste an image URL or upload a photo.",
+          admin_category_covers: "Category covers",
+          admin_brand_covers: "Brand covers",
+          admin_cover_set: "Cover set",
+          admin_cover_not_set: "No cover",
+          admin_cover_url_placeholder: "https://image-url",
+          admin_upload: "Upload",
+          admin_remove: "Remove",
+          admin_reset: "Reset",
+          admin_no_products: "No products yet. Click “Add product”.",
+          admin_saved: "Saved.",
+          admin_invalid_credentials: "Invalid username or password.",
+          admin_stock_prefix: "Stock: {stock}",
+          admin_out_of_stock: "Out of stock",
+          admin_edit: "Edit",
+          admin_delete: "Delete",
+          admin_no_orders: "No orders yet.",
+          admin_view: "View",
+          admin_items: "Items",
+          admin_phone: "Phone",
+          admin_address: "Address",
+          admin_notes: "Notes",
+          status_new: "New",
+          status_fulfilled: "Fulfilled",
+          status_cancelled: "Cancelled",
+          confirm_delete_product: "Delete product: {title}?",
+          confirm_delete_category: "Delete category “{cat}”? {count} product(s) will move to Uncategorized.",
+          admin_orders_saved_notice: "Orders are saved locally in this browser for the demo.",
+          admin_cannot_delete_uncategorized: "Cannot delete Uncategorized.",
+          admin_deleted_category: "Deleted “{cat}”. Moved products to Uncategorized.",
+          admin_renamed_category: "Renamed “{from}” → “{to}”.",
+          admin_no_categories: "No categories yet.",
+          about_title: "About this site",
+          about_subtitle: "Ready to connect payments + real inventory",
+          about_notice:
+            "This is a demo storefront: product listing, product detail, cart, and a checkout form that simulates an order. To make it a real shop, the next step is to connect a payment provider (Stripe/PayPal), add an admin dashboard, and store products in a database.",
         },
         ar: {
+          announce: "شحن مجاني للطلبات أكثر من ٧٠ د.أ",
           cart: "السلة",
           admin: "الإدارة",
           all_bags: "كل الشنط",
@@ -1982,6 +2584,38 @@
           each: "للواحدة",
           line_total: "مجموع السطر: {total}",
           delivery_fees: "رسوم التوصيل: عمّان ٢ د.أ · باقي المحافظات ٣ د.أ",
+          hero_kicker: "مجموعة جديدة",
+          hero_title_a: "أناقة.",
+          hero_title_b: "بلمسة جديدة.",
+          hero_sub: "شنط مصممة بعناية للمرأة العصرية.",
+          hero_shop_now: "تسوقي الآن",
+          hero_new_in: "جديد",
+          hero_feature_title: "شنطة Elle شولدر",
+          hero_discover: "اكتشفي →",
+          benefit_free_shipping_title: "شحن مجاني",
+          benefit_free_shipping_desc: "للطلبات أكثر من ٧٠ د.أ",
+          benefit_made_with_care_title: "مصنوع بعناية",
+          benefit_made_with_care_desc: "خامات بريميوم فقط",
+          collections_heading: "اختاري الأنسب لكِ.",
+          collections_view_all: "عرض كل التصنيفات →",
+          brands_heading: "اختاري حسب البراند.",
+          brands_view_all: "عرض كل البراندات →",
+          browse_title: "تصفح",
+          browse_back: "رجوع",
+          browse_clear: "مسح",
+          explore: "استكشاف",
+          collection_shoulder: "شنط شولدر",
+          collection_tote: "شنط توت",
+          collection_crossbody: "شنط كروس بودي",
+          collection_top_handle: "شنط يد/توب هاندل",
+          collection_backpacks: "حقائب ظهر",
+          footer_shop: "تسوقي",
+          footer_about: "عن الموقع",
+          footer_top: "أعلى الصفحة",
+          sort_featured: "مميز",
+          sort_price_asc: "السعر: من الأقل للأعلى",
+          sort_price_desc: "السعر: من الأعلى للأقل",
+          sort_name_asc: "الاسم: أ → ي",
           full_name: "الاسم الكامل",
           email: "البريد الإلكتروني",
           phone: "رقم الهاتف",
@@ -1997,8 +2631,96 @@
           governorate_address: "المحافظة والعنوان",
           order_value: "قيمة الطلب",
           items: "المنتجات",
+          qty_short: "الكمية",
+          qty_increase: "زيادة الكمية",
+          qty_decrease: "تقليل الكمية",
+          admin_username: "اسم المستخدم",
+          admin_password: "كلمة المرور",
+          admin_sign_in: "تسجيل الدخول",
+          admin_tab_products: "المنتجات",
+          admin_tab_orders: "الطلبات",
+          admin_tab_categories: "التصنيفات",
+          admin_tab_covers: "الصور",
+          admin_logout: "تسجيل خروج",
+          admin_add_product: "إضافة منتج",
+          admin_clear_all: "مسح الكل",
+          admin_refresh: "تحديث",
+          admin_rename_category: "تعديل اسم التصنيف",
+          admin_edit_product: "تعديل المنتج",
+          admin_brand: "البراند",
+          admin_name: "الاسم",
+          admin_category: "التصنيف",
+          admin_price: "السعر",
+          admin_color: "اللون",
+          admin_material: "الخامة",
+          admin_size: "الحجم",
+          admin_variant_count: "عدد الألوان",
+          admin_featured_rank: "ترتيب الظهور",
+          admin_stock: "المخزون",
+          admin_new: "جديد",
+          yes: "نعم",
+          no: "لا",
+          admin_description: "الوصف",
+          admin_photos: "الصور (PNG/JPG)",
+          admin_or_photo_urls: "أو روابط الصور (كل رابط بسطر)",
+          admin_image_urls_placeholder: "https://... (كل رابط بسطر)",
+          admin_current_photos: "الصور الحالية",
+          admin_save: "حفظ",
+          admin_updates_all_products: "يتم تحديث كل المنتجات",
+          admin_current_category: "التصنيف الحالي",
+          admin_new_category_name: "اسم التصنيف الجديد",
+          admin_apply_rename: "تطبيق التعديل",
+          admin_covers_note: "حددي صور الغلاف لتصنيفات الشنط والبراندات. يمكنك لصق رابط صورة أو رفع صورة.",
+          admin_category_covers: "صور غلاف التصنيفات",
+          admin_brand_covers: "صور غلاف البراندات",
+          admin_cover_set: "تم تحديد صورة",
+          admin_cover_not_set: "لا توجد صورة",
+          admin_cover_url_placeholder: "https://رابط-الصورة",
+          admin_upload: "رفع",
+          admin_remove: "حذف",
+          admin_reset: "إعادة ضبط",
+          admin_no_products: "لا يوجد منتجات بعد. اضغط “إضافة منتج”.",
+          admin_saved: "تم الحفظ.",
+          admin_invalid_credentials: "اسم المستخدم أو كلمة المرور غير صحيحة.",
+          admin_stock_prefix: "المخزون: {stock}",
+          admin_out_of_stock: "نفذت الكمية",
+          admin_edit: "تعديل",
+          admin_delete: "حذف",
+          admin_no_orders: "لا يوجد طلبات بعد.",
+          admin_view: "عرض",
+          admin_items: "المنتجات",
+          admin_phone: "الهاتف",
+          admin_address: "العنوان",
+          admin_notes: "ملاحظات",
+          status_new: "جديد",
+          status_fulfilled: "تم التنفيذ",
+          status_cancelled: "ملغي",
+          confirm_delete_product: "حذف المنتج: {title}؟",
+          confirm_delete_category: "حذف التصنيف “{cat}”؟ سيتم نقل {count} منتج إلى Uncategorized.",
+          admin_orders_saved_notice: "يتم حفظ الطلبات محليًا في هذا المتصفح (تجريبي).",
+          admin_cannot_delete_uncategorized: "لا يمكن حذف Uncategorized.",
+          admin_deleted_category: "تم حذف “{cat}”. تم نقل المنتجات إلى Uncategorized.",
+          admin_renamed_category: "تم تغيير “{from}” إلى “{to}”.",
+          admin_no_categories: "لا يوجد تصنيفات بعد.",
+          about_title: "عن الموقع",
+          about_subtitle: "جاهز لربط الدفع والمخزون الحقيقي",
+          about_notice:
+            "هذا متجر تجريبي: عرض منتجات، تفاصيل منتج، سلة، ونموذج دفع يحاكي الطلب. لتحويله لمتجر حقيقي: اربط بوابة دفع (Stripe/PayPal)، فعّل لوحة إدارة، وخزّن المنتجات في قاعدة بيانات.",
         },
       };
+
+      function applyDataI18n(root = document) {
+        root.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (!key) return;
+          el.textContent = t(key);
+        });
+        root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (!key) return;
+          if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) el.placeholder = t(key);
+        });
+      }
 
       function t(key, vars) {
         const dict = I18N[currentLang] || I18N.en;
@@ -2036,6 +2758,7 @@
         adminProducts: document.getElementById("adminProducts"),
         adminOrders: document.getElementById("adminOrders"),
         adminCategories: document.getElementById("adminCategories"),
+        adminCovers: document.getElementById("adminCovers"),
         adminNewProduct: document.getElementById("adminNewProduct"),
         adminNewProductCategory: document.getElementById("adminNewProductCategory"),
         adminProductList: document.getElementById("adminProductList"),
@@ -2054,6 +2777,11 @@
         adminApplyCategory: document.getElementById("adminApplyCategory"),
         adminCategoryMsg: document.getElementById("adminCategoryMsg"),
         adminCategoryOptions: document.getElementById("adminCategoryOptions"),
+        adminCoverCategoryList: document.getElementById("adminCoverCategoryList"),
+        adminCoverBrandList: document.getElementById("adminCoverBrandList"),
+        adminCoversMsg: document.getElementById("adminCoversMsg"),
+        adminCoversResetCategories: document.getElementById("adminCoversResetCategories"),
+        adminCoversResetBrands: document.getElementById("adminCoversResetBrands"),
         openCart: document.getElementById("openCart"),
         closeCart: document.getElementById("closeCart"),
         drawer: document.getElementById("drawer"),
@@ -2248,6 +2976,57 @@
         localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
       }
 
+      function normalizeKey(value) {
+        return String(value || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "");
+      }
+
+      function loadCovers() {
+        try {
+          const raw = localStorage.getItem(COVERS_KEY);
+          if (!raw) return { categories: {}, brands: {} };
+          const parsed = JSON.parse(raw);
+          const categories = parsed && typeof parsed.categories === "object" ? parsed.categories : {};
+          const brands = parsed && typeof parsed.brands === "object" ? parsed.brands : {};
+          return { categories, brands };
+        } catch {
+          return { categories: {}, brands: {} };
+        }
+      }
+
+      function saveCovers(covers) {
+        localStorage.setItem(COVERS_KEY, JSON.stringify(covers));
+      }
+
+      function getCover(type, key) {
+        const covers = state?.covers || loadCovers();
+        const k = normalizeKey(key);
+        if (type === "category") return String(covers.categories?.[k] || "").trim();
+        if (type === "brand") return String(covers.brands?.[k] || "").trim();
+        return "";
+      }
+
+      function setCover(type, key, url) {
+        const next = state.covers || loadCovers();
+        const k = normalizeKey(key);
+        const val = String(url || "").trim();
+        if (type === "category") {
+          const categories = { ...(next.categories || {}) };
+          if (val) categories[k] = val;
+          else delete categories[k];
+          state.covers = { ...next, categories };
+        } else if (type === "brand") {
+          const brands = { ...(next.brands || {}) };
+          if (val) brands[k] = val;
+          else delete brands[k];
+          state.covers = { ...next, brands };
+        } else {
+          return;
+        }
+        saveCovers(state.covers);
+      }
+
       function hashColor(seed) {
         let h = 0;
         for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
@@ -2302,6 +3081,48 @@
             <text x="44" y="742" fill="rgba(11,15,26,0.68)" font-size="16" font-weight="600" font-family="ui-sans-serif, system-ui">${sub}</text>
           </svg>
         `;
+      }
+
+      function findAnyProductByCategory(category) {
+        const c = String(category || "").trim().toLowerCase();
+        return state.products.find((p) => String(p.category || "").trim().toLowerCase() === c) || null;
+      }
+
+      function findAnyProductByBrand(brandKey) {
+        const k = normalizeKey(brandKey);
+        return state.products.find((p) => normalizeKey(p.brand) === k) || null;
+      }
+
+      function tileMediaHtml({ type, key, fallbackProduct }) {
+        const cover = getCover(type, key);
+        if (cover) return `<img src="${escapeHtml(cover)}" alt="" loading="lazy" />`;
+        if (fallbackProduct) return productSvg(fallbackProduct);
+        return "";
+      }
+
+      function renderCollectionTiles() {
+        const row = document.getElementById("collectionsRow");
+        if (!row) return;
+        row.querySelectorAll("[data-media]").forEach((el) => {
+          const cat = el.getAttribute("data-media") || "";
+          const p = findAnyProductByCategory(cat);
+          el.innerHTML = tileMediaHtml({ type: "category", key: cat, fallbackProduct: p });
+        });
+      }
+
+      function renderBrandTiles() {
+        const row = document.getElementById("brandsRow");
+        if (!row) return;
+        row.querySelectorAll("[data-brand-media]").forEach((el) => {
+          const id = el.getAttribute("data-brand-media") || "";
+          const p = findAnyProductByBrand(id);
+          el.innerHTML = tileMediaHtml({ type: "brand", key: id, fallbackProduct: p });
+        });
+      }
+
+      function renderAllTiles() {
+        renderCollectionTiles();
+        renderBrandTiles();
       }
 
       function loadCart() {
@@ -2366,7 +3187,7 @@
           if (el) el.textContent = String(value);
         };
 
-        setText("announceText", t("delivery_fees"));
+        setText("announceText", t("announce"));
         setText("navAll", t("all_bags"));
         setText("navBrands", currentLang === "ar" ? "البراندات" : "Brands");
         setText("navAbout", currentLang === "ar" ? "عن الموقع" : "About");
@@ -2400,7 +3221,7 @@
         if (notes instanceof HTMLTextAreaElement) notes.placeholder = t("notes_placeholder");
 
         setText("placeOrderBtn", t("place_order_demo"));
-        setText("shippingNote", t("delivery_fees"));
+        setText("shippingNote", t("announce"));
         setText("adminLauncher", t("admin"));
         setText("crumbHome", currentLang === "ar" ? "الرئيسية" : "Home");
         setText("crumbAll", t("all_bags"));
@@ -2415,6 +3236,33 @@
         setText("newArrivalsSubtitle", currentLang === "ar" ? "أحدث الإضافات" : "Latest drops");
         setText("printInvoice", t("print"));
         setText("closeInvoice", t("close"));
+
+        applyDataI18n();
+
+        document.querySelectorAll(".admin-tab").forEach((btn) => {
+          const tab = btn.getAttribute("data-tab");
+          if (tab === "products") btn.textContent = t("admin_tab_products");
+          else if (tab === "orders") btn.textContent = t("admin_tab_orders");
+          else if (tab === "categories") btn.textContent = t("admin_tab_categories");
+          else if (tab === "covers") btn.textContent = t("admin_tab_covers");
+        });
+
+        const logoutBtn = document.getElementById("adminLogout");
+        if (logoutBtn) logoutBtn.textContent = t("admin_logout");
+
+        const addProductBtn = document.getElementById("adminNewProduct");
+        if (addProductBtn) addProductBtn.textContent = t("admin_add_product");
+
+        const clearAllOrdersBtn = document.getElementById("adminClearOrders");
+        if (clearAllOrdersBtn) clearAllOrdersBtn.textContent = t("admin_clear_all");
+
+        const refreshCategoriesBtn = document.getElementById("adminRefreshCategories");
+        if (refreshCategoriesBtn) refreshCategoriesBtn.textContent = t("admin_refresh");
+
+        const renameCatTitle = document.querySelector("#adminCategories strong");
+        if (renameCatTitle && String(renameCatTitle.textContent || "").trim().toLowerCase() === "categories") {
+          renameCatTitle.textContent = currentLang === "ar" ? "التصنيفات" : "Categories";
+        }
       }
 
       function setLang(lang) {
@@ -2433,8 +3281,10 @@
         renderCheckoutCities();
         buildFilters();
         buildNewArrivals();
+        renderAllTiles();
         renderGrid();
         renderCart();
+        applyRouteFromHash();
       }
 
       function updateCheckoutSummary() {
@@ -2464,10 +3314,12 @@
       const state = {
         products: normalizeProducts(loadProducts()),
         orders: loadOrders(),
+        covers: loadCovers(),
         lang: currentLang,
         brands: new Set(),
         categories: new Set(),
         filtersBound: false,
+        route: { name: "home", brand: "", category: "" },
         admin: {
           authed: false,
           tab: "products",
@@ -2732,9 +3584,9 @@
                   <div class="muted">${escapeHtml(t("line_total", { total: money(lineTotal) }))}</div>
                 </div>
                 <div class="qty" aria-label="Quantity controls">
-                  <button class="btn" type="button" data-action="dec" aria-label="Decrease quantity">−</button>
+                  <button class="btn" type="button" data-action="dec" aria-label="${escapeHtml(t("qty_decrease"))}">−</button>
                   <strong aria-label="Quantity">${qty}</strong>
-                  <button class="btn" type="button" data-action="inc" aria-label="Increase quantity">+</button>
+                  <button class="btn" type="button" data-action="inc" aria-label="${escapeHtml(t("qty_increase"))}">+</button>
                 </div>
               </div>
             `;
@@ -2994,6 +3846,7 @@
         syncCategoryCheckboxes();
         syncChips();
         buildNewArrivals();
+        renderAllTiles();
         renderGrid();
         renderCart();
         syncAdminCategoryControls();
@@ -3031,6 +3884,7 @@
         els.adminProducts.hidden = tab !== "products";
         els.adminOrders.hidden = tab !== "orders";
         els.adminCategories.hidden = tab !== "categories";
+        els.adminCovers.hidden = tab !== "covers";
         if (tab === "products") {
           if (API_ENABLED) {
             syncProductsFromApi()
@@ -3056,6 +3910,15 @@
               .finally(() => renderAdminCategories());
           } else {
             renderAdminCategories();
+          }
+        }
+        if (tab === "covers") {
+          if (API_ENABLED) {
+            syncProductsFromApi()
+              .catch(() => {})
+              .finally(() => renderAdminCovers());
+          } else {
+            renderAdminCovers();
           }
         }
       }
@@ -3125,7 +3988,7 @@
             const title = escapeHtml(`${p.brand} ${p.name}`);
             const stock = Number.isFinite(Number(p.stock)) ? Number(p.stock) : 999;
             const stockNote =
-              stock <= 0 ? (currentLang === "ar" ? " · نفذت الكمية" : " · Out of stock") : ` · Stock: ${stock}`;
+              stock <= 0 ? ` · ${escapeHtml(t("admin_out_of_stock"))}` : ` · ${escapeHtml(t("admin_stock_prefix", { stock }))}`;
             const meta = escapeHtml(
               `${p.category} · ${money(p.price)}${p.isNew ? (currentLang === "ar" ? " · جديد" : " · New") : ""}${stockNote}`
             );
@@ -3136,8 +3999,8 @@
                   <div class="small">${meta}</div>
                 </div>
                 <div class="admin-item-actions">
-                  <button class="btn" type="button" data-action="edit">Edit</button>
-                  <button class="btn linkbtn" type="button" data-action="delete">Delete</button>
+                  <button class="btn" type="button" data-action="edit">${escapeHtml(t("admin_edit"))}</button>
+                  <button class="btn linkbtn" type="button" data-action="delete">${escapeHtml(t("admin_delete"))}</button>
                 </div>
               </div>
             `;
@@ -3146,7 +4009,7 @@
 
         els.adminProductList.innerHTML =
           list ||
-          `<div class="notice">No products yet. Click “Add product”.</div>`;
+          `<div class="notice">${escapeHtml(t("admin_no_products"))}</div>`;
 
         syncAdminCategoryControls();
 
@@ -3161,7 +4024,7 @@
       function renderAdminOrders() {
         const orders = state.orders;
         if (orders.length === 0) {
-          els.adminOrderList.innerHTML = `<div class="notice">No orders yet.</div>`;
+          els.adminOrderList.innerHTML = `<div class="notice">${escapeHtml(t("admin_no_orders"))}</div>`;
           return;
         }
 
@@ -3184,25 +4047,25 @@
                   <strong>${escapeHtml(o.id)} · ${customer}</strong>
                   <div class="small">${when} · ${total}</div>
                   <div class="small" data-order-details hidden style="margin-top: 8px">
-                    <div><strong>Items</strong></div>
+                    <div><strong>${escapeHtml(t("admin_items"))}</strong></div>
                     <div class="small" style="margin-top: 6px">${items || "—"}</div>
-                    <div class="small" style="margin-top: 10px"><strong>Phone</strong></div>
+                    <div class="small" style="margin-top: 10px"><strong>${escapeHtml(t("admin_phone"))}</strong></div>
                     <div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.phone ?? "") || "—"}</div>
-                    <div class="small" style="margin-top: 10px"><strong>Address</strong></div>
+                    <div class="small" style="margin-top: 10px"><strong>${escapeHtml(t("admin_address"))}</strong></div>
                     <div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.city ?? "")} · ${escapeHtml(
               o.customer?.address ?? ""
             )}</div>
-                    ${o.customer?.notes ? `<div class="small" style="margin-top: 10px"><strong>Notes</strong></div><div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.notes ?? "")}</div>` : ""}
+                    ${o.customer?.notes ? `<div class="small" style="margin-top: 10px"><strong>${escapeHtml(t("admin_notes"))}</strong></div><div class="small" style="margin-top: 6px">${escapeHtml(o.customer?.notes ?? "")}</div>` : ""}
                   </div>
                 </div>
                 <div class="admin-item-actions">
                   <select class="select" data-action="status" aria-label="Order status">
-                    <option value="new" ${status === "new" ? "selected" : ""}>New</option>
-                    <option value="fulfilled" ${status === "fulfilled" ? "selected" : ""}>Fulfilled</option>
-                    <option value="cancelled" ${status === "cancelled" ? "selected" : ""}>Cancelled</option>
+                    <option value="new" ${status === "new" ? "selected" : ""}>${escapeHtml(t("status_new"))}</option>
+                    <option value="fulfilled" ${status === "fulfilled" ? "selected" : ""}>${escapeHtml(t("status_fulfilled"))}</option>
+                    <option value="cancelled" ${status === "cancelled" ? "selected" : ""}>${escapeHtml(t("status_cancelled"))}</option>
                   </select>
                   <button class="btn" type="button" data-action="invoice">${escapeHtml(t("invoice"))}</button>
-                  <button class="btn" type="button" data-action="toggle">View</button>
+                  <button class="btn" type="button" data-action="toggle">${escapeHtml(t("admin_view"))}</button>
                 </div>
               </div>
             `;
@@ -3279,7 +4142,7 @@
         <tr>
           <th style="width:92px"></th>
           <th>${escapeHtml(t("items"))}</th>
-          <th style="width:70px; text-align:center">Qty</th>
+          <th style="width:70px; text-align:center">${escapeHtml(t("qty_short"))}</th>
         </tr>
       </thead>
       <tbody>${rows || ""}</tbody>
@@ -3310,25 +4173,103 @@
           categories
             .map((c) => {
               const count = state.products.filter((p) => p.category === c).length;
+              const countLabel =
+                currentLang === "ar" ? `${count} منتج` : `${count} product${count === 1 ? "" : "s"}`;
               return `
                 <div class="admin-item" data-cat="${escapeHtml(c)}">
                   <div>
                     <strong>${escapeHtml(c)}</strong>
-                    <div class="small">${count} product${count === 1 ? "" : "s"}</div>
+                    <div class="small">${escapeHtml(countLabel)}</div>
                   </div>
                   <div class="admin-item-actions">
-                    <button class="btn" type="button" data-action="rename">Rename</button>
-                    <button class="btn" type="button" data-action="addProduct">Add product</button>
-                    <button class="btn linkbtn" type="button" data-action="delete">Delete</button>
+                    <button class="btn" type="button" data-action="rename">${escapeHtml(t("admin_rename_category"))}</button>
+                    <button class="btn" type="button" data-action="addProduct">${escapeHtml(t("admin_add_product"))}</button>
+                    <button class="btn linkbtn" type="button" data-action="delete">${escapeHtml(t("admin_delete"))}</button>
                   </div>
                 </div>
               `;
             })
-            .join("") || `<div class="notice">No categories yet.</div>`;
+            .join("") || `<div class="notice">${escapeHtml(t("admin_no_categories"))}</div>`;
 
         els.adminCategoryList.innerHTML = list;
         els.adminCategoryMsg.textContent = "";
         syncAdminCategoryControls();
+      }
+
+      function renderAdminCovers() {
+        if (!els.adminCoverCategoryList || !els.adminCoverBrandList) return;
+        const categories = getAllCategories();
+
+        els.adminCoverCategoryList.innerHTML =
+          categories
+            .map((cat) => {
+              const cover = getCover("category", cat);
+              const img = cover ? `<img src="${escapeHtml(cover)}" alt="" style="width:100%; height:100%; object-fit:cover; display:block" />` : "";
+              return `
+                <div class="admin-item" data-cover-type="category" data-cover-key="${escapeHtml(cat)}">
+                  <div style="display:flex; gap: 10px; align-items:center">
+                    <div style="width:56px; height:56px; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.86)">
+                      ${img || ""}
+                    </div>
+                    <div>
+                      <strong>${escapeHtml(cat)}</strong>
+                      <div class="small">${escapeHtml(cover ? t("admin_cover_set") : t("admin_cover_not_set"))}</div>
+                    </div>
+                  </div>
+                  <div class="admin-item-actions" style="flex-wrap:wrap; justify-content:flex-end">
+                    <input
+                      type="url"
+                      data-role="url"
+                      value="${escapeHtml(cover)}"
+                      placeholder="${escapeHtml(t("admin_cover_url_placeholder"))}"
+                      style="width:220px"
+                    />
+                    <label class="btn" style="position:relative; overflow:hidden">
+                      <span data-i18n="admin_upload">Upload</span>
+                      <input type="file" accept="image/*" data-role="file" style="position:absolute; inset:0; opacity:0; cursor:pointer" />
+                    </label>
+                    <button class="btn linkbtn" type="button" data-action="removeCover" data-i18n="admin_remove">Remove</button>
+                  </div>
+                </div>
+              `;
+            })
+            .join("") || `<div class="notice">${escapeHtml(t("admin_no_categories"))}</div>`;
+
+        els.adminCoverBrandList.innerHTML =
+          BRAND_PRESETS.map((b) => {
+            const cover = getCover("brand", b.id);
+            const img = cover ? `<img src="${escapeHtml(cover)}" alt="" style="width:100%; height:100%; object-fit:cover; display:block" />` : "";
+            return `
+              <div class="admin-item" data-cover-type="brand" data-cover-key="${escapeHtml(b.id)}">
+                <div style="display:flex; gap: 10px; align-items:center">
+                  <div style="width:56px; height:56px; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.86)">
+                    ${img || ""}
+                  </div>
+                  <div>
+                    <strong>${escapeHtml(b.label)}</strong>
+                    <div class="small">${escapeHtml(cover ? t("admin_cover_set") : t("admin_cover_not_set"))}</div>
+                  </div>
+                </div>
+                <div class="admin-item-actions" style="flex-wrap:wrap; justify-content:flex-end">
+                  <input
+                    type="url"
+                    data-role="url"
+                    value="${escapeHtml(cover)}"
+                    placeholder="${escapeHtml(t("admin_cover_url_placeholder"))}"
+                    style="width:220px"
+                  />
+                  <label class="btn" style="position:relative; overflow:hidden">
+                    <span data-i18n="admin_upload">Upload</span>
+                    <input type="file" accept="image/*" data-role="file" style="position:absolute; inset:0; opacity:0; cursor:pointer" />
+                  </label>
+                  <button class="btn linkbtn" type="button" data-action="removeCover" data-i18n="admin_remove">Remove</button>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+        applyDataI18n(els.adminCovers || document);
+        if (els.adminCoversMsg) els.adminCoversMsg.textContent = "";
       }
 
       function getAllCategories() {
@@ -3391,10 +4332,84 @@
         els.adminLoginForm.querySelector('input[name="username"]').focus();
       }
 
+      function brandLabelFromId(id) {
+        const k = normalizeKey(id);
+        const found = BRAND_PRESETS.find((b) => normalizeKey(b.id) === k);
+        return found ? found.label : String(id || "");
+      }
+
+      function findBrandCanonical(idOrLabel) {
+        const k = normalizeKey(idOrLabel);
+        const brands = uniqSorted(state.products.map((p) => String(p.brand || "").trim()).filter(Boolean));
+        return brands.find((b) => normalizeKey(b) === k) || brandLabelFromId(idOrLabel) || String(idOrLabel || "");
+      }
+
+      function findCategoryCanonical(value) {
+        const k = normalizeKey(value);
+        const cats = uniqSorted(state.products.map((p) => String(p.category || "").trim()).filter(Boolean));
+        return cats.find((c) => normalizeKey(c) === k) || String(value || "").trim();
+      }
+
+      function navigateBrowse({ brand = "", category = "" } = {}) {
+        const params = new URLSearchParams();
+        if (brand) params.set("brand", String(brand));
+        if (category) params.set("category", String(category));
+        const qs = params.toString();
+        location.hash = qs ? `#browse?${qs}` : "#browse";
+      }
+
+      function parseBrowseHash() {
+        const raw = String(location.hash || "");
+        if (!raw.startsWith("#browse")) return null;
+        const query = raw.includes("?") ? raw.split("?", 2)[1] : "";
+        const params = new URLSearchParams(query);
+        return {
+          brand: String(params.get("brand") || ""),
+          category: String(params.get("category") || ""),
+        };
+      }
+
+      function applyRouteFromHash() {
+        const browse = parseBrowseHash();
+        const browseHead = document.getElementById("browseHead");
+        const browseTitle = document.getElementById("browseTitle");
+        if (browse) {
+          state.route = { name: "browse", brand: browse.brand, category: browse.category };
+          document.body.classList.add("route-browse");
+          if (browseHead) browseHead.hidden = false;
+
+          state.brands.clear();
+          state.categories.clear();
+
+          const brandCanonical = browse.brand ? findBrandCanonical(browse.brand) : "";
+          const categoryCanonical = browse.category ? findCategoryCanonical(browse.category) : "";
+          if (brandCanonical) state.brands.add(brandCanonical);
+          if (categoryCanonical) state.categories.add(categoryCanonical);
+
+          syncBrandCheckboxes();
+          syncCategoryCheckboxes();
+          syncChips();
+
+          const parts = [];
+          if (categoryCanonical) parts.push(categoryCanonical);
+          if (brandCanonical) parts.push(brandCanonical);
+          if (browseTitle) browseTitle.textContent = parts.length ? parts.join(" · ") : t("browse_title");
+
+          renderGrid();
+          document.getElementById("shop")?.scrollIntoView({ behavior: "auto", block: "start" });
+          return;
+        }
+
+        state.route = { name: "home", brand: "", category: "" };
+        document.body.classList.remove("route-browse");
+        if (browseHead) browseHead.hidden = true;
+      }
+
       async function init() {
         if (!API_ENABLED) ensureAdminCred();
         els.year.textContent = String(new Date().getFullYear());
         setLang(currentLang);
+        renderAllTiles();
         els.langToggle?.addEventListener("click", () => setLang(currentLang === "ar" ? "en" : "ar"));
         els.checkoutCity?.addEventListener("change", updateCheckoutSummary);
 
@@ -3423,6 +4438,38 @@
           const isOpen = els.filterBtn.getAttribute("aria-expanded") === "true";
           setFilterMenu(!isOpen);
         });
+
+        document.getElementById("collectionsRow")?.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-category]");
+          if (!btn) return;
+          const category = btn.getAttribute("data-category");
+          if (!category) return;
+          const cur = parseBrowseHash();
+          navigateBrowse({ category, brand: cur?.brand || "" });
+        });
+
+        document.getElementById("brandsRow")?.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-brand]");
+          if (!btn) return;
+          const brandId = btn.getAttribute("data-brand");
+          if (!brandId) return;
+          const cur = parseBrowseHash();
+          navigateBrowse({ brand: brandId, category: cur?.category || "" });
+        });
+
+        document.getElementById("browseBack")?.addEventListener("click", () => {
+          state.brands.clear();
+          state.categories.clear();
+          location.hash = "";
+          refreshStorefront();
+          applyRouteFromHash();
+        });
+
+        document.getElementById("browseClear")?.addEventListener("click", () => {
+          navigateBrowse({});
+        });
+
+        window.addEventListener("hashchange", applyRouteFromHash);
 
         document.addEventListener("click", (e) => {
           if (!els.filterMenu || !els.filterBtn) return;
@@ -3457,6 +4504,8 @@
         syncAdminDeepLink();
         window.addEventListener("hashchange", syncAdminDeepLink);
 
+        applyRouteFromHash();
+
         document.addEventListener("keydown", (e) => {
           if (!(e.ctrlKey || e.metaKey) || !e.shiftKey) return;
           if (String(e.key).toLowerCase() !== "a") return;
@@ -3488,7 +4537,7 @@
           const cred = raw ? JSON.parse(raw) : null;
           const ok = cred && cred.user === user && cred.passHash === hashString(`${user}:${pass}`);
           if (!ok) {
-            els.adminLoginMsg.textContent = "Invalid username or password.";
+            els.adminLoginMsg.textContent = t("admin_invalid_credentials");
             return;
           }
           els.adminLoginMsg.textContent = "";
@@ -3518,7 +4567,7 @@
           if (action === "delete") {
             const p = getProductById(id);
             if (!p) return;
-            const ok = confirm(`Delete product: ${p.brand} ${p.name}?`);
+            const ok = confirm(t("confirm_delete_product", { title: `${p.brand} ${p.name}` }));
             if (!ok) return;
             if (API_ENABLED) {
               try {
@@ -3603,6 +4652,67 @@
           });
         }
 
+        els.adminCovers?.addEventListener("change", async (e) => {
+          const target = e.target;
+          if (!(target instanceof HTMLInputElement)) return;
+          const row = target.closest("[data-cover-type][data-cover-key]");
+          if (!row) return;
+          const type = row.getAttribute("data-cover-type");
+          const key = row.getAttribute("data-cover-key");
+          if (!type || !key) return;
+
+          if (target.getAttribute("data-role") === "url" && (target.type === "url" || target.type === "text")) {
+            setCover(type, key, target.value);
+            renderAdminCovers();
+            renderAllTiles();
+            if (els.adminCoversMsg) els.adminCoversMsg.textContent = t("admin_saved");
+            return;
+          }
+
+          if (target.getAttribute("data-role") === "file" && target.files && target.files.length > 0) {
+            const file = target.files[0];
+            const dataUrl = await readFileAsDataUrl(file);
+            if (dataUrl) {
+              setCover(type, key, dataUrl);
+              renderAdminCovers();
+              renderAllTiles();
+              if (els.adminCoversMsg) els.adminCoversMsg.textContent = t("admin_saved");
+            }
+            target.value = "";
+          }
+        });
+
+        els.adminCovers?.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-action]");
+          if (!btn) return;
+          const row = btn.closest("[data-cover-type][data-cover-key]");
+          if (!row) return;
+          const type = row.getAttribute("data-cover-type");
+          const key = row.getAttribute("data-cover-key");
+          if (!type || !key) return;
+          if (btn.getAttribute("data-action") !== "removeCover") return;
+          setCover(type, key, "");
+          renderAdminCovers();
+          renderAllTiles();
+          if (els.adminCoversMsg) els.adminCoversMsg.textContent = t("admin_saved");
+        });
+
+        els.adminCoversResetCategories?.addEventListener("click", () => {
+          state.covers = { ...(state.covers || loadCovers()), categories: {} };
+          saveCovers(state.covers);
+          renderAdminCovers();
+          renderAllTiles();
+          if (els.adminCoversMsg) els.adminCoversMsg.textContent = t("admin_saved");
+        });
+
+        els.adminCoversResetBrands?.addEventListener("click", () => {
+          state.covers = { ...(state.covers || loadCovers()), brands: {} };
+          saveCovers(state.covers);
+          renderAdminCovers();
+          renderAllTiles();
+          if (els.adminCoversMsg) els.adminCoversMsg.textContent = t("admin_saved");
+        });
+
         els.adminProductForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const id = state.admin.selectedProductId;
@@ -3650,7 +4760,7 @@
               await syncProductsFromApi().catch(() => {});
               renderAdminProducts();
               selectAdminProduct(saved?.id || id);
-              els.adminProductMsg.textContent = "Saved.";
+              els.adminProductMsg.textContent = t("admin_saved");
             } catch (err) {
               els.adminProductMsg.textContent = String(err?.message || "Save failed");
             }
@@ -3662,7 +4772,7 @@
           refreshStorefront();
           renderAdminProducts();
           selectAdminProduct(id);
-          els.adminProductMsg.textContent = "Saved.";
+          els.adminProductMsg.textContent = t("admin_saved");
         });
 
         els.adminDeleteProduct.addEventListener("click", async () => {
@@ -3670,7 +4780,7 @@
           if (!id) return;
           const p = getProductById(id);
           if (p) {
-            const ok = confirm(`Delete product: ${p.brand} ${p.name}?`);
+            const ok = confirm(t("confirm_delete_product", { title: `${p.brand} ${p.name}` }));
             if (!ok) return;
           }
 
@@ -3774,11 +4884,11 @@
           }
           if (action === "delete") {
             if (cat === "Uncategorized") {
-              els.adminCategoryMsg.textContent = "Cannot delete Uncategorized.";
+              els.adminCategoryMsg.textContent = t("admin_cannot_delete_uncategorized");
               return;
             }
             const count = state.products.filter((p) => p.category === cat).length;
-            const ok = confirm(`Delete category “${cat}”? ${count} product(s) will move to Uncategorized.`);
+            const ok = confirm(t("confirm_delete_category", { cat, count }));
             if (!ok) return;
             if (API_ENABLED) {
               try {
@@ -3787,7 +4897,7 @@
                 refreshStorefront();
                 renderAdminProducts();
                 renderAdminCategories();
-                els.adminCategoryMsg.textContent = `Deleted “${cat}”. Moved products to Uncategorized.`;
+                els.adminCategoryMsg.textContent = t("admin_deleted_category", { cat });
               } catch (err) {
                 els.adminCategoryMsg.textContent = String(err?.message || "Delete failed");
               }
@@ -3799,7 +4909,7 @@
             refreshStorefront();
             renderAdminProducts();
             renderAdminCategories();
-            els.adminCategoryMsg.textContent = `Deleted “${cat}”. Moved products to Uncategorized.`;
+            els.adminCategoryMsg.textContent = t("admin_deleted_category", { cat });
           }
         };
 
@@ -3820,7 +4930,7 @@
               refreshStorefront();
               renderAdminProducts();
               renderAdminCategories();
-              els.adminCategoryMsg.textContent = `Renamed “${from}” → “${to}”.`;
+              els.adminCategoryMsg.textContent = t("admin_renamed_category", { from, to });
             } catch (err) {
               els.adminCategoryMsg.textContent = String(err?.message || "Rename failed");
             }
@@ -3832,7 +4942,7 @@
           refreshStorefront();
           renderAdminProducts();
           renderAdminCategories();
-          els.adminCategoryMsg.textContent = `Renamed “${from}” → “${to}”.`;
+          els.adminCategoryMsg.textContent = t("admin_renamed_category", { from, to });
         });
 
         els.adminOrderList.onclick = (e) => {
