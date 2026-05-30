@@ -1699,16 +1699,6 @@
         </div>
         <div class="hero-media">
           <img class="hero-img" src="1.png" alt="Jana Bags new collection" />
-          <div class="hero-card" aria-label="Featured product">
-            <div class="hero-card-media">
-              <img src="2.png" alt="Featured bag" />
-            </div>
-            <div>
-              <div class="hero-card-kicker" data-i18n="hero_new_in">New in</div>
-              <div class="hero-card-title" data-i18n="hero_feature_title">The Elle Shoulder Bag</div>
-              <a class="hero-card-link" href="#shop" data-i18n="hero_discover">Discover →</a>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -3791,6 +3781,7 @@
               order = await apiCreateOrder({ customer, items });
               if (order) {
                 state.orders = [order, ...state.orders];
+                saveOrders(state.orders);
                 await syncProductsFromApi().catch(() => {});
               }
             } catch {
@@ -3865,6 +3856,7 @@
         if (!API_ENABLED) return false;
         const orders = await apiGetOrders();
         state.orders = orders;
+        saveOrders(state.orders);
         return true;
       }
 
